@@ -1,0 +1,30 @@
+@import "../../variables";
+@import "../../mixins";
+
+.buddyPage {
+    margin: auto;
+    height: calc(100vh - 370px);
+    width: 80%;
+    
+    flex-direction: row;
+    .buddiesHolder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    }
+    .siteSloganTitle {
+        text-align: center;
+        font-size: 50px;
+        text-shadow: $text-shadow;
+    }
+    
+    .buddySearchWrapper {
+        display: flex;
+        justify-content: center;
+        .buddySearchSelect {
+            @include select();
+            
+        }
+    }
+}

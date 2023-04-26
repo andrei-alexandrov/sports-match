@@ -1,0 +1,488 @@
+[
+    {
+        "image": "https://sportal365images.com/process/smp-images-production/sportal.bg/13112021/ead2e012-b2b8-4752-91d7-993c18988dcc.jpg?operations=crop(0:352:5986:3719),fit(768:433)&format=webp",
+        "name": "Бадминтон зала Европа - Люлин",
+        "site": "www.badminton.com",
+        "address": "ж.к Люлин, ул. Арх. Георги Ненов 29",
+        "phone": "0888 144 255",
+        "workingHours": "Понеделник - петък: 07:00 - 23:00",
+        "type": "badminton"
+    },
+    {
+        "image": "https://www.tce.bg/js/backend/tiny_mce/plugins/ajaxfilemanager/upload/image1_1.JPG",
+        "name": "Бадминтон зала Европа",
+        "site": "www.badminton.sportcentereurope.bg",
+        "address": "кв. Дружба, бул. Искърско Шосе 7",
+        "phone": "0899 635 940",
+        "workingHours": "Понеделник - петък: 07:00 - 23:00",
+        "type": "badminton"
+    },
+    {
+        "image": "https://scontent.fsof8-1.fna.fbcdn.net/v/t1.6435-9/37890701_2204286873174145_8069515079780925440_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=ikXJXKVvI1wAX-ICLbI&_nc_ht=scontent.fsof8-1.fna&oh=00_AfAVkyMYzVJs-_bqWCmZ_U0D_mn1750ICzzZzEK8Lhf0Ew&oe=645E2DDE",
+        "name": "Fireball sports hall",
+        "site": "www.fireball.bg",
+        "address": "кв. Дружба, бул. Цариградско шосе 133",
+        "phone": "0878 811 222",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "badminton"
+    },
+    {
+        "image": "https://lh3.googleusercontent.com/p/AF1QipMOUpYWvPNLynsaDfhafrSmd-INeU52GQ5QsPt9=s1360-w1360-h1020",
+        "name": "Спортна зала Триадица",
+        "site": "www.example.com",
+        "address": "кв. Дружба",
+        "phone": "0884 951 868",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "basketball"
+    },
+    {
+        "image": "https://cska.bg/bmz_cache/7/7ae2b5fceff2474c312a2d66ac638aab.image.700x455.png",
+        "name": "Спортна зала ЦСКА",
+        "site": "www.cska-basket.bg",
+        "address": "кв. Витоша 77",
+        "phone": "0899 971 178",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "basketball"
+    },
+    {
+        "image": "https://www.isofia.bg/thumb/asp/900/1/1/2015/08/03/1438612629.jpg",
+        "name": "Спортна София - 2000 ЕАД",
+        "site": "https://sportnasofia2000.com/",
+        "address": "ул. “Българска морава” № 2",
+        "phone": "(+359 2) 8 22 11 53",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "basketball"
+    },
+    {
+        "image": "https://playground.bg/files/images/535/resize_648_99999.jpg",
+        "name": "Зала за билярд",
+        "site": "www.example.com",
+        "address": "кв. Дружба",
+        "phone": "088888888882",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "billiards"
+    },
+    {
+        "image": "https://www.deals.bg/resources/images_opt/56250/karta-za-10-chasa-igra-na-bilyard-ot-igralna-zala-mania2_gr2.jpg",
+        "name": "Зала за билярд",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "08888888881",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "billiards"
+    },
+    {
+        "image": "https://hotelmarkovo.bg/wp-content/uploads/2020/07/%D0%91%D0%B8%D0%BB%D1%8F%D1%80%D0%B4%D0%BD%D0%B0-%D0%BC%D0%B0%D1%81%D0%B0.jpg",
+        "name": "Зала за билярд",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "088888888820",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "billiards"
+    },
+    {
+        "image": "https://mega-xtreme.com/wp-content/uploads/2020/07/sky-city-archive-new-1.jpg",
+        "name": "Зала за боулинг",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0888188182",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "bowling"
+    },
+    {
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfSn22MS9ApDsd707ME-PabVcRIwA0_zY5h7KuWdaf2DCgamBYWXA9FFy4_qB-BzFmg5U&usqp=CAU",
+        "name": "Зала за боулинг",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "08882233281",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "bowling"
+    },
+    {
+        "image": "https://mega-xtreme.com/wp-content/uploads/2020/07/IMG_0627-1-scaled.jpg",
+        "name": "Зала за боулинг",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "08322123283280",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "bowling"
+    },
+    {
+        "image": "https://cdn.akamai.steamstatic.com/steam/apps/720540/ss_1c55a2fb87ce40b877ac6c06700a418a271391d6.600x338.jpg?t=1514648459",
+        "name": "Зала за дартс",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "08838288851280",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "darts"
+    },
+    {
+        "image": "https://cdn.vox-cdn.com/thumbor/XQ2q-POTLrDR_St3uCO4sByWVt8=/0x0:5880x3881/1200x800/filters:focal(2470x1471:3410x2411)/cdn.vox-cdn.com/uploads/chorus_image/image/63872460/FlightClubChicago_Oche_13.1.0.jpg",
+        "name": "Зала за дартс",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "088381438820",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "darts"
+    },
+    {
+        "image": "https://confidentials.com/uploads/imager/299deb39facbb0c50fa0371390d9cd0c/1201372/3e2b1654e3e90a30e1d8bc0e82b47c8a.jpg",
+        "name": "Зала за дартс",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "08218388881280",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "darts"
+    },
+    {
+        "image": "https://lupa.bg/f/news/b/209/dcaaa28d63149460d4bba567ca18493d.jpeg",
+        "name": "Игрище за футбол",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "082832382880",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "football"
+    },
+    {
+        "image": "https://lh5.googleusercontent.com/p/AF1QipPcEXfklrMWtogGKhTBF_glaHsLk4DXHZGzJqXz",
+        "name": "Игрище за футбол",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "082838888380",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "football"
+    },
+    {
+        "image": "https://zasportaa.blog.bg/photos/175867/original/winslow%20sofia.jpg",
+        "name": "Игрище за футбол",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "082831888880",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "football"
+    },
+    {
+        "image": "https://www.blackseaicearena.com/uploads/images/original/5_16.jpg",
+        "name": "Зала кънки на лед",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0182831888880",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "iceSkating"
+    },
+    {
+        "image": "https://lh5.googleusercontent.com/p/AF1QipNqA8x2FLXzKpRFJGXmAFZ8G1gWxez5AHg6qx3S",
+        "name": "Зала кънки на лед",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0822831888880",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "iceSkating"
+    },
+    {
+        "image": "https://peika.bg/pictures/80447_715__3.jpg",
+        "name": "Зала кънки на лед",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0828318838880",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "iceSkating"
+    },
+    {
+        "image": "https://static.pochivka.bg/sights.bgstay.com/images/00/464/54c3de6e18efe.jpg",
+        "name": "Име на зала Картинг",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0828318838886",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "karting"
+    },
+    {
+        "image": "https://funsport.bg/upload/services/428427-334066536672303-431553841-n.jpg",
+        "name": "Име на зала Картинг",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0828318838881",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "karting"
+    },
+    {
+        "image": "https://funsport.bg/upload/services/1506475-805379079541044-7248382600949647346-n.jpg",
+        "name": "Име на зала Картинг",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0828318838882",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "karting"
+    },
+    {
+        "image": "https://tennis.bg/uploaded/posts/ddb1a51a961d473ad9f8bd0f13dccda1.jpg",
+        "name": "Име на зала Падел 1",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0828318238882",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "padel"
+    },
+    {
+        "image": "https://goguide.bg/wp-content/uploads/1600958479decathloncover.jpg",
+        "name": "Име на зала Падел 2",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0828318831882",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "padel"
+    },
+    {
+        "image": "https://play.decathlon.bg/static/images/Group%202700.png",
+        "name": "Име на зала Падел 3",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0328318838882",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "padel"
+    },
+    {
+        "image": "https://www.paintball-brno.cz/wp-content/uploads/2020/10/foto-paintball-hall-paintball_brno-11.jpg",
+        "name": "Име на място за paintball 1",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "03328318838882",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "paintball"
+    },
+    {
+        "image": "https://www.paintball-brno.cz/wp-content/uploads/2020/03/paintball-hala-brno-01-1.jpg",
+        "name": "Име на място за paintball 2",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "02328318838882",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "paintball"
+    },
+    {
+        "image": "https://i0.wp.com/www.narozlucku.cz/wp-content/uploads/2017/03/obr2025.jpg?fit=690%2C460&ssl=1",
+        "name": "Име на място за paintball 3",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "013283188338882",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "paintball"
+    },
+    {
+        "image": "https://visitsofia.bg/images/vegas_media/category30000/object366/34265c9d0e2600acea3b0f474485daef.jpg",
+        "name": "Стадион за тичане 1",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "01328318421222",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "running"
+    },
+    {
+        "image": "https://visitsofia.bg/images/vegas_media/category30000/object366/34265c9d0e2600acea3b0f474485daef.jpg",
+        "name": "Стадион за тичане 2",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "013212331882",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "running"
+    },
+    {
+        "image": "https://visitsofia.bg/images/vegas_media/category30000/object366/34265c9d0e2600acea3b0f474485daef.jpg",
+        "name": "Стадион за тичане 3",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "01983231282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "running"
+    },
+    {
+        "image": "https://littlebg.com/wp-content/uploads/2016/12/borovec.jpg",
+        "name": "Ски курорт",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0198343282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "ski"
+    },
+    {
+        "image": "https://www.travelnews.bg//pic/posts/2021-10/16347990025367/gals/%D0%B1%D0%BE%D1%80%D0%BE%D0%B2%D0%B5%D1%86.jpg",
+        "name": "Ски курорт",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0198323282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "ski"
+    },
+    {
+        "image": "https://luckybansko.bg/wp-content/uploads/2017/09/bansko-ski-768x512-1-500x334.jpg",
+        "name": "Ски курорт",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0198312282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "ski"
+    },
+    {
+        "image": "https://pateshestvenik.com/wp-content/uploads/2019/10/la-plagne2.jpg",
+        "name": "Snowboard курорт",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "019831212282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "snowboard"
+    },
+    {
+        "image": "https://pateshestvenik.com/wp-content/uploads/2019/10/la-plagne2.jpg",
+        "name": "Snowboard курорт",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "013298312282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "snowboard"
+    },
+    {
+        "image": "https://pateshestvenik.com/wp-content/uploads/2019/10/la-plagne2.jpg",
+        "name": "Snowboard курорт",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "019831229082",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "snowboard"
+    },
+    {
+        "image": "https://www.tce.bg/js/backend/tiny_mce/plugins/ajaxfilemanager/upload/DSC_4639-small.gif",
+        "name": "Скуош",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "019831221239082",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "squash"
+    },
+    {
+        "image": "https://m2.spitogatos.gr/168537121_1600x1200.jpg?v=20130730",
+        "name": "Скуош",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "01983132229082",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "squash"
+    },
+    {
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy-QbN0HtLVCiiT1p76_EM2RDY-bAim-0bI9H9l9akviGvYhxD054c6tg5m75H9yr5lqU&usqp=CAU",
+        "name": "Скуош",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "01912831229082",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "squash"
+    },
+    {
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQigEvKAZLse9HicbWahzNRyNVzisaWMeWEsihTiTbgZdwqnDDdzxQmxxbybKkq-zkMelU&usqp=CAU",
+        "name": "Тенис на маса",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "01912831212382",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "tableTennis"
+    },
+    {
+        "image": "https://benefitsystems.bg/wp-content/uploads/2022/03/Tenis-na-masa-Olympia-2-scaled.jpg",
+        "name": "Тенис на маса",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "01912831221294082",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "tableTennis"
+    },
+    {
+        "image": "https://theacademy.bg/wp-content/uploads/2015/03/IMG_3153.jpg",
+        "name": "Тенис на маса",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "012191283122907682",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "tableTennis"
+    },
+    {
+        "image": "https://mdss.bg/wp-content/uploads/2012/06/Tenis-akademia-malinova-dolina-hard-kort-1024x650.jpg",
+        "name": "Тенис 1",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "091912831227907682",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "tennis"
+    },
+    {
+        "image": "https://www.geramis.bg/wp-content/uploads/2017/11/15085577_1223670441056080_6183557181550351092_n.jpg",
+        "name": "Тенис 2",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "081911283122907682",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "tennis"
+    },
+    {
+        "image": "https://easybuildbg.com/wp-content/uploads/2016/05/ADIS-Boiana-18-1024x768.jpg",
+        "name": "Тенис 3",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "071912831229076282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "tennis"
+    },
+    {
+        "image": "https://volleymaritza.bg/wp-content/uploads/2017/12/VasilLevski_Inside.jpg",
+        "name": "Волейбол зала 1",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "06191283122376282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "volleyball"
+    },
+    {
+        "image": "https://gradat.bg/sites/default/files/styles/article_media_embed/public/viber_image_2021-01-29_22-53-21.jpg?itok=DaNJI0En",
+        "name": "Волейбол зала 2",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "0519192229076282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "volleyball"
+    },
+    {
+        "image": "https://hotelbagira.bg/thumbs/3/20171218151858_DSC06991.JPG",
+        "name": "Волейбол зала 3",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "041912899076282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "volleyball"
+    },
+    {
+        "image": "https://climbing.sportcentereurope.bg/wp-content/uploads/2021/10/IMG_0074-1024x683.jpg",
+        "name": "Зала за катерене 1",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "031912899076282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "wallClimbing"
+    },
+    {
+        "image": "https://visitsofia.bg/images/vegas_media/category30000/object2855/4e8c2d219926dc055ed5db469a61e011.jpg",
+        "name": "Зала за катерене 2",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "021912899076282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "wallClimbing"
+    },
+    {
+        "image": "https://www.360mag.bg/wp-content/uploads/2016/03/MG_8132.jpg",
+        "name": "Зала за катерене 3",
+        "site": "www.example.com",
+        "address": "Адрес",
+        "phone": "011912899076282",
+        "workingHours": "Понеделник - неделя: 06:00 - 23:00",
+        "type": "wallClimbing"
+    }
+]

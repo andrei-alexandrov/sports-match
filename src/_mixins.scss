@@ -1,0 +1,94 @@
+@mixin button() {
+    position: relative;
+    top: 10px;
+    right: 5px;
+    width: 80%;
+    height: 40px;
+    background: $almost-white-color;
+    border: none;
+    border-radius: 40px;
+    color: black;
+    font-weight: 600;
+    font-size: 17px;
+    box-shadow: $box-shadow;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $super-contrast;
+    }
+}
+
+@mixin border() {
+    border: 2px solid $super-contrast;
+    border-radius: 20px;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    box-shadow: $box-shadow;
+}
+
+@mixin search() {
+    border: none;
+    font-size: 18px;
+    border-radius: 15px;
+    padding: 10px;
+    height: 30px;
+    width: 160px;
+    margin: auto;
+    margin-bottom: 50px;
+    box-shadow: $box-shadow;
+    background-color: rgba(255, 255, 255, 0.2);
+    text-align: center
+}
+
+@mixin select {
+    @include search();
+    color: $almost-white-color;
+    font-size: 18px;
+    width: 300px;
+    height: 40px;
+    margin-top: 50px;
+    cursor: pointer;
+
+    option {
+        background-color: $light-main-color;
+    }
+}
+
+@mixin gradientBorder {
+    border-width: 6px;
+    border-style: solid;
+    border-image: linear-gradient(to right, $contrast-transperant, $almost-white-color) 1;
+    border-radius: 10px;
+}
+
+@mixin profileBorder {
+    border-width: 6px;
+    border-style: solid;
+    border-image: linear-gradient(to right, $contrast-transperant, $almost-white-color) 1;
+    border-radius: 10px;
+    z-index: -1;
+    animation: gradientBorder 4s linear infinite;
+
+    @keyframes gradientBorder {
+        0% {
+            border-image: linear-gradient(235deg, $purple-color, #010615, #00bcd4) 1;
+            background-position: 0 0;
+        }
+
+        50% {
+            border-image: linear-gradient(235deg, $contrast-transperant, $purple-color, #010615) 1;
+            background-position: 50% 0;
+        }
+
+        100% {
+            border-image: linear-gradient(235deg, #010615, #00bcd4, $purple-color) 1;
+            background-position: 100% 0;
+        }
+    }
+}
+
+
+@mixin sphere {
+    border-radius: 110px;
+    position: absolute;
+}

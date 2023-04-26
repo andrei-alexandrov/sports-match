@@ -1,0 +1,126 @@
+@import "../../variables";
+@import "../../mixins";
+
+
+$color_1: #fff;
+
+.box {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    transform: 0.5s;
+    background: #060c21;
+
+    &:hover {
+        height: 490px;
+
+        .imgBx {
+            img {
+                opacity: 1;
+            }
+        }
+
+        .content {
+            opacity: 1;
+        }
+    }
+
+    .imgBx {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 355px;
+        height: 355px;
+        padding: 10px;
+        box-sizing: border-box;
+
+        img {
+            width: 355px;
+            height: 335px;
+            object-fit: cover;
+            max-width: 100%;
+            opacity: 0.1;
+            transition: 0.5s;
+        }
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: #fff;
+        z-index: -1;
+        background: linear-gradient(235deg, $purple-color, #010615, #00bcd4);
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: #fff;
+        z-index: -2;
+        filter: blur(40px);
+        background: linear-gradient(235deg, $purple-color, #010615, #00bcd4);
+    }
+
+    &:nth-child(2)before {
+        background: linear-gradient(235deg, #ff005e, #010615, #fbff00);
+    }
+
+    .content {
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        height: 150px;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        opacity: 0;
+        transition: 0.5s;
+
+        h3 {
+            font-size: 24px;
+            color: $almost-white-color;
+            line-height: 30px;
+            letter-spacing: 2px;
+            span {
+                font-size: 18px;
+                font-weight: 300;
+                padding: 10px;
+                color: $almost-white-color
+            }
+        }
+
+        .chatBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+
+            @include button();
+            width: 100px;
+            margin-bottom: 30px;
+            background-color: $contrast-transperant;
+            color: $almost-white-color;
+
+            &:hover {
+                background-color: $medium-main-color;
+                color: $almost-white-color;
+            }
+        }
+    }
+}

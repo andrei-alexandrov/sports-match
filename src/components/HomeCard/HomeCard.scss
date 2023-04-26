@@ -1,0 +1,40 @@
+@import "../../variables";
+
+.homeCardContainerWrapper {
+    display: flex;
+    justify-content: center;
+    margin: 150px;
+
+    .homeCardContainer {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        height: 300px;
+        align-items: center;
+
+        img {
+            width: 100px;
+            height: auto;
+            transition: transform 0.5s ease-in-out;
+
+            filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.9));
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h2 {
+            color: $almost-white-color;
+            font-size: 28px;
+
+            &:hover {
+                color: $contrast-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,122 @@
+@import "../../variables";
+@import "../../mixins";
+
+.profilePageContainer {
+    width: 80%;
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
+    height: calc(100vh - 430px);
+
+    .profileInfo {
+        width: 860px;
+        margin: auto;
+        display: flex;
+        color: $almost-white-color;
+        background-color: rgba(255, 255, 255, 0.2);
+        height: 400px;
+        box-shadow: 10px 20px 20px 10px rgba(0, 0, 0, 0.5);
+        @include profileBorder();
+
+
+        .userInfo {
+            width: 500px;
+
+            button {
+                @include button();
+                width: 100px;
+                background-color: $contrast-transperant;
+            }
+        }
+    }
+
+    .profileImage img {
+        box-sizing: border-box;
+        width: 380px;
+        height: 380px;
+        margin: 10px 0 0 12px;
+        object-fit: cover;
+        filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.9));
+
+
+    }
+
+    input[type=file] {
+        border: none;
+    }
+
+    button {
+        @include button();
+        width: 100px;
+        color: $almost-white-color;
+        background-color: $contrast-transperant !important;
+        text-shadow: 1px 1px 1px black;
+
+        &:hover {
+            background-color: $purple-color !important;
+        }
+    }
+
+    p {
+        font-size: 22px;
+        color: $almost-white-color;
+
+    }
+
+    .activitiesList {
+        margin: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: center;
+    }
+
+    h3 {
+        margin: 100px 0 0 0;
+        font-size: 32px;
+    }
+
+    input,
+    select {
+        background-color: $contrast-transperant;
+        color: $almost-white-color;
+        box-sizing: border-box;
+        border-radius: 40px;
+        width: 200px;
+        height: 30px;
+        border: none;
+        align-items: center;
+        text-align: center;
+        margin: 0 10px;
+        font-size: 16px;
+        font-family: inherit;
+
+        &::placeholder {
+            color: $almost-white-color;
+        }
+    }
+
+
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    .file-input-label {
+        @include button();
+        padding: 10px;
+        background-color: $contrast-transperant;
+        color: $almost-white-color;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .file-input-label:hover {
+        background-color: $purple-color;
+    }
+}

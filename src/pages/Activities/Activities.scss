@@ -1,0 +1,89 @@
+@import "../../variables";
+@import "../../mixins";
+
+.activitiesPageContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .activitiesContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 80%;
+        margin: auto;
+        gap: 40px;
+        margin-top: 50px;
+    }
+
+    .siteNameTitle {
+        color: $almost-white-color;
+        position: absolute;
+        width: 9%;
+        font-size: 42px;
+        text-align: right;
+        left: 2%;
+        top: 86px;
+
+        @media screen and (max-width: 1366px) {
+            font-size: 26px;
+            width: 10%;
+            top: 4.7%;
+        }
+    }
+
+    .searchContainer {
+        height: 30px;
+        width: 150px;
+        margin: auto;
+        margin-top: 50px;
+
+        @media screen and (max-width: 1366px) {
+            font-size: 30px;
+            width: 12%;
+            top: 2%;
+            right: 14.2%;
+        }
+
+    }
+
+    #activitySearch {
+        @include search();
+        color: $almost-white-color;
+
+        &::placeholder,
+        &:focus {
+            color: $almost-white-color;
+            // padding: 10px;
+        }
+    }
+
+    .sphere {
+        @include sphere();
+        width: 205px;
+        top: 75%;
+        left: 4%;
+        z-index: -1;
+        position: fixed;
+    }
+}
+
+.swal2-title {
+    font-size: 24px;
+    color: #333;
+}
+
+.swal2-popup {
+    background-color: $dark-main-color;
+    border-radius: 10px;
+}
+
+.swal2-confirm {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+
+    &:hover {
+        background-color: #66bb6a;
+    }
+}

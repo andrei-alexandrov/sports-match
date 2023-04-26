@@ -1,0 +1,39 @@
+@import "../../variables";
+@import "../../mixins";
+
+.sportPlaceCard {
+    box-shadow: -1rem 0 3rem #000;
+    transition: 0.4s ease-out;
+    border-width: 6px;
+    border-style: solid;
+    border-image: linear-gradient(to right, $contrast-transperant, $almost-white-color) 1;
+    border-radius: 10px;
+
+    &:hover {
+        transform: translateY(-10px);
+        transition: 0.4s ease-out;
+    }
+
+    img {
+        height: 200px;
+        width: 300px;
+        padding: 5px;
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, .5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .inner {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a {
+        color: white;
+    }
+
+}
