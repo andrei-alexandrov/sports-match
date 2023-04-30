@@ -1,7 +1,13 @@
 This is my own project idea created in collaboration with my colleague Tina Groshkova.
 It is our final project from the IT talents training camp.
 
-![homePagePhoto](./src/images/homeScreen.jpg)
+![loginPhoto](./src/images/loginPage.jpg)
+![homePhoto](./src/images/homeScreen.jpg)
+![profilePhoto](./src/images/profilePage.jpg)
+![activitiesPhoto](./src/images/activitiesPage.jpg)
+![buddySearchPhoto](./src/images/buddySearch.jpg)
+![chatPhoto](./src/images/chatPage.jpg)
+![placesPhoto](./src/images/placesPages.jpg)
 
 ## Available Scripts
 
