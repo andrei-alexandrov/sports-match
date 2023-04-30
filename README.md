@@ -1,5 +1,5 @@
 This is my own project idea created in collaboration with my colleague Tina Groshkova.
-It is our final project from the IT talents training camp.
+It is our final project from the IT talents training camp 2023.
 
 ## User guide
 1. Edit your profile.

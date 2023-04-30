@@ -71,7 +71,6 @@ const Messages = (props) => {
     }
   }, [messages]);
 
-
   useEffect(() => {
     const updateImages = async () => {
       const updatedUsers = await userManager.fetchAllUsers();
@@ -84,13 +83,12 @@ const Messages = (props) => {
   
     const intervalId = setInterval(() => {
       updateImages();
-    }, 300); // Check for updated images every 10 seconds
+    }, 300);
   
     return () => {
       clearInterval(intervalId);
     };
   }, [currentReceiver]);
-
 
   const handleSendMessage = (event) => {
     event.preventDefault();
