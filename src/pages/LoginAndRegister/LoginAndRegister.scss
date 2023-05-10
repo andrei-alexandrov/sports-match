@@ -7,21 +7,13 @@ section {
     align-items: center;
 }
 
-.loginPage,
-.registerPage {
+.pageHolder {
     height: 100vh;
-
-    .loginPageHolder {
-        height: 100vh;
-        background-image: url('../../images/projectBackground3.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: bottom;
-        position: relative;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
+    background-image: url('../../images/projectBackground3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    position: relative;
 
     .loginForm,
     .registrationForm {
@@ -29,14 +21,13 @@ section {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        justify-content: center;
-
         font-size: 18px;
         top: 20%;
         background: transparent;
-        z-index: 10;
+        box-shadow: 0px -1px 50px 12px $dark-main-color;
+        z-index: 20;
         @include border();
-        box-shadow: 0px -1px 14px 1px $super-contrast;
+        box-shadow: 0px -1px 40px 1px $super-contrast;
 
         h2 {
             font-size: 2em;
@@ -61,82 +52,82 @@ section {
                 width: 300px;
             }
         }
+
+        .registerLink {
+            text-decoration: none;
+            color: $almost-white-color;
+
+            a {
+                color: $almost-white-color;
+                text-decoration: none;
+                font-weight: 600;
+
+                &:hover {
+                    color: $super-contrast;
+                }
+            }
+        }
+
+        @media (max-width: 1980px) {
+            top: 10%;
+        }
+
+        @media (max-width: 1366px) {
+            top: 8%;
+        }
     }
 
-    .registerLink {
-        text-decoration: none;
-        color: $almost-white-color;
+    .inputBox {
+        position: relative;
+        width: 336px;
+        margin: 30px;
+        border-bottom: 2px solid $almost-white-color;
 
-        a {
+        label {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            transform: translateY(-50%);
             color: $almost-white-color;
-            text-decoration: none;
-            font-weight: 600;
+            font-weight: 400;
+            pointer-events: none;
+            transition: .5s;
+        }
 
-            &:hover {
-                color: $super-contrast;
+        input {
+            width: 100%;
+            height: 50px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #f0eded;
+
+            &:focus~label,
+            &:valid~label {
+                top: -5px;
+            }
+        }
+
+        .icon {
+            position: absolute;
+            right: 8px;
+            color: $super-contrast;
+            font-size: 1.2em;
+            line-height: 57px;
+        }
+
+        @media (max-width: 360px) {
+            .inputBox {
+                width: 100%;
+                height: 100vh;
+                border: none;
+                border-radius: 0;
             }
         }
     }
 
-    @media (max-width: 1980px) {
-        top: 10%;
-    }
-
-    @media (max-width: 1366px) {
-        top: 8%;
-    }
-}
-
-.inputBox {
-    position: relative;
-    width: 336px;
-    margin: 30px;
-    border-bottom: 2px solid $almost-white-color;
-
-    label {
+    .alert {
         position: absolute;
-        top: 50%;
-        left: 5px;
-        transform: translateY(-50%);
-        color: $almost-white-color;
-        font-weight: 400;
-        pointer-events: none;
-        transition: .5s;
+        top: 120px;
     }
-
-    input {
-
-        width: 100%;
-        height: 50px;
-        background: transparent;
-        border: none;
-        outline: none;
-        color: #f0eded;
-
-        &:focus~label,
-        &:valid~label {
-            top: -5px;
-        }
-    }
-
-    .icon {
-        position: absolute;
-        right: 8px;
-        color: $super-contrast;
-        font-size: 1.2em;
-        line-height: 57px;
-    }
-
-    @media (max-width: 360px) {
-        .inputBox {
-            width: 100%;
-            height: 100vh;
-            border: none;
-            border-radius: 0;
-        }
-    }
-}
-
-.enabled {
-    background-color: $super-contrast !important;
 }
