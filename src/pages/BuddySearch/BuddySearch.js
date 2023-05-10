@@ -18,10 +18,10 @@ export default function BuddySearchPage() {
       if (!loggedInUser) {
         const isLoggedIn = await LoginModal();
         if (!isLoggedIn) {
-          navigate('/home', { state: { from: '/profile' } });
+          navigate('/home', { state: { from: '/buddySearch' } });
           return;
         }
-        navigate('/login', { state: { from: '/profile' } });
+        navigate('/login', { state: { from: '/buddySearch' } });
       }
       setUsers(userManager.users);
     };

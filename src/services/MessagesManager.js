@@ -1,5 +1,3 @@
-import userManager from "./UserManager";
-
 class Message {
   constructor(text, timestamp, sender, receiver, status = 'unread') {
     this.text = text;
@@ -15,7 +13,6 @@ const CHAT_STORAGE_KEY = 'chatState';
 class MessagesManager {
   constructor() {
     this.messages = [];
-    this.onUpdateCallbacks = [];
     this.intervalId = null;
     this.startCheckingStorage();
   }
@@ -33,17 +30,6 @@ class MessagesManager {
   addMessage(message) {
     this.messages.push(message);
     this.saveMessagesToStorage();
-  }
-
-  getMessagesByReceiver(buddy) {
-    const loggedInUser = userManager.getLoggedInUser();
-    if (!loggedInUser) {
-      return [];
-    }
-    return this.messages.filter(message =>
-      (message.sender === buddy && message.receiver === loggedInUser.username) ||
-      (message.receiver === buddy && message.sender === loggedInUser.username)
-    );
   }
 
   saveMessagesToStorage() {
