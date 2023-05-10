@@ -6,14 +6,13 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/CustomAlert/CustomAlert";
 
 const RegistrationForm = () => {
-
-  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [alert, setAlert] = useState({ show: false, variant: "", message: "" });
   const [formValid, setFormValid] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,7 +60,6 @@ const RegistrationForm = () => {
         delete newErrors.confirmPassword;
       }
     }
-
     const usernameValid = !newErrors.username && username;
     const passwordValid = !newErrors.password && password;
     const confirmPasswordValid = !newErrors.confirmPassword && confirmPassword;
@@ -72,34 +70,7 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const errors = {};
-
-    if (!username) {
-      errors.username = "Username is required";
-    } else if (username.length < 3) {
-      errors.username = "Username must be at least 3 characters long";
-    } else if (/^\d/.test(username)) {
-      errors.username = "Username cannot start with a number";
-    } else if (/^[^a-zA-Z0-9]/.test(username)) {
-      errors.username = "Username cannot start with a special character";
-    }
-
-    if (!password) {
-      errors.password = "Password is required";
-    } else if (password.length < 6) {
-      errors.password = "Password must be at least 6 characters long";
-    } else if (!/\d/.test(password)) {
-      errors.password = "Password must contain at least one number";
-    } else if (!/[A-Z]/.test(password)) {
-      errors.password = "Password must contain at least one uppercase letter";
-    }
-
-    if (confirmPassword !== password) {
-      errors.confirmPassword = "Passwords do not match";
-    }
-
-
     if (Object.keys(errors).length === 0) {
       const users = JSON.parse(localStorage.getItem("users")) || [];
       if (users.some((user) => user.username === username)) {
@@ -121,7 +92,7 @@ const RegistrationForm = () => {
   };
   return (
     <div className="registerPage">
-      <section className="loginPageHolder">
+      <section className="pageHolder">
         <form className="registrationForm" onSubmit={handleSubmit}>
           <h2 className="registerTitle">Register</h2>
           {alert.show && <CustomAlert variant={alert.variant} message={alert.message} />}
@@ -171,8 +142,8 @@ const RegistrationForm = () => {
               <label>Confirm Password</label>
             </div>
           </Form.Group>
-
           <Form.Control.Feedback className="text-danger" type="invalid">{errors.password}</Form.Control.Feedback>
+
           <span className="btnHolder">
             <Button type="submit" className={`submit-btn ${formValid ? "enabled" : ""}`}>
               Register
@@ -188,7 +159,3 @@ const RegistrationForm = () => {
   );
 }
 export default RegistrationForm;
-
-
-
-
