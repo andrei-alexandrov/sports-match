@@ -1,14 +1,12 @@
 import React from "react";
 import HomeCard from "../../components/HomeCard/HomeCard";
-import "./Home.scss"
-
 import myProfile from "../../images/homePage/homePageProfile.png";
 import activities from "../../images/homePage/Icons8_flat_sports_mode.svg.png";
 import buddySearch from "../../images/homePage/homePageRequests.png";
 import messages from "../../images/homePage/mess.png";
 import places from "../../images/homePage/homePagePlaces.png";
-import lineHome from "../../images/homePage/lineHome.gif";
 import myVideo from "../../images/11.mov";
+import "./Home.scss"
 
 
 export default function HomePage() {

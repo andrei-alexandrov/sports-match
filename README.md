@@ -1,5 +1,10 @@
-This is my own project idea created in collaboration with my colleague Tina Groshkova.
-It is our final project from the IT talents training camp 2023.
+Update: 
+Planned incoming additions/changes:
+1. Making the site fully responsive.
+2. Overall design changes. 
+3. Moving the stored data to a database and deployment.
+
+This is my own project idea for a website that helps people with common interests in different sports to meet and play together. The website also provides an opportunity to choose the most convenient places for practicing the desired sport in the respective city/neighborhood.
 
 ## User guide
 1. Edit your profile.
