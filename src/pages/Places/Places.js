@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import placesData from "./placesData";
 import PlacesCard from "../../components/PlacesCard/PlacesCard";
-import "./Places.scss";
 import useDebounce from '../../components/Utils/Debounce';
+
+import "./Places.scss";
 
 export default function PlacesPage() {
   const [items, setItems] = useState([]);
@@ -38,12 +39,12 @@ export default function PlacesPage() {
 
       <div className='searchWrapper'>
         <div>
-          <input className='inputSearch' type="text" value={searchText} onChange={handleSearch} placeholder="Search" />
+          <input className='inputSearch' name='inputSearchField' type="text" value={searchText} onChange={handleSearch} placeholder="Type to search" />
         </div>
 
-        <div>
+        <div style={{ color: "white" }}>
           or / and
-          <select className='selectSearch' value={selectedItem} onChange={handleSelect}>
+          <select className='selectSearch' name='inputSearchField' value={selectedItem} onChange={handleSelect}>
             <option value="">Choose sport category</option>
             {sportsTypes.map(sport => <option key={sport} value={sport}>{sport.charAt(0).toUpperCase() + sport.slice(1)}</option>)}
           </select>

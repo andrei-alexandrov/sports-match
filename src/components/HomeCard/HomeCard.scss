@@ -1,40 +1,33 @@
 @import "../../variables";
 
-.homeCardContainerWrapper {
+.homeCardContainer {
     display: flex;
-    justify-content: center;
-    margin: 150px;
+    flex-direction: column;
+    width: 200px;
+    height: 300px;
+    align-items: center;
 
-    .homeCardContainer {
-        display: flex;
-        flex-direction: column;
-        width: 200px;
-        height: 300px;
-        align-items: center;
+    img {
+        width: 100px;
+        transition: transform 0.5s ease-in-out;
+        filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.9));
 
-        img {
-            width: 100px;
-            height: auto;
-            transition: transform 0.5s ease-in-out;
-
-            filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.9));
-
-            &:hover {
-                transform: scale(1.2);
-            }
+        &:hover {
+            transform: scale(1.2);
         }
+    }
 
-        a {
-            text-decoration: none;
-        }
+    a {
+        text-decoration: none;
+    }
 
-        h2 {
-            color: $almost-white-color;
-            font-size: 28px;
+    h2 {
+        margin-top: 1rem;
+        color: $almost-white-color;
+        font-size: 26px;
 
-            &:hover {
-                color: $contrast-color;
-            }
+        &:hover {
+            color: $contrast-color;
         }
     }
 }

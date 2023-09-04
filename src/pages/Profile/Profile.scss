@@ -2,29 +2,31 @@
 @import "../../mixins";
 
 .profilePageContainer {
-    width: 80%;
-    margin: auto;
-    margin-top: 100px;
+    margin-top: 30px;
     text-align: center;
-    height: calc(100vh - 430px);
 
     .profileInfo {
-        width: 860px;
+        width: 700px;
         margin: auto;
         display: flex;
         color: $almost-white-color;
         background-color: rgba(255, 255, 255, 0.2);
-        height: 400px;
+
         box-shadow: 10px 20px 20px 10px rgba(0, 0, 0, 0.5);
         @include profileBorder();
 
 
         .userInfo {
             width: 500px;
+            margin-top: 1rem;
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 3rem;
+            }
 
             button {
                 @include button();
-                width: 100px;
                 background-color: $contrast-transperant;
             }
         }
@@ -32,13 +34,9 @@
 
     .profileImage img {
         box-sizing: border-box;
-        width: 380px;
-        height: 400px;
-        // margin: 10px 0 0 12px;
+        width: 250px;
+        height: 270px;
         object-fit: cover;
-        // filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.9));
-
-
     }
 
     input[type=file] {
@@ -47,10 +45,12 @@
 
     button {
         @include button();
-        width: 100px;
+        width: 97px;
         color: $almost-white-color;
         background-color: $contrast-transperant !important;
-        text-shadow: 1px 1px 1px black;
+        margin-right: 1rem;
+        margin-top: 1rem;
+        font-size: 17px;
 
         &:hover {
             background-color: $purple-color !important;
@@ -58,9 +58,8 @@
     }
 
     p {
-        font-size: 22px;
+        font-size: 18px;
         color: $almost-white-color;
-
     }
 
     .activitiesList {
@@ -72,8 +71,9 @@
     }
 
     h3 {
-        margin: 100px 0 0 0;
+        margin: 40px 0 0 0;
         font-size: 32px;
+        color: white;
     }
 
     input,
@@ -96,7 +96,6 @@
         }
     }
 
-
     input[type=number]::-webkit-outer-spin-button,
     input[type=number]::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -114,6 +113,10 @@
         color: $almost-white-color;
         font-weight: bold;
         cursor: pointer;
+        font-size: 15px;
+        height: 43px;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
 
     .file-input-label:hover {

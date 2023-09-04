@@ -1,8 +1,7 @@
 Update: 
 Planned incoming additions/changes:
-1. Making the site fully responsive.
-2. Overall design changes. 
-3. Moving the stored data to a database and deployment.
+1. Making the site responsive. (in progress)
+2. Overall design changes. (in progress)
 
 This is my own project idea for a website that helps people with common interests in different sports to meet and play together. The website also provides an opportunity to choose the most convenient places for practicing the desired sport in the respective city/neighborhood.
 
@@ -13,8 +12,8 @@ This is my own project idea for a website that helps people with common interest
 4. Start a chat and discuss the details.
 5. Use the catalogue to find new sport places in your city.
 
-![loginPhoto](./src/images/loginPage.jpg)
-![homePhoto](./src/images/homeScreen.jpg)
+![loginPhoto](./src/images/loginPage.png)
+![homePhoto](./src/images/homeScreen.png)
 ![profilePhoto](./src/images/profilePage.jpg)
 ![activitiesPhoto](./src/images/activitiesPage.jpg)
 ![buddySearchPhoto](./src/images/buddySearch.jpg)

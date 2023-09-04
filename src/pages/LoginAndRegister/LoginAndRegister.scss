@@ -1,133 +1,114 @@
 @import "../../variables";
 @import "../../mixins";
 
-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+.introPage {
+    height: 10vh;
 
-.pageHolder {
-    height: 100vh;
-    background-image: url('../../images/projectBackground3.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom;
-    position: relative;
-
-    .loginForm,
-    .registrationForm {
+    .pageHolder {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        text-align: center;
-        font-size: 18px;
-        top: 20%;
-        background: transparent;
-        box-shadow: 0px -1px 50px 12px $dark-main-color;
-        z-index: 20;
-        @include border();
-        box-shadow: 0px -1px 40px 1px $super-contrast;
+        height: 100vh;
+        background-image: url('../../images/projectBackground3.png');
+        background-size: cover;
+        background-position: bottom;
+        position: relative;
+        bottom: 6.5rem;
 
-        h2 {
-            font-size: 2em;
-            color: $almost-white-color;
+        .loginForm,
+        .registrationForm {
+
             text-align: center;
-            padding: 30px 0 0 0;
-        }
-
-        .text-danger,
-        .form-text {
             font-size: 16px;
-            color: $super-contrast;
-            height: 30px;
-        }
+            top: 20%;
+            background: transparent;
+            box-shadow: 0px -1px 50px 12px $dark-main-color;
+            z-index: 20;
+            @include border();
+            box-shadow: 0px -1px 10px 1px rgb(255, 255, 255);
 
-        .btnHolder {
-            margin: 20px 0 20px 0;
-
-            .btn-primary {
-                @include button();
-                margin-bottom: 10px;
-                width: 300px;
-            }
-        }
-
-        .registerLink {
-            text-decoration: none;
-            color: $almost-white-color;
-
-            a {
+            h2 {
+                font-size: 2em;
                 color: $almost-white-color;
-                text-decoration: none;
-                font-weight: 600;
+                text-align: center;
+                padding: 65px 0 0 0;
+            }
 
-                &:hover {
-                    color: $super-contrast;
+            .text-danger {
+                color: $super-contrast !important;
+                display: block;
+            }
+
+            .btnHolder {
+                margin: 20px 0 20px 0;
+
+                .btn-primary {
+                    @include button();
+                    margin-top: 1rem;
+                    margin-bottom: 10px;
+                    width: 300px;
+                }
+            }
+
+            .registerLink {
+                text-decoration: none;
+                color: $almost-white-color;
+
+                a {
+                    color: $almost-white-color;
+                    text-decoration: none;
+                    font-weight: 600;
+
+                    &:hover {
+                        color: $super-contrast;
+                    }
+                }
+
+                p {
+                    margin-top: 3rem;
+                    margin-bottom: 1rem;
                 }
             }
         }
 
-        @media (max-width: 1980px) {
-            top: 10%;
-        }
+        .inputBox {
+            position: relative;
+            width: 336px;
+            margin: 30px;
+            border-bottom: 2px solid $almost-white-color;
 
-        @media (max-width: 1366px) {
-            top: 8%;
-        }
-    }
-
-    .inputBox {
-        position: relative;
-        width: 336px;
-        margin: 30px;
-        border-bottom: 2px solid $almost-white-color;
-
-        label {
-            position: absolute;
-            top: 50%;
-            left: 5px;
-            transform: translateY(-50%);
-            color: $almost-white-color;
-            font-weight: 400;
-            pointer-events: none;
-            transition: .5s;
-        }
-
-        input {
-            width: 100%;
-            height: 50px;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #f0eded;
-
-            &:focus~label,
-            &:valid~label {
-                top: -5px;
+            label {
+                position: absolute;
+                top: 50%;
+                left: 5px;
+                transform: translateY(-50%);
+                color: $almost-white-color;
+                font-weight: 400;
+                pointer-events: none;
+                transition: .5s;
             }
-        }
 
-        .icon {
-            position: absolute;
-            right: 8px;
-            color: $super-contrast;
-            font-size: 1.2em;
-            line-height: 57px;
-        }
-
-        @media (max-width: 360px) {
-            .inputBox {
+            input {
                 width: 100%;
-                height: 100vh;
+                height: 50px;
+                background: transparent;
                 border: none;
-                border-radius: 0;
+                outline: none;
+                color: #f0eded;
+
+                &:focus~label,
+                &:valid~label {
+                    top: -5px;
+                }
+            }
+
+            .icon {
+                position: absolute;
+                right: 8px;
+                color: white;
+                font-size: 1.2em;
+                line-height: 57px;
             }
         }
-    }
-
-    .alert {
-        position: absolute;
-        top: 120px;
     }
 }

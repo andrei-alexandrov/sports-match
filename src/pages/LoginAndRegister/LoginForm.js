@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import "../components/../LoginAndRegister/LoginAndRegister.scss";
 import userManager from "../../services/UserManager";
 import CustomAlert from "../../components/CustomAlert/CustomAlert";
 import { } from "https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+
+import "../components/../LoginAndRegister/LoginAndRegister.scss";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState({ show: false, variant: "", message: "" });
   const [formValid, setFormValid] = useState(false);
-  const [success, setSuccess] = useState(false); 
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,22 +40,22 @@ function LoginForm() {
     }
     try {
       await userManager.loginUser(username, password);
-      setSuccess(true); 
-      setAlert({ show: true, variant: "success", message: "Login successful!" }); 
+      setSuccess(true);
+      setAlert({ show: true, variant: "success", message: "Login successful!" });
       setTimeout(() => {
         navigate("/");
-      }, 1000); 
+      }, 1000);
     } catch (error) {
       setAlert({ show: true, variant: "danger", message: "Invalid username or password." });
     }
   };
 
   return (
-    <div className="loginPage">
+    <div className="introPage">
       <section className="pageHolder">
         <form className="loginForm" onSubmit={handleSubmit}>
           <h2 className="loginTitle">Login</h2>
-          {alert.show && <CustomAlert variant={alert.variant} message={alert.message}/>} 
+          {alert.show && <CustomAlert variant={alert.variant} message={alert.message} />}
           <Form.Group controlId="username">
             <div className="inputBox">
               <span className="icon"><ion-icon name="person"></ion-icon></span>
@@ -88,7 +89,7 @@ function LoginForm() {
               Login
             </Button>
             <div className="registerLink">
-              <p className="haveAnAcount">Don't have an account?
+              <p className="have-account">Don't have an account?
                 <Link to="/register"><span className="registerHover"> Sign up</span></Link></p>
             </div>
           </span>

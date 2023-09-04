@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import userManager from "../../services/UserManager";
-import "./BuddySearch.scss";
 import { useNavigate } from "react-router-dom";
 import userImage from "../../images/user.png";
 import BuddyCard from "../../components/BuddyCard/BuddyCard";
 import activitiesData from "../Activities/activitiesData";
 import LoginModal from "../../components/Modals/LoginModal";
+
+import "./BuddySearch.scss";
 
 export default function BuddySearchPage() {
   const [users, setUsers] = useState(userManager.users);

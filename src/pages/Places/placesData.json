@@ -1,7 +1,7 @@
 [
     {
         "image": "https://sportal365images.com/process/smp-images-production/sportal.bg/13112021/ead2e012-b2b8-4752-91d7-993c18988dcc.jpg?operations=crop(0:352:5986:3719),fit(768:433)&format=webp",
-        "name": "Бадминтон зала Европа - Люлин",
+        "name": "Бадминтон зала ",
         "site": "www.badminton.com",
         "address": "ж.к Люлин, ул. Арх. Георги Ненов 29",
         "phone": "0888 144 255",
@@ -10,7 +10,7 @@
     },
     {
         "image": "https://www.tce.bg/js/backend/tiny_mce/plugins/ajaxfilemanager/upload/image1_1.JPG",
-        "name": "Бадминтон зала Европа",
+        "name": "Бадминтон зала",
         "site": "www.badminton.sportcentereurope.bg",
         "address": "кв. Дружба, бул. Искърско Шосе 7",
         "phone": "0899 635 940",
@@ -18,7 +18,7 @@
         "type": "badminton"
     },
     {
-        "image": "https://scontent.fsof8-1.fna.fbcdn.net/v/t1.6435-9/37890701_2204286873174145_8069515079780925440_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=ikXJXKVvI1wAX-ICLbI&_nc_ht=scontent.fsof8-1.fna&oh=00_AfAVkyMYzVJs-_bqWCmZ_U0D_mn1750ICzzZzEK8Lhf0Ew&oe=645E2DDE",
+        "image": "https://thumbs.dreamstime.com/b/empty-badminton-court-competing-32605065.jpg",
         "name": "Fireball sports hall",
         "site": "www.fireball.bg",
         "address": "кв. Дружба, бул. Цариградско шосе 133",
@@ -28,7 +28,7 @@
     },
     {
         "image": "https://lh3.googleusercontent.com/p/AF1QipMOUpYWvPNLynsaDfhafrSmd-INeU52GQ5QsPt9=s1360-w1360-h1020",
-        "name": "Спортна зала Триадица",
+        "name": "Зала Триадица",
         "site": "www.example.com",
         "address": "кв. Дружба",
         "phone": "0884 951 868",
@@ -36,8 +36,8 @@
         "type": "basketball"
     },
     {
-        "image": "https://cska.bg/bmz_cache/7/7ae2b5fceff2474c312a2d66ac638aab.image.700x455.png",
-        "name": "Спортна зала ЦСКА",
+        "image": "https://media.gettyimages.com/id/183256716/photo/ball-and-basketball-court.jpg?s=612x612&w=gi&k=20&c=j4n2xknaJ-tL-tGZyvUxXpjhBFEteP0nx9L7ZMk0oZI=",
+        "name": "Зала ЦСКА",
         "site": "www.cska-basket.bg",
         "address": "кв. Витоша 77",
         "phone": "0899 971 178",
@@ -46,7 +46,7 @@
     },
     {
         "image": "https://www.isofia.bg/thumb/asp/900/1/1/2015/08/03/1438612629.jpg",
-        "name": "Спортна София - 2000 ЕАД",
+        "name": "Спортна София",
         "site": "https://sportnasofia2000.com/",
         "address": "ул. “Българска морава” № 2",
         "phone": "(+359 2) 8 22 11 53",
@@ -54,7 +54,7 @@
         "type": "basketball"
     },
     {
-        "image": "https://playground.bg/files/images/535/resize_648_99999.jpg",
+        "image": "https://media.timeout.com/images/103453563/750/562/image.jpg",
         "name": "Зала за билярд",
         "site": "www.example.com",
         "address": "кв. Дружба",
@@ -190,7 +190,7 @@
     },
     {
         "image": "https://static.pochivka.bg/sights.bgstay.com/images/00/464/54c3de6e18efe.jpg",
-        "name": "Име на зала Картинг",
+        "name": "Зала за Картинг",
         "site": "www.example.com",
         "address": "Адрес",
         "phone": "0828318838886",
@@ -199,7 +199,7 @@
     },
     {
         "image": "https://funsport.bg/upload/services/428427-334066536672303-431553841-n.jpg",
-        "name": "Име на зала Картинг",
+        "name": "Зала за Картинг",
         "site": "www.example.com",
         "address": "Адрес",
         "phone": "0828318838881",
@@ -208,7 +208,7 @@
     },
     {
         "image": "https://funsport.bg/upload/services/1506475-805379079541044-7248382600949647346-n.jpg",
-        "name": "Име на зала Картинг",
+        "name": "Зала за Картинг",
         "site": "www.example.com",
         "address": "Адрес",
         "phone": "0828318838882",
@@ -234,7 +234,7 @@
         "type": "padel"
     },
     {
-        "image": "https://play.decathlon.bg/static/images/Group%202700.png",
+        "image": "https://goguide.bg/wp-content/uploads/1600958479decathloncover.jpg",
         "name": "Име на зала Падел 3",
         "site": "www.example.com",
         "address": "Адрес",
@@ -244,7 +244,7 @@
     },
     {
         "image": "https://www.paintball-brno.cz/wp-content/uploads/2020/10/foto-paintball-hall-paintball_brno-11.jpg",
-        "name": "Име на място за paintball 1",
+        "name": "Paintball 1",
         "site": "www.example.com",
         "address": "Адрес",
         "phone": "03328318838882",
@@ -253,7 +253,7 @@
     },
     {
         "image": "https://www.paintball-brno.cz/wp-content/uploads/2020/03/paintball-hala-brno-01-1.jpg",
-        "name": "Име на място за paintball 2",
+        "name": "Paintball 2",
         "site": "www.example.com",
         "address": "Адрес",
         "phone": "02328318838882",
@@ -262,7 +262,7 @@
     },
     {
         "image": "https://i0.wp.com/www.narozlucku.cz/wp-content/uploads/2017/03/obr2025.jpg?fit=690%2C460&ssl=1",
-        "name": "Име на място за paintball 3",
+        "name": "Paintball 3",
         "site": "www.example.com",
         "address": "Адрес",
         "phone": "013283188338882",

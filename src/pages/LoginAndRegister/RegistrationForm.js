@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import "../components/../LoginAndRegister/LoginAndRegister.scss";
-import userManager from "../../services/UserManager";
 import { Link, useNavigate } from "react-router-dom";
+import userManager from "../../services/UserManager";
 import CustomAlert from "../../components/CustomAlert/CustomAlert";
+
+import "../components/../LoginAndRegister/LoginAndRegister.scss";
 
 const RegistrationForm = () => {
   const [username, setUsername] = useState("");
@@ -91,9 +92,9 @@ const RegistrationForm = () => {
     }
   };
   return (
-    <div className="registerPage">
+    <div className="introPage">
       <section className="pageHolder">
-        <form className="registrationForm" onSubmit={handleSubmit}>
+        <Form className="registrationForm" onSubmit={handleSubmit}>
           <h2 className="registerTitle">Register</h2>
           {alert.show && <CustomAlert variant={alert.variant} message={alert.message} />}
           <Form.Group controlId="username">
@@ -145,7 +146,8 @@ const RegistrationForm = () => {
           <Form.Control.Feedback className="text-danger" type="invalid">{errors.password}</Form.Control.Feedback>
 
           <span className="btnHolder">
-            <Button type="submit" className={`submit-btn ${formValid ? "enabled" : ""}`}>
+            <Button type="submit" className={`submit-btn ${formValid ? "enabled" : "disabled"}`}
+              disabled={!formValid}>
               Register
             </Button>
             <div className="registerLink">
@@ -153,7 +155,7 @@ const RegistrationForm = () => {
                 <Link to="/login"><span className="registerHover"> Log in</span></Link></p>
             </div>
           </span>
-        </form>
+        </Form>
       </section>
     </div>
   );

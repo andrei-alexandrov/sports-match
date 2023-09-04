@@ -1,7 +1,6 @@
 @mixin button() {
     position: relative;
-    top: 10px;
-    right: 5px;
+    // top: 10px;
     width: 80%;
     height: 40px;
     background: $almost-white-color;
@@ -19,7 +18,7 @@
 }
 
 @mixin border() {
-    border: 2px solid $super-contrast;
+    // border: 1px solid $super-contrast;
     border-radius: 20px;
     background: transparent;
     backdrop-filter: blur(15px);
@@ -30,7 +29,6 @@
     border: none;
     font-size: 18px;
     border-radius: 15px;
-    padding: 10px;
     height: 30px;
     width: 160px;
     margin: auto;
@@ -85,10 +83,4 @@
             background-position: 100% 0;
         }
     }
-}
-
-
-@mixin sphere {
-    border-radius: 110px;
-    position: absolute;
 }

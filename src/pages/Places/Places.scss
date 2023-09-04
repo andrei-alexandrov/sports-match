@@ -2,7 +2,7 @@
 @import "../../mixins";
 
 .placesPage {
-    height: calc(100vh - 350px);
+
     .sportsPageContainer {
         display: flex;
         flex-wrap: wrap;
@@ -13,33 +13,31 @@
         margin-top: 45px;
         margin-bottom: 200px;
     }
+
     .siteSloganTitle {
-        padding-top: 40px;
+        padding-top: 30px;
         text-align: center;
-        font-size: 50px;
-        width: 50%;
+        font-size: 26px;
+        color: white;
+        width: 60%;
         margin: auto;
         line-height: 1.5em;
-        text-shadow: $text-shadow;  
+        text-shadow: $text-shadow;
     }
 
     .searchWrapper {
         display: flex;
         justify-content: center;
-        margin: 40px;
-    
-    
+
         .selectSearch {
             @include select();
-            height: 50px;
+            height: 40px;
             margin-left: 30px;
         }
-    
+
         .inputSearch {
             @include select();
-            cursor: auto;
             margin-right: 30px;
-            height: 28px;
 
             &::placeholder {
                 color: $almost-white-color;
@@ -47,4 +45,3 @@
         }
     }
 }
-
