@@ -2,6 +2,8 @@ Update:
 Planned incoming additions/changes:
 1. Making the site responsive. (in progress)
 2. Overall design changes. (in progress)
+3. Adding MongoDB database. (in progress)
+4. Implementing new chat features. (in progress)
 
 This is my own project idea for a website that helps people with common interests in different sports to meet and play together. The website also provides an opportunity to choose the most convenient places for practicing the desired sport in the respective city/neighborhood.
 
