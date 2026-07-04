@@ -6,6 +6,7 @@ import ComingSoon from "./pages/ComingSoon/ComingSoon";
 import HomePage from "./pages/Home/Home";
 import LoginForm from "./pages/LoginAndRegister/LoginForm";
 import RegistrationForm from "./pages/LoginAndRegister/RegistrationForm";
+import ProfilePage from "./pages/Profile/Profile";
 import "./App.scss";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/home" element={<HomePage />} />
         <Route element={<RequireAuth />}>
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/activities" element={<ComingSoon feature="Activities" />} />
           <Route path="/buddySearch" element={<ComingSoon feature="Buddy Search" />} />
           <Route path="/messages" element={<ComingSoon feature="Messages" />} />
