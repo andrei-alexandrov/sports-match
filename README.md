@@ -43,5 +43,5 @@ To keep data, create a free MongoDB Atlas cluster, copy
 
 1. ✅ Auth + profiles
 2. ✅ Activities + buddy search
-3. Real-time chat (Socket.io)
+3. ✅ Real-time chat (Socket.io)
 4. Places catalogue with geo search
