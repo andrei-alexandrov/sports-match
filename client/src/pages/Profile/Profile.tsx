@@ -14,6 +14,7 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState<UpdateProfileInput>({});
   const [error, setError] = useState("");
+  const [savingActivities, setSavingActivities] = useState(false);
 
   if (!user) {
     return null; // RequireAuth guarantees a user; this narrows the type.
@@ -60,6 +61,9 @@ export default function ProfilePage() {
   };
 
   const handleRemoveActivity = async (activityKey: string) => {
+    if (savingActivities) {
+      return; // one update at a time — a second confirm would race the first PATCH
+    }
     const shouldRemove = await ConfirmModal(
       "Do you really want to remove this activity?",
       "This action cannot be undone.",
@@ -67,6 +71,7 @@ export default function ProfilePage() {
     if (!shouldRemove) {
       return;
     }
+    setSavingActivities(true);
     try {
       const next = user.activities.filter((key) => key !== activityKey);
       // user.activities is string[] on the wire but only ever holds server-validated catalogue keys.
@@ -74,6 +79,8 @@ export default function ProfilePage() {
       setError("");
     } catch {
       setError("Could not update your activities. Please try again.");
+    } finally {
+      setSavingActivities(false);
     }
   };
 
