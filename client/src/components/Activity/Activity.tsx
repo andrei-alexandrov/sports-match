@@ -6,9 +6,10 @@ interface ActivityComponentProps {
   onAdd?: (activity: ClientActivity) => void;
   added?: boolean;
   onRemove?: (activity: ClientActivity) => void;
+  disabled?: boolean;
 }
 
-function ActivityComponent({ activity, onAdd, added, onRemove }: ActivityComponentProps) {
+function ActivityComponent({ activity, onAdd, added, onRemove, disabled }: ActivityComponentProps) {
   const addButtonText = added ? "Remove" : "Add";
 
   return (
@@ -16,12 +17,12 @@ function ActivityComponent({ activity, onAdd, added, onRemove }: ActivityCompone
       <h2>{activity.label}</h2>
       <img src={activity.image} alt={activity.label} />
       {onAdd && (
-        <button className={added ? "addedButton" : "addButton"} onClick={() => onAdd(activity)}>
+        <button className={added ? "addedButton" : "addButton"} onClick={() => onAdd(activity)} disabled={disabled}>
           {addButtonText}
         </button>
       )}
       {onRemove && (
-        <button className="removeButton" onClick={() => onRemove(activity)}>
+        <button className="removeButton" onClick={() => onRemove(activity)} disabled={disabled}>
           X
         </button>
       )}
@@ -32,13 +33,14 @@ function ActivityComponent({ activity, onAdd, added, onRemove }: ActivityCompone
 interface ActivityComponentCircleProps {
   activity: ClientActivity;
   onRemove?: (activity: ClientActivity) => void;
+  disabled?: boolean;
 }
 
-function ActivityComponentCircle({ activity, onRemove }: ActivityComponentCircleProps) {
+function ActivityComponentCircle({ activity, onRemove, disabled }: ActivityComponentCircleProps) {
   return (
     <div className="activityContainerCircle">
       {onRemove && (
-        <button className="smallBtn" onClick={() => onRemove(activity)}>
+        <button className="smallBtn" onClick={() => onRemove(activity)} disabled={disabled}>
           X
         </button>
       )}

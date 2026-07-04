@@ -156,7 +156,7 @@ export default function ProfilePage() {
               const activity = activityByKey(key);
               return activity ? (
                 <div key={key}>
-                  <ActivityComponentCircle activity={activity} onRemove={() => handleRemoveActivity(key)} />
+                  <ActivityComponentCircle activity={activity} onRemove={() => handleRemoveActivity(key)} disabled={savingActivities} />
                 </div>
               ) : null;
             })}

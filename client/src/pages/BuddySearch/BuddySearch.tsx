@@ -16,6 +16,7 @@ export default function BuddySearchPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [selectedActivity, setSelectedActivity] = useState("");
+  // Safe: this route renders inside RequireAuth, which blocks until the auth check resolves.
   const [city, setCity] = useState(user?.city ?? "");
   const [buddies, setBuddies] = useState<PublicUser[]>([]);
   const [error, setError] = useState("");
@@ -37,6 +38,7 @@ export default function BuddySearchPage() {
       })
       .catch(() => {
         if (!cancelled) {
+          setBuddies([]);
           setError("Could not load buddies. Please try again.");
         }
       });
@@ -76,11 +78,15 @@ export default function BuddySearchPage() {
       </div>
       {error && <CustomAlert variant="danger" message={error} />}
       <div className="buddiesHolder">
-        {buddies.map((buddy) => (
-          <div className="buddyCardContainer" key={buddy.username}>
-            <BuddyCard user={buddy} defaultImage={userImage} onStartChat={handleStartChat} />
-          </div>
-        ))}
+        {buddies.length === 0 && !error ? (
+          <p style={{ color: "white", textAlign: "center" }}>No buddies found</p>
+        ) : (
+          buddies.map((buddy) => (
+            <div className="buddyCardContainer" key={buddy.username}>
+              <BuddyCard user={buddy} defaultImage={userImage} onStartChat={handleStartChat} />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

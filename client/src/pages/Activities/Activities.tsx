@@ -69,6 +69,7 @@ export default function ActivitiesPage() {
               activity={activity}
               onAdd={handleToggleActivity}
               added={addedKeys.has(activity.key)}
+              disabled={saving}
             />
           ))}
       </div>
