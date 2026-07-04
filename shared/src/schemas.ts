@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ACTIVITY_KEYS } from "./activities";
 
 export const registerInputSchema = z.object({
   username: z
@@ -24,12 +25,18 @@ export type LoginInput = z.infer<typeof loginInputSchema>;
 export const genderSchema = z.enum(["male", "female", "other"]).or(z.literal(""));
 export type Gender = z.infer<typeof genderSchema>;
 
+export const activityKeySchema = z.enum(ACTIVITY_KEYS);
+
 export const updateProfileInputSchema = z.object({
   age: z.number().int().min(0).max(100).nullable().optional(),
   city: z.string().max(100).optional(),
   gender: genderSchema.optional(),
   // Profile pictures travel as data URLs for now (prototype parity); real upload is a follow-up.
   image: z.string().max(2_000_000).optional(),
+  activities: z
+    .array(activityKeySchema)
+    .transform((keys) => [...new Set(keys)])
+    .optional(),
 });
 export type UpdateProfileInput = z.infer<typeof updateProfileInputSchema>;
 
@@ -43,6 +50,12 @@ export const publicUserSchema = z.object({
   activities: z.array(z.string()),
 });
 export type PublicUser = z.infer<typeof publicUserSchema>;
+
+export const searchUsersQuerySchema = z.object({
+  activity: activityKeySchema.optional(),
+  city: z.string().trim().max(100).optional(),
+});
+export type SearchUsersQuery = z.infer<typeof searchUsersQuerySchema>;
 
 export interface ApiErrorBody {
   error: { code: string; message: string };

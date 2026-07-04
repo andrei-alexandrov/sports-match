@@ -5,6 +5,8 @@ import {
   registerInputSchema,
   updateProfileInputSchema,
 } from "./schemas";
+import { ACTIVITIES } from "./activities";
+import { searchUsersQuerySchema } from "./schemas";
 
 describe("registerInputSchema", () => {
   it("accepts a valid username and password", () => {
@@ -52,7 +54,7 @@ describe("updateProfileInputSchema", () => {
   });
 
   it("strips unknown keys (mass-assignment protection)", () => {
-    const result = updateProfileInputSchema.safeParse({ city: "Sofia", activities: ["hacked"] });
+    const result = updateProfileInputSchema.safeParse({ city: "Sofia", unknown: "hacked" });
     expect(result.success).toBe(true);
     expect(result.data).toEqual({ city: "Sofia" });
   });
@@ -83,5 +85,39 @@ describe("publicUserSchema", () => {
     if (withHash.success) {
       expect(withHash.data).not.toHaveProperty("passwordHash");
     }
+  });
+});
+
+describe("activities catalogue", () => {
+  it("has 40 entries with unique keys and labels", () => {
+    expect(ACTIVITIES).toHaveLength(40);
+    expect(new Set(ACTIVITIES.map((a) => a.key)).size).toBe(40);
+    expect(new Set(ACTIVITIES.map((a) => a.label)).size).toBe(40);
+  });
+
+  it("accepts and dedupes valid activity keys in profile updates", () => {
+    const result = updateProfileInputSchema.safeParse({ activities: ["tennis", "tennis", "yoga"] });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.activities).toEqual(["tennis", "yoga"]);
+    }
+  });
+
+  it("rejects unknown activity keys", () => {
+    expect(updateProfileInputSchema.safeParse({ activities: ["quidditch"] }).success).toBe(false);
+  });
+});
+
+describe("searchUsersQuerySchema", () => {
+  it("trims city and strips unknown params", () => {
+    const result = searchUsersQuerySchema.safeParse({ city: "  Sofia ", activity: "tennis", admin: "1" });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data).toEqual({ city: "Sofia", activity: "tennis" });
+    }
+  });
+
+  it("rejects an unknown activity key", () => {
+    expect(searchUsersQuerySchema.safeParse({ activity: "quidditch" }).success).toBe(false);
   });
 });

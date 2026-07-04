@@ -21,18 +21,26 @@ describe("PATCH /api/users/me", () => {
     expect(cityOnly.body.user).toMatchObject({ age: 30, city: "Plovdiv" });
   });
 
-  it("cannot mass-assign protected fields like activities or passwordHash", async () => {
+  it("stores validated, deduplicated activities but never passwordHash or username", async () => {
     const agent = request.agent(createApp());
     await agent.post("/api/auth/register").send(creds);
     const res = await agent
       .patch("/api/users/me")
-      .send({ city: "Sofia", activities: ["hacked"], passwordHash: "owned" });
+      .send({ activities: ["tennis", "tennis", "yoga"], passwordHash: "owned", username: "hijacked" });
     expect(res.status).toBe(200);
-    expect(res.body.user.city).toBe("Sofia");
+    expect(res.body.user.activities).toEqual(["tennis", "yoga"]);
     const user = await User.findOne({ username: "andrei" });
-    expect(user?.city).toBe("Sofia");
-    expect(user?.activities).toEqual([]);
+    expect(user?.username).toBe("andrei");
+    expect(user?.activities).toEqual(["tennis", "yoga"]);
     expect(user?.passwordHash).toMatch(/^\$2/);
+  });
+
+  it("rejects activities outside the catalogue", async () => {
+    const agent = request.agent(createApp());
+    await agent.post("/api/auth/register").send(creds);
+    const res = await agent.patch("/api/users/me").send({ activities: ["hacked"] });
+    expect(res.status).toBe(400);
+    expect(res.body.error.code).toBe("VALIDATION_ERROR");
   });
 
   it("rejects invalid values with 400", async () => {
