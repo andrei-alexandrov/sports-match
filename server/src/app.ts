@@ -1,6 +1,7 @@
 import express from "express";
 import { errorHandler, notFoundHandler } from "./errors";
 import { authRouter } from "./routes/auth";
+import { messagesRouter } from "./routes/messages";
 import { usersRouter } from "./routes/users";
 import { createSessionMiddleware } from "./session";
 
@@ -19,6 +20,7 @@ export function createApp(
 
   app.use("/api/auth", authRouter);
   app.use("/api/users", usersRouter);
+  app.use("/api/messages", messagesRouter);
 
   app.use(notFoundHandler);
   app.use(errorHandler);
