@@ -54,7 +54,7 @@ const RegistrationForm = () => {
       newErrors.confirmPassword = confirmPassword !== value && confirmPassword !== "" ? "Passwords do not match" : undefined;
     } else if (name === "confirmPassword") {
       setConfirmPassword(value);
-      newErrors.confirmPassword = value !== password ? "Passwords do not match" : undefined;
+      newErrors.confirmPassword = value !== password && value !== "" ? "Passwords do not match" : undefined;
     }
     setErrors(newErrors);
   };
