@@ -14,11 +14,19 @@ interface SocketData {
   username: string;
 }
 
+let ioInstance: Server | null = null;
+
+/** Disconnects every live socket belonging to a user (e.g. on logout). */
+export function disconnectUserSockets(username: string): void {
+  ioInstance?.in(`user:${username}`).disconnectSockets(true);
+}
+
 export function attachSocket(
   server: http.Server,
   sessionMiddleware: express.RequestHandler,
 ): Server {
   const io = new Server(server);
+  ioInstance = io;
   // The same session middleware the Express app uses runs on the socket
   // handshake request — the httpOnly cookie authenticates sockets too.
   io.engine.use(sessionMiddleware);
@@ -59,6 +67,10 @@ export function attachSocket(
           return;
         }
         const { receiver, text } = result.data;
+        if (receiver === username) {
+          ack?.({ ok: false, error: { code: "VALIDATION_ERROR", message: "You cannot message yourself" } });
+          return;
+        }
         const receiverUser = await User.findOne({ username: receiver });
         if (!receiverUser) {
           ack?.({ ok: false, error: { code: "UNKNOWN_RECEIVER", message: "That user does not exist" } });

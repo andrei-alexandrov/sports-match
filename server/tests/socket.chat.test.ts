@@ -134,4 +134,52 @@ describe("socket chat", () => {
     expect(ack).toEqual({ ok: false, error: { code: "UNKNOWN_RECEIVER", message: "That user does not exist" } });
     expect(await Message.countDocuments()).toBe(0);
   });
+
+  it("does not deliver private messages to third parties", async () => {
+    const chat = await startChatServer();
+    const annaCookie = await registerAndGetCookie(chat.app, "anna");
+    const bobCookie = await registerAndGetCookie(chat.app, "bob");
+    const charlieCookie = await registerAndGetCookie(chat.app, "charlie");
+
+    const anna = connect(chat.url, annaCookie);
+    const bob = connect(chat.url, bobCookie);
+    const charlie = connect(chat.url, charlieCookie);
+    await Promise.all([connected(anna), connected(bob), connected(charlie)]);
+
+    let charlieGotMessage = false;
+    charlie.on(SOCKET_EVENT_MESSAGE_NEW, () => {
+      charlieGotMessage = true;
+    });
+    const bobReceived = new Promise<PublicMessage>((resolve) => bob.once(SOCKET_EVENT_MESSAGE_NEW, resolve));
+
+    const ack = await anna.emitWithAck(SOCKET_EVENT_MESSAGE_SEND, { receiver: "bob", text: "secret plans" }) as MessageSendAck;
+    expect(ack.ok).toBe(true);
+    await bobReceived;
+    // Give any stray broadcast a moment to arrive before asserting isolation.
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    expect(charlieGotMessage).toBe(false);
+  });
+
+  it("rejects sending a message to yourself", async () => {
+    const chat = await startChatServer();
+    const annaCookie = await registerAndGetCookie(chat.app, "anna");
+    const anna = connect(chat.url, annaCookie);
+    await connected(anna);
+
+    const ack = await anna.emitWithAck(SOCKET_EVENT_MESSAGE_SEND, { receiver: "anna", text: "hi me" }) as MessageSendAck;
+    expect(ack).toEqual({ ok: false, error: { code: "VALIDATION_ERROR", message: "You cannot message yourself" } });
+    expect(await Message.countDocuments()).toBe(0);
+  });
+
+  it("disconnects a user's live sockets on logout", async () => {
+    const chat = await startChatServer();
+    const annaCookie = await registerAndGetCookie(chat.app, "anna");
+    const anna = connect(chat.url, annaCookie);
+    await connected(anna);
+
+    const disconnected = new Promise<string>((resolve) => anna.once("disconnect", resolve));
+    await request(chat.app).post("/api/auth/logout").set("Cookie", annaCookie);
+    const reason = await disconnected;
+    expect(reason).toBe("io server disconnect");
+  });
 });

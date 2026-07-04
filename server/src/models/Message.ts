@@ -14,7 +14,7 @@ const messageSchema = new mongoose.Schema<MessageFields>({
   receiver: { type: String, required: true },
   text: { type: String, required: true },
   timestamp: { type: Date, default: Date.now },
-  status: { type: String, default: "unread" },
+  status: { type: String, enum: ["unread", "read"], default: "unread" },
 });
 messageSchema.index({ sender: 1, receiver: 1, timestamp: 1 });
 

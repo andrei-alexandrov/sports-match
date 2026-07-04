@@ -5,6 +5,7 @@ import { AppError } from "../errors";
 import { requireAuth } from "../middleware/requireAuth";
 import { validate } from "../middleware/validate";
 import { toPublicUser, User } from "../models/User";
+import { disconnectUserSockets } from "../socket";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -46,11 +47,15 @@ authRouter.post("/login", validate(loginInputSchema), async (req, res) => {
   res.json({ user: toPublicUser(user) });
 });
 
-authRouter.post("/logout", (req, res, next) => {
+authRouter.post("/logout", async (req, res, next) => {
+  const user = req.session.userId ? await User.findById(req.session.userId) : null;
   req.session.destroy((err) => {
     if (err) {
       next(err);
       return;
+    }
+    if (user) {
+      disconnectUserSockets(user.username);
     }
     res.clearCookie("connect.sid");
     res.status(204).end();
