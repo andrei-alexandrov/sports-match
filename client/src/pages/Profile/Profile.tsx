@@ -5,6 +5,9 @@ import { useAuth } from "../../context/AuthContext";
 import userImage from "../../images/user.png";
 import "../../sweetalert2-custom.scss";
 import "./Profile.scss";
+import { activityByKey } from "../../activities/catalogue";
+import { ActivityComponentCircle } from "../../components/Activity/Activity";
+import ConfirmModal from "../../components/Modals/ConfirmModal";
 
 export default function ProfilePage() {
   const { user, updateProfile } = useAuth();
@@ -54,6 +57,24 @@ export default function ProfilePage() {
       setDraft((d) => ({ ...d, image: typeof reader.result === "string" ? reader.result : "" }));
     };
     reader.readAsDataURL(file);
+  };
+
+  const handleRemoveActivity = async (activityKey: string) => {
+    const shouldRemove = await ConfirmModal(
+      "Do you really want to remove this activity?",
+      "This action cannot be undone.",
+    );
+    if (!shouldRemove) {
+      return;
+    }
+    try {
+      const next = user.activities.filter((key) => key !== activityKey);
+      // user.activities is string[] on the wire but only ever holds server-validated catalogue keys.
+      await updateProfile({ activities: next as UpdateProfileInput["activities"] });
+      setError("");
+    } catch {
+      setError("Could not update your activities. Please try again.");
+    }
   };
 
   const displayedImage = (isEditing ? draft.image : user.image) || userImage;
@@ -124,9 +145,14 @@ export default function ProfilePage() {
         <h3>{user.username}'s activities:</h3>
         {user.activities.length > 0 ? (
           <div className="activitiesList">
-            {user.activities.map((activity) => (
-              <div key={activity}>{activity}</div>
-            ))}
+            {user.activities.map((key) => {
+              const activity = activityByKey(key);
+              return activity ? (
+                <div key={key}>
+                  <ActivityComponentCircle activity={activity} onRemove={() => handleRemoveActivity(key)} />
+                </div>
+              ) : null;
+            })}
           </div>
         ) : (
           <p>No activities added yet</p>
