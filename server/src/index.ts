@@ -1,6 +1,8 @@
+import http from "node:http";
 import { createApp } from "./app";
 import { config } from "./config";
 import { connectDb } from "./db";
+import { createSessionMiddleware } from "./session";
 
 async function main(): Promise<void> {
   if (!config.mongoUrl) {
@@ -10,8 +12,10 @@ async function main(): Promise<void> {
     throw new Error("SESSION_SECRET is required in production");
   }
   await connectDb(config.mongoUrl);
-  const app = createApp();
-  app.listen(config.port, () => {
+  const sessionMiddleware = createSessionMiddleware();
+  const app = createApp(sessionMiddleware);
+  const server = http.createServer(app);
+  server.listen(config.port, () => {
     console.log(`API listening on http://localhost:${config.port}`);
   });
 }
