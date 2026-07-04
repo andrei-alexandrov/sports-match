@@ -1,7 +1,9 @@
 # TypeScript + Vite Migration — Design
 
 **Date:** 2026-07-04
-**Status:** Approved by Andrei (sections 1–3 approved individually)
+**Status:** SUPERSEDED by `2026-07-04-fullstack-rebuild-design.md` — the
+project pivoted from migrating the prototype to rebuilding fresh as a
+full-stack TypeScript monorepo. Kept for the record of decisions made.
 **Scope:** Frontend only. The backend (MongoDB, real auth, real chat) is a separate follow-up project.
 
 ## Background and goal
