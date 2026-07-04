@@ -4,6 +4,8 @@ import RequireAuth from "./components/RequireAuth";
 import errorpic from "./images/errorPage.gif";
 import ComingSoon from "./pages/ComingSoon/ComingSoon";
 import HomePage from "./pages/Home/Home";
+import LoginForm from "./pages/LoginAndRegister/LoginForm";
+import RegistrationForm from "./pages/LoginAndRegister/RegistrationForm";
 import "./App.scss";
 
 export default function App() {
@@ -12,6 +14,8 @@ export default function App() {
       <NavBar />
       <Routes>
         <Route index element={<Navigate to="/home" />} />
+        <Route path="/register" element={<RegistrationForm />} />
+        <Route path="/login" element={<LoginForm />} />
         <Route path="/home" element={<HomePage />} />
         <Route element={<RequireAuth />}>
           <Route path="/activities" element={<ComingSoon feature="Activities" />} />
