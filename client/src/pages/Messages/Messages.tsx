@@ -52,7 +52,13 @@ export default function MessagesPage() {
         setMessages((previous) => [...previous, message]);
         if (message.receiver === me) {
           // You are looking at the thread — mark it read immediately.
-          void messagesApi.markThreadRead(message.sender).then(refreshConversations);
+          void messagesApi
+            .markThreadRead(message.sender)
+            .then(refreshConversations)
+            .catch(() => {
+              // Non-blocking: if read-marking fails, the unread dot simply
+              // persists and self-heals the next time the thread is opened.
+            });
           return;
         }
       }
@@ -89,7 +95,13 @@ export default function MessagesPage() {
           setError("Could not load this conversation. Please try again.");
         }
       });
-    void messagesApi.markThreadRead(currentReceiver).then(refreshConversations);
+    void messagesApi
+      .markThreadRead(currentReceiver)
+      .then(refreshConversations)
+      .catch(() => {
+        // Non-blocking: if read-marking fails, the unread dot simply
+        // persists and self-heals the next time the thread is opened.
+      });
     return () => {
       cancelled = true;
     };
