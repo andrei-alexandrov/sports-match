@@ -1,5 +1,38 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
+import RequireAuth from "./components/RequireAuth";
+import errorpic from "./images/errorPage.gif";
+import ComingSoon from "./pages/ComingSoon/ComingSoon";
+import HomePage from "./pages/Home/Home";
 import "./App.scss";
 
 export default function App() {
-  return <h1 style={{ color: "white", textAlign: "center" }}>Sports Match — client scaffold OK</h1>;
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route index element={<Navigate to="/home" />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/activities" element={<ComingSoon feature="Activities" />} />
+          <Route path="/buddySearch" element={<ComingSoon feature="Buddy Search" />} />
+          <Route path="/messages" element={<ComingSoon feature="Messages" />} />
+          <Route path="/places" element={<ComingSoon feature="Places" />} />
+        </Route>
+        <Route
+          path="*"
+          element={
+            <div>
+              <h2 style={{ color: "white", display: "flex", justifyContent: "center" }}>
+                Page not found. You've taken a wrong turn, but you found a hedgehog.
+              </h2>
+              <div className="errorImage">
+                <img width={650} src={errorpic} alt="errorImage" />
+              </div>
+            </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }

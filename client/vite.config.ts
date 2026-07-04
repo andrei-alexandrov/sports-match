@@ -4,6 +4,7 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ["**/*.mov"],
   resolve: {
     alias: {
       "@sports-match/shared": fileURLToPath(new URL("../shared/src/index.ts", import.meta.url)),
