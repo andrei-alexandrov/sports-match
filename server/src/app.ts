@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import { config } from "./config";
 import { errorHandler, notFoundHandler } from "./errors";
 import { authRouter } from "./routes/auth";
+import { usersRouter } from "./routes/users";
 
 export function createApp(): express.Express {
   const app = express();
@@ -35,6 +36,7 @@ export function createApp(): express.Express {
   });
 
   app.use("/api/auth", authRouter);
+  app.use("/api/users", usersRouter);
 
   app.use(notFoundHandler);
   app.use(errorHandler);
