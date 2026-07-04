@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import RequireAuth from "./components/RequireAuth";
 import errorpic from "./images/errorPage.gif";
+import ActivitiesPage from "./pages/Activities/Activities";
 import ComingSoon from "./pages/ComingSoon/ComingSoon";
 import HomePage from "./pages/Home/Home";
 import LoginForm from "./pages/LoginAndRegister/LoginForm";
@@ -20,7 +21,7 @@ export default function App() {
         <Route path="/home" element={<HomePage />} />
         <Route element={<RequireAuth />}>
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/activities" element={<ComingSoon feature="Activities" />} />
+          <Route path="/activities" element={<ActivitiesPage />} />
           <Route path="/buddySearch" element={<ComingSoon feature="Buddy Search" />} />
           <Route path="/messages" element={<ComingSoon feature="Messages" />} />
           <Route path="/places" element={<ComingSoon feature="Places" />} />
