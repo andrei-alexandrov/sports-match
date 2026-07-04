@@ -6,6 +6,10 @@ import { requireAuth } from "../middleware/requireAuth";
 import { validate } from "../middleware/validate";
 import { toPublicUser, User } from "../models/User";
 
+// Same-cost bcrypt comparison for unknown usernames — prevents a timing
+// side-channel that would reveal whether a username exists.
+const DUMMY_HASH = bcrypt.hashSync("invalid-password-placeholder", 10);
+
 export const authRouter = Router();
 
 /** Session fixation defense: always mint a fresh session id at privilege change. */
@@ -31,7 +35,7 @@ authRouter.post("/register", validate(registerInputSchema), async (req, res) => 
 authRouter.post("/login", validate(loginInputSchema), async (req, res) => {
   const { username, password } = req.body as LoginInput;
   const user = await User.findOne({ username });
-  const valid = user !== null && (await bcrypt.compare(password, user.passwordHash));
+  const valid = await bcrypt.compare(password, user?.passwordHash ?? DUMMY_HASH);
   if (!valid || user === null) {
     throw new AppError(401, "INVALID_CREDENTIALS", "Invalid username or password");
   }
