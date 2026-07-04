@@ -41,7 +41,7 @@ To keep data, create a free MongoDB Atlas cluster, copy
 
 ## Roadmap
 
-1. ✅ Auth + profiles (this phase)
-2. Activities + buddy search
+1. ✅ Auth + profiles
+2. ✅ Activities + buddy search
 3. Real-time chat (Socket.io)
 4. Places catalogue with geo search
