@@ -5,6 +5,7 @@ import type { MongoClient } from "mongodb";
 import mongoose from "mongoose";
 import { config } from "./config";
 import { errorHandler, notFoundHandler } from "./errors";
+import { authRouter } from "./routes/auth";
 
 export function createApp(): express.Express {
   const app = express();
@@ -32,6 +33,8 @@ export function createApp(): express.Express {
   app.get("/api/health", (_req, res) => {
     res.json({ status: "ok" });
   });
+
+  app.use("/api/auth", authRouter);
 
   app.use(notFoundHandler);
   app.use(errorHandler);
