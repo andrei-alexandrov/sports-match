@@ -3,6 +3,7 @@ import { createApp } from "./app";
 import { config } from "./config";
 import { connectDb } from "./db";
 import { createSessionMiddleware } from "./session";
+import { attachSocket } from "./socket";
 
 async function main(): Promise<void> {
   if (!config.mongoUrl) {
@@ -15,6 +16,7 @@ async function main(): Promise<void> {
   const sessionMiddleware = createSessionMiddleware();
   const app = createApp(sessionMiddleware);
   const server = http.createServer(app);
+  attachSocket(server, sessionMiddleware);
   server.listen(config.port, () => {
     console.log(`API listening on http://localhost:${config.port}`);
   });
