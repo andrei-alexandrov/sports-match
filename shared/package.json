@@ -1,1 +1,18 @@
-{ "name": "@sports-match/shared", "version": "0.1.0", "private": true, "main": "src/index.ts", "types": "src/index.ts" }
+{
+  "name": "@sports-match/shared",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  }
+}
