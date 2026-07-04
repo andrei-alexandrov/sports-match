@@ -50,4 +50,24 @@ describe("RequireAuth", () => {
     );
     expect(await screen.findByText("Secret profile")).toBeDefined();
   });
+
+  it("logs non-401 fetchMe failures and still redirects to login", async () => {
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(null, { status: 502 })));
+    render(
+      <AuthProvider>
+        <MemoryRouter initialEntries={["/profile"]}>
+          <Routes>
+            <Route path="/login" element={<div>Login page</div>} />
+            <Route element={<RequireAuth />}>
+              <Route path="/profile" element={<div>Secret profile</div>} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </AuthProvider>,
+    );
+    expect(await screen.findByText("Login page")).toBeDefined();
+    expect(errorSpy).toHaveBeenCalled();
+    errorSpy.mockRestore();
+  });
 });
