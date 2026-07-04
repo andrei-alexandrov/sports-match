@@ -118,10 +118,14 @@ export default function MessagesPage() {
     const form = event.currentTarget;
     const input = form.elements.namedItem("message") as HTMLInputElement;
     const text = input.value;
-    socketRef.current?.emit(
+    socketRef.current?.timeout(5000).emit(
       SOCKET_EVENT_MESSAGE_SEND,
       { receiver: currentReceiver, text },
-      (ack: MessageSendAck) => {
+      (timeoutErr: Error | null, ack?: MessageSendAck) => {
+        if (timeoutErr || !ack) {
+          setError("The message could not be sent. Check your connection and try again.");
+          return;
+        }
         if (ack.ok) {
           form.reset();
           setError("");
