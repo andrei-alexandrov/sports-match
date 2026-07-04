@@ -108,8 +108,9 @@ sports-match/
   1. Create `prototype` branch; restructure `main` as the monorepo.
   2. Server scaffold: Express + TS + Mongoose + session auth + Zod
      validation + tests.
-  3. Client scaffold: Vite + TS; port login/register/profile pages against
-     the real API; auth context + protected routes.
+  3. Client scaffold: Vite + TS; port the app shell (NavBar, routing, home
+     page) plus login/register/profile pages against the real API; auth
+     context + protected routes.
   - **Success criterion:** register in one browser, log in from a different
     browser/machine, see the same account; password stored as a bcrypt hash.
     (The prototype fundamentally could not do this.)
