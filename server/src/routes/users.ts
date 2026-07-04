@@ -6,15 +6,12 @@ import { requireAuth } from "../middleware/requireAuth";
 import { validate } from "../middleware/validate";
 import { validateQuery } from "../middleware/validateQuery";
 import { toPublicUser, User, type UserFields } from "../models/User";
+import { escapeRegExp } from "../util/escapeRegExp";
 
 export const usersRouter = Router();
 
 // Documented cap (see phase 2 spec): no pagination yet at current scale.
 const SEARCH_RESULT_CAP = 50;
-
-function escapeRegExp(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
 
 usersRouter.patch("/me", requireAuth, validate(updateProfileInputSchema), async (req, res) => {
   const updates = req.body as UpdateProfileInput;
