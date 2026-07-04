@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "dev:memory": "tsx src/dev-memory.ts",
     "test": "vitest run",
     "build": "tsc --noEmit"
   },
