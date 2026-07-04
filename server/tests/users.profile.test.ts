@@ -24,8 +24,13 @@ describe("PATCH /api/users/me", () => {
   it("cannot mass-assign protected fields like activities or passwordHash", async () => {
     const agent = request.agent(createApp());
     await agent.post("/api/auth/register").send(creds);
-    await agent.patch("/api/users/me").send({ city: "Sofia", activities: ["hacked"], passwordHash: "owned" });
+    const res = await agent
+      .patch("/api/users/me")
+      .send({ city: "Sofia", activities: ["hacked"], passwordHash: "owned" });
+    expect(res.status).toBe(200);
+    expect(res.body.user.city).toBe("Sofia");
     const user = await User.findOne({ username: "andrei" });
+    expect(user?.city).toBe("Sofia");
     expect(user?.activities).toEqual([]);
     expect(user?.passwordHash).toMatch(/^\$2/);
   });
