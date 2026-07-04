@@ -142,6 +142,19 @@ describe("GET /api/places", () => {
     expect(res.body.places.map((p: { name: string }) => p.name)).toEqual(["Тенис близо"]);
   });
 
+  it("combines q with a near query", async () => {
+    const app = createApp();
+    const me = await loggedInAgent(app);
+    await insertPlaces([
+      { name: "Зала Дружба", sports: ["tennis"], address: "кв. Дружба, ул. Тестова 5", lat: 42.69, lng: 23.32 },
+      { name: "Зала Люлин", sports: ["tennis"], address: "ж.к. Люлин, ул. Тестова 6", lat: 42.6852, lng: 23.319 },
+    ]);
+    const res = await me.get(`/api/places?lat=42.6852&lng=23.319&q=${encodeURIComponent("дружба")}`);
+    expect(res.status).toBe(200);
+    expect(res.body.places.map((p: { name: string }) => p.name)).toEqual(["Зала Дружба"]);
+    expect(res.body.places[0].distanceKm).toBeGreaterThan(0);
+  });
+
   it("treats a regex-special q literally", async () => {
     const app = createApp();
     const me = await loggedInAgent(app);

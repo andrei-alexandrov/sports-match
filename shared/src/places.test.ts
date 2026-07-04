@@ -37,6 +37,11 @@ describe("searchPlacesQuerySchema", () => {
     }
     expect(searchPlacesQuerySchema.safeParse({ q: "x".repeat(101) }).success).toBe(false);
   });
+
+  it("rejects blank-string coordinates instead of coercing them to 0", () => {
+    expect(searchPlacesQuerySchema.safeParse({ lat: "", lng: "" }).success).toBe(false);
+    expect(searchPlacesQuerySchema.safeParse({ lat: " ", lng: "23.3" }).success).toBe(false);
+  });
 });
 
 describe("publicPlaceSchema", () => {
@@ -57,5 +62,23 @@ describe("publicPlaceSchema", () => {
     };
     expect(publicPlaceSchema.safeParse(venue).success).toBe(true);
     expect(publicPlaceSchema.safeParse({ ...venue, distanceKm: 1.2 }).success).toBe(true);
+  });
+
+  it("rejects an empty sports array", () => {
+    const venue = {
+      id: "abc",
+      name: "Зала",
+      sports: [],
+      address: "ул. Тестова 1",
+      city: "София",
+      neighborhood: "Център",
+      phone: "0888 000 000",
+      workingHours: "Понеделник - неделя: 06:00 - 23:00",
+      site: null,
+      image: null,
+      lat: 42.7,
+      lng: 23.3,
+    };
+    expect(publicPlaceSchema.safeParse(venue).success).toBe(false);
   });
 });
