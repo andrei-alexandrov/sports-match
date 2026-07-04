@@ -24,6 +24,21 @@ export function errorHandler(err: unknown, _req: Request, res: Response, _next: 
     res.status(409).json({ error: { code: "USERNAME_TAKEN", message: "Username already exists" } });
     return;
   }
+  // Body-parser and similar client faults carry a 4xx status (e.g. malformed
+  // JSON, oversized body) — report them as such, without log noise.
+  if (typeof err === "object" && err !== null) {
+    const maybe = err as { status?: unknown; statusCode?: unknown };
+    const status =
+      typeof maybe.status === "number" ? maybe.status
+      : typeof maybe.statusCode === "number" ? maybe.statusCode
+      : undefined;
+    if (status !== undefined && status >= 400 && status < 500) {
+      const code = status === 413 ? "PAYLOAD_TOO_LARGE" : "BAD_REQUEST";
+      const message = status === 413 ? "Request body too large" : "Malformed request body";
+      res.status(status).json({ error: { code, message } });
+      return;
+    }
+  }
   console.error(err);
   res.status(500).json({ error: { code: "INTERNAL", message: "Something went wrong" } });
 }

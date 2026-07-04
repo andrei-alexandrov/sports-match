@@ -46,12 +46,12 @@ export default function ProfilePage() {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) {
-      setDraft({ ...draft, image: "" });
+      setDraft((d) => ({ ...d, image: "" }));
       return;
     }
     const reader = new FileReader();
     reader.onloadend = () => {
-      setDraft({ ...draft, image: typeof reader.result === "string" ? reader.result : "" });
+      setDraft((d) => ({ ...d, image: typeof reader.result === "string" ? reader.result : "" }));
     };
     reader.readAsDataURL(file);
   };

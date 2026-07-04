@@ -6,9 +6,11 @@ import { requireAuth } from "../middleware/requireAuth";
 import { validate } from "../middleware/validate";
 import { toPublicUser, User } from "../models/User";
 
+const BCRYPT_ROUNDS = 10;
+
 // Same-cost bcrypt comparison for unknown usernames — prevents a timing
 // side-channel that would reveal whether a username exists.
-const DUMMY_HASH = bcrypt.hashSync("invalid-password-placeholder", 10);
+const DUMMY_HASH = bcrypt.hashSync("invalid-password-placeholder", BCRYPT_ROUNDS);
 
 export const authRouter = Router();
 
@@ -25,7 +27,7 @@ authRouter.post("/register", validate(registerInputSchema), async (req, res) => 
   if (existing) {
     throw new AppError(409, "USERNAME_TAKEN", "Username already exists");
   }
-  const passwordHash = await bcrypt.hash(password, 10);
+  const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
   const user = await User.create({ username, passwordHash });
   await regenerateSession(req);
   req.session.userId = user.id as string;

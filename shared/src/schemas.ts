@@ -4,10 +4,12 @@ export const registerInputSchema = z.object({
   username: z
     .string()
     .min(3, "Username must be at least 3 characters long")
+    .max(30, "Username must be at most 30 characters long")
     .regex(/^[a-zA-Z]/, "Username must start with a letter"),
   password: z
     .string()
     .min(6, "Password must be at least 6 characters long")
+    .max(72, "Password must be at most 72 characters long")
     .regex(/\d/, "Password must contain at least one number")
     .regex(/[A-Z]/, "Password must contain at least one uppercase letter"),
 });
