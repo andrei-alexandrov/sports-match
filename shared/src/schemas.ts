@@ -25,8 +25,6 @@ export type LoginInput = z.infer<typeof loginInputSchema>;
 export const genderSchema = z.enum(["male", "female", "other"]).or(z.literal(""));
 export type Gender = z.infer<typeof genderSchema>;
 
-export { activityKeySchema };
-
 export const updateProfileInputSchema = z.object({
   age: z.number().int().min(0).max(100).nullable().optional(),
   city: z.string().max(100).optional(),
