@@ -1,35 +1,47 @@
-Update: 
-Planned incoming additions/changes:
-1. Making the site responsive. (in progress)
-2. Overall design changes. (in progress)
-3. Adding MongoDB database. (in progress)
-4. Implementing new chat features. (in progress)
+# Sports Match
 
-This is my own project idea for a website that helps people with common interests in different sports to meet and play together. The website also provides an opportunity to choose the most convenient places for practicing the desired sport in the respective city/neighborhood.
+A platform for finding people to play your favorite sports with: build a
+profile around the sports you love, find nearby players who share them,
+chat to arrange a game, and discover venues in your city.
 
-## User guide
-1. Edit your profile.
-2. Add your favorite activities, so other people who share your passion can find you.
-3. Use the buddy search option to find new friends and play your favorite sport together.
-4. Start a chat and discuss the details.
-5. Use the catalogue to find new sport places in your city.
+**Status:** rebuilt from scratch as a full-stack TypeScript app (Phase 1:
+auth + profiles). The original 2023 prototype lives on the
+[`prototype`](../../tree/prototype) branch.
 
-![loginPhoto](./src/images/loginPage.png)
-![homePhoto](./src/images/homeScreen.png)
-![profilePhoto](./src/images/profilePage.jpg)
-![activitiesPhoto](./src/images/activitiesPage.jpg)
-![buddySearchPhoto](./src/images/buddySearch.jpg)
-![chatPhoto](./src/images/chatPage.jpg)
-![placesPhoto](./src/images/placesPages.jpg)
+## Structure
 
-## Available Scripts
+- `client/` — React 18 + Vite single-page app
+- `server/` — Express 5 API, MongoDB, session-cookie auth
+- `shared/` — Zod schemas shared by both (single source of truth for
+  validation and types)
+- `docs/superpowers/` — design specs and implementation plans
 
-In the project directory, you can run:
+## Getting started
 
-### `npm install`
-### `npm start`
+Requires Node >= 20.19.
 
-Runs the app in the development mode.\
-Open this link [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    npm install
+    npm run dev:memory
 
-The page will reload when you make changes.\
+Open http://localhost:3000. `dev:memory` runs against a throwaway
+in-memory MongoDB — no database setup needed, data resets on restart.
+
+To keep data, create a free MongoDB Atlas cluster, copy
+`server/.env.example` to `server/.env`, fill in `MONGO_URL` and a random
+`SESSION_SECRET`, then run:
+
+    npm run dev
+
+## Scripts
+
+- `npm run dev` — client (:3000) + server (:4000), real database
+- `npm run dev:memory` — same, with in-memory MongoDB
+- `npm test` — all workspace test suites
+- `npm run build` — typecheck everything + production client build
+
+## Roadmap
+
+1. ✅ Auth + profiles (this phase)
+2. Activities + buddy search
+3. Real-time chat (Socket.io)
+4. Places catalogue with geo search
