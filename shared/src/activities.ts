@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export const ACTIVITIES = [
   { key: "tennis", label: "Tennis" },
   { key: "table-tennis", label: "Table tennis" },
@@ -44,3 +46,5 @@ export const ACTIVITIES = [
 export type ActivityKey = (typeof ACTIVITIES)[number]["key"];
 
 export const ACTIVITY_KEYS = ACTIVITIES.map((a) => a.key) as [ActivityKey, ...ActivityKey[]];
+
+export const activityKeySchema = z.enum(ACTIVITY_KEYS);

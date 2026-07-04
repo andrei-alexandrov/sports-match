@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ACTIVITY_KEYS } from "./activities";
+import { activityKeySchema } from "./activities";
 
 export const registerInputSchema = z.object({
   username: z
@@ -25,7 +25,7 @@ export type LoginInput = z.infer<typeof loginInputSchema>;
 export const genderSchema = z.enum(["male", "female", "other"]).or(z.literal(""));
 export type Gender = z.infer<typeof genderSchema>;
 
-export const activityKeySchema = z.enum(ACTIVITY_KEYS);
+export { activityKeySchema };
 
 export const updateProfileInputSchema = z.object({
   age: z.number().int().min(0).max(100).nullable().optional(),
