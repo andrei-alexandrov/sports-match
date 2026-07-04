@@ -1,0 +1,87 @@
+import type { PublicUser } from "@sports-match/shared";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { CLIENT_ACTIVITIES } from "../../activities/catalogue";
+import * as usersApi from "../../api/users";
+import BuddyCard from "../../components/BuddyCard/BuddyCard";
+import CustomAlert from "../../components/CustomAlert/CustomAlert";
+import useDebounce from "../../components/Utils/Debounce";
+import { useAuth } from "../../context/AuthContext";
+import userImage from "../../images/user.png";
+import "./BuddySearch.scss";
+
+const sortedActivities = [...CLIENT_ACTIVITIES].sort((a, b) => a.label.localeCompare(b.label));
+
+export default function BuddySearchPage() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [selectedActivity, setSelectedActivity] = useState("");
+  const [city, setCity] = useState(user?.city ?? "");
+  const [buddies, setBuddies] = useState<PublicUser[]>([]);
+  const [error, setError] = useState("");
+  const debouncedCity = useDebounce(city, 300);
+
+  useEffect(() => {
+    let cancelled = false;
+    usersApi
+      .searchUsers({
+        // Select options come from the catalogue, so the value is a valid key or "".
+        activity: (selectedActivity || undefined) as usersApi.SearchUsersParams["activity"],
+        city: debouncedCity.trim() || undefined,
+      })
+      .then((results) => {
+        if (!cancelled) {
+          setBuddies(results);
+          setError("");
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setError("Could not load buddies. Please try again.");
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedActivity, debouncedCity]);
+
+  const handleStartChat = (otherUser: PublicUser) => {
+    navigate("/messages", { state: { receiver: otherUser.username } });
+  };
+
+  return (
+    <div className="buddyPage">
+      <h2 className="siteSloganTitle">Find someone that shares your sport passion</h2>
+      <div className="buddySearchWrapper">
+        <select
+          className="buddySearchSelect"
+          id="activity-select"
+          value={selectedActivity}
+          onChange={(e) => setSelectedActivity(e.target.value)}
+        >
+          <option value="">Search buddy by activity</option>
+          {sortedActivities.map((activity) => (
+            <option key={activity.key} value={activity.key}>
+              {activity.label}
+            </option>
+          ))}
+        </select>
+        <input
+          className="buddySearchSelect"
+          type="text"
+          value={city}
+          placeholder="City"
+          onChange={(e) => setCity(e.target.value)}
+        />
+      </div>
+      {error && <CustomAlert variant="danger" message={error} />}
+      <div className="buddiesHolder">
+        {buddies.map((buddy) => (
+          <div className="buddyCardContainer" key={buddy.username}>
+            <BuddyCard user={buddy} defaultImage={userImage} onStartChat={handleStartChat} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

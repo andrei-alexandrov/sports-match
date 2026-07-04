@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar/NavBar";
 import RequireAuth from "./components/RequireAuth";
 import errorpic from "./images/errorPage.gif";
 import ActivitiesPage from "./pages/Activities/Activities";
+import BuddySearchPage from "./pages/BuddySearch/BuddySearch";
 import ComingSoon from "./pages/ComingSoon/ComingSoon";
 import HomePage from "./pages/Home/Home";
 import LoginForm from "./pages/LoginAndRegister/LoginForm";
@@ -22,7 +23,7 @@ export default function App() {
         <Route element={<RequireAuth />}>
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/activities" element={<ActivitiesPage />} />
-          <Route path="/buddySearch" element={<ComingSoon feature="Buddy Search" />} />
+          <Route path="/buddySearch" element={<BuddySearchPage />} />
           <Route path="/messages" element={<ComingSoon feature="Messages" />} />
           <Route path="/places" element={<ComingSoon feature="Places" />} />
         </Route>
