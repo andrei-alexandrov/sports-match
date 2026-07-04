@@ -14,6 +14,7 @@ export default function ActivitiesPage() {
   const { user, updateProfile } = useAuth();
   const [searchInput, setSearchInput] = useState("");
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
   const debouncedSearchInput = useDebounce(searchInput, 300);
 
   if (!user) {
@@ -23,15 +24,21 @@ export default function ActivitiesPage() {
   const addedKeys = new Set(user.activities);
 
   const handleToggleActivity = async (activity: ClientActivity) => {
+    if (saving) {
+      return; // one update at a time — a second click would race the first PATCH
+    }
     const next = addedKeys.has(activity.key)
       ? user.activities.filter((key) => key !== activity.key)
       : [...user.activities, activity.key];
+    setSaving(true);
     try {
       // user.activities is string[] on the wire but only ever holds server-validated catalogue keys.
       await updateProfile({ activities: next as UpdateProfileInput["activities"] });
       setError("");
     } catch {
       setError("Could not update your activities. Please try again.");
+    } finally {
+      setSaving(false);
     }
   };
 
