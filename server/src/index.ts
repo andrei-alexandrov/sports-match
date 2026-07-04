@@ -2,6 +2,7 @@ import http from "node:http";
 import { createApp } from "./app";
 import { config } from "./config";
 import { connectDb } from "./db";
+import { seedPlaces } from "./seed/places";
 import { createSessionMiddleware } from "./session";
 import { attachSocket } from "./socket";
 
@@ -13,6 +14,7 @@ async function main(): Promise<void> {
     throw new Error("SESSION_SECRET is required in production");
   }
   await connectDb(config.mongoUrl);
+  await seedPlaces();
   const sessionMiddleware = createSessionMiddleware();
   const app = createApp(sessionMiddleware);
   const server = http.createServer(app);
