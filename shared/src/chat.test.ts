@@ -33,6 +33,14 @@ describe("sendMessageInputSchema", () => {
       expect(result.error.issues[0]?.message).toBe("Message is too long");
     }
   });
+
+  it("rejects an empty receiver with the exact message", () => {
+    const result = sendMessageInputSchema.safeParse({ receiver: "", text: "Hi" });
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.issues[0]?.message).toBe("Receiver is required");
+    }
+  });
 });
 
 describe("chat shapes and event names", () => {
