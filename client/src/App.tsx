@@ -4,11 +4,11 @@ import RequireAuth from "./components/RequireAuth";
 import errorpic from "./images/errorPage.gif";
 import ActivitiesPage from "./pages/Activities/Activities";
 import BuddySearchPage from "./pages/BuddySearch/BuddySearch";
-import ComingSoon from "./pages/ComingSoon/ComingSoon";
 import HomePage from "./pages/Home/Home";
 import LoginForm from "./pages/LoginAndRegister/LoginForm";
 import RegistrationForm from "./pages/LoginAndRegister/RegistrationForm";
 import MessagesPage from "./pages/Messages/Messages";
+import PlacesPage from "./pages/Places/Places";
 import ProfilePage from "./pages/Profile/Profile";
 import "./App.scss";
 
@@ -26,7 +26,7 @@ export default function App() {
           <Route path="/activities" element={<ActivitiesPage />} />
           <Route path="/buddySearch" element={<BuddySearchPage />} />
           <Route path="/messages" element={<MessagesPage />} />
-          <Route path="/places" element={<ComingSoon feature="Places" />} />
+          <Route path="/places" element={<PlacesPage />} />
         </Route>
         <Route
           path="*"

@@ -4,8 +4,9 @@ A platform for finding people to play your favorite sports with: build a
 profile around the sports you love, find nearby players who share them,
 chat to arrange a game, and discover venues in your city.
 
-**Status:** rebuilt from scratch as a full-stack TypeScript app (Phase 1:
-auth + profiles). The original 2023 prototype lives on the
+**Status:** rebuilt from scratch as a full-stack TypeScript app — auth +
+profiles, activities + buddy search, real-time chat, and the places
+catalogue are all live. The original 2023 prototype lives on the
 [`prototype`](../../tree/prototype) branch.
 
 ## Structure
@@ -44,4 +45,4 @@ To keep data, create a free MongoDB Atlas cluster, copy
 1. ✅ Auth + profiles
 2. ✅ Activities + buddy search
 3. ✅ Real-time chat (Socket.io)
-4. Places catalogue with geo search
+4. ✅ Places catalogue with geo search
