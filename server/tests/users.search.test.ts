@@ -2,6 +2,7 @@ import type { Express } from "express";
 import request from "supertest";
 import { describe, expect, it } from "vitest";
 import { createApp } from "../src/app";
+import { User } from "../src/models/User";
 import { setupTestDb } from "./helpers";
 
 setupTestDb();
@@ -84,5 +85,20 @@ describe("GET /api/users/search", () => {
     const res = await request(createApp()).get("/api/users/search");
     expect(res.status).toBe(401);
     expect(res.body.error.code).toBe("UNAUTHORIZED");
+  });
+
+  it("caps results at 50", async () => {
+    const app = createApp();
+    const me = await createUser(app, "mira", {});
+    const docs = Array.from({ length: 55 }, (_, i) => ({
+      username: `user${String(i).padStart(2, "0")}`,
+      passwordHash: "$2a$10$abcdefghijklmnopqrstuv",
+      city: "Sofia",
+      activities: [],
+    }));
+    await User.insertMany(docs);
+    const res = await me.get("/api/users/search");
+    expect(res.status).toBe(200);
+    expect(res.body.users).toHaveLength(50);
   });
 });
