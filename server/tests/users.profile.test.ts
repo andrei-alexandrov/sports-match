@@ -47,4 +47,21 @@ describe("PATCH /api/users/me", () => {
     const res = await request(createApp()).patch("/api/users/me").send({ city: "Sofia" });
     expect(res.status).toBe(401);
   });
+
+  it("returns 401 when the session's user no longer exists", async () => {
+    const agent = request.agent(createApp());
+    await agent.post("/api/auth/register").send(creds);
+    await User.deleteOne({ username: creds.username });
+    const res = await agent.patch("/api/users/me").send({ city: "Sofia" });
+    expect(res.status).toBe(401);
+    expect(res.body.error.code).toBe("UNAUTHORIZED");
+  });
+
+  it("accepts an empty patch as a no-op", async () => {
+    const agent = request.agent(createApp());
+    await agent.post("/api/auth/register").send(creds);
+    const res = await agent.patch("/api/users/me").send({});
+    expect(res.status).toBe(200);
+    expect(res.body.user.username).toBe(creds.username);
+  });
 });

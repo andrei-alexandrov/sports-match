@@ -6,6 +6,7 @@ import RequireAuth from "./RequireAuth";
 
 afterEach(() => {
   vi.unstubAllGlobals();
+  vi.restoreAllMocks();
 });
 
 describe("RequireAuth", () => {

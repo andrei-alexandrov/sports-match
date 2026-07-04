@@ -49,4 +49,15 @@ describe("session lifecycle", () => {
     const me = await agent.get("/api/auth/me");
     expect(me.status).toBe(401);
   });
+
+  it("rotates the session id on login", async () => {
+    const agent = request.agent(createApp());
+    const reg = await agent.post("/api/auth/register").send(creds);
+    const registerCookie = reg.headers["set-cookie"]?.[0];
+    const login = await agent.post("/api/auth/login").send(creds);
+    const loginCookie = login.headers["set-cookie"]?.[0];
+    expect(registerCookie).toBeDefined();
+    expect(loginCookie).toBeDefined();
+    expect(loginCookie).not.toBe(registerCookie);
+  });
 });

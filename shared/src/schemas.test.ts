@@ -61,6 +61,8 @@ describe("updateProfileInputSchema", () => {
     expect(updateProfileInputSchema.safeParse({ age: 150 }).success).toBe(false);
     expect(updateProfileInputSchema.safeParse({ age: -1 }).success).toBe(false);
     expect(updateProfileInputSchema.safeParse({ age: 30 }).success).toBe(true);
+    expect(updateProfileInputSchema.safeParse({ age: 0 }).success).toBe(true);
+    expect(updateProfileInputSchema.safeParse({ age: 100 }).success).toBe(true);
   });
 });
 

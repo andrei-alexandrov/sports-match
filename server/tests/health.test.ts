@@ -17,4 +17,13 @@ describe("GET /api/health", () => {
     expect(res.status).toBe(404);
     expect(res.body).toEqual({ error: { code: "NOT_FOUND", message: "Route not found" } });
   });
+
+  it("returns the error envelope for malformed JSON", async () => {
+    const res = await request(createApp())
+      .post("/api/auth/register")
+      .set("Content-Type", "application/json")
+      .send('{"username": "broken"');
+    expect(res.status).toBe(400);
+    expect(res.body.error.code).toBe("BAD_REQUEST");
+  });
 });
