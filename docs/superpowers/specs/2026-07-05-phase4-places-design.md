@@ -23,7 +23,7 @@ chat → meet) and retires the last ComingSoon page.
 | Venue sports | `sports: ActivityKey[]` (array of catalogue keys) | Prototype's 18 camelCase types map onto the 40-key catalogue; `billiards` venues carry `["snooker", "pool"]` and appear under both filters |
 | Coordinates | Approximate neighborhood-level points, hand-assigned in the seed | Prototype has only street addresses (some placeholders); geocoding real addresses is out of scope. Documented as approximate |
 | Wire format | Flat `lat`/`lng` numbers; GeoJSON `[lng, lat]` stays inside the Mongoose model | Quarantines GeoJSON's inverted coordinate order (a classic bug source) in the one layer that needs it for the 2dsphere index |
-| Venue data locale | Bulgarian names/addresses/hours kept verbatim | The product targets Sofia; the page slogan says so |
+| Venue data locale | Bulgarian locale kept; placeholder fields curated | Only 7 of the 54 prototype venues have real data — the rest carry "Адрес", junk phone digits, and `www.example.com`. Shipping those verbatim would look broken. Curation: duplicate names made distinct, placeholder addresses/phones replaced with plausible fictional Sofia ones, `www.example.com` sites become `null`, ski/snowboard venues get real resort locations (Витоша, Боровец, Банско) so distance sort demonstrates properly |
 | Result cap | 100, documented in code | YAGNI at 54 seeded venues; consistent with search's 50 and history's 100 |
 | Access | `requireAuth`, `/places` stays in the RequireAuth route group | One auth story; the catalogue is part of the logged-in product loop |
 
@@ -50,12 +50,14 @@ New `shared/src/places.ts`, re-exported from the shared index:
   phone, workingHours, site, image, `location: { type: "Point",
   coordinates: [lng, lat] }` with a **2dsphere index**. `toPublicPlace()`
   flattens GeoJSON to `lat`/`lng`.
-- **Seed** (`server/src/seed/places.ts`): the prototype's 54 venues as a
-  typed array — sport types mapped to catalogue keys (`billiards` →
-  `["snooker", "pool"]`), Bulgarian text kept, each venue given approximate
-  neighborhood-level coordinates. `seedPlaces()` inserts only when the
-  collection is empty; called from `main()` in `server/src/index.ts` right
-  after `connectDb` (covers both normal boot and dev:memory).
+- **Seed** (`server/src/seed/places.ts` + `server/src/seed/placesData.ts`):
+  the prototype's 54 venues as a typed array — sport types mapped to
+  catalogue keys (`billiards` → `["snooker", "pool"]`), Bulgarian locale
+  kept, placeholder fields curated per the decisions table, each venue
+  given approximate neighborhood-level coordinates. `seedPlaces()` ensures
+  the 2dsphere index exists (`createIndexes()`), then inserts only when
+  the collection is empty; called from `main()` in `server/src/index.ts`
+  right after `connectDb` (covers both normal boot and dev:memory).
 - **API** — `GET /api/places` (mounted `/api/places`, `requireAuth`,
   `validateQuery(searchPlacesQuerySchema)`) → `{ places: PublicPlace[] }`:
   - Without coordinates: `find()` with filters, sorted by name ascending,
