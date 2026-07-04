@@ -1,0 +1,61 @@
+@import "../../variables";
+@import "../../mixins";
+
+.placesPage {
+
+    .sportsPageContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 80%;
+        margin: auto;
+        gap: 40px;
+        margin-top: 45px;
+        margin-bottom: 200px;
+    }
+
+    .siteSloganTitle {
+        padding-top: 30px;
+        text-align: center;
+        font-size: 26px;
+        color: white;
+        width: 60%;
+        margin: auto;
+        line-height: 1.5em;
+        text-shadow: $text-shadow;
+    }
+
+    .searchWrapper {
+        display: flex;
+        justify-content: center;
+
+        .selectSearch {
+            @include select();
+            height: 40px;
+            margin-left: 30px;
+        }
+
+        .inputSearch {
+            @include select();
+            margin-right: 30px;
+
+            &::placeholder {
+                color: $almost-white-color;
+            }
+        }
+
+        // Phase 4 addition (the one deliberate deviation from the prototype page):
+        // the "Near me" geolocation toggle, styled like the neighboring controls.
+        .nearMeButton {
+            @include select();
+            height: 40px;
+            margin-left: 30px;
+            cursor: pointer;
+
+            &.active {
+                color: $contrast-transperant;
+                border-color: $contrast-transperant;
+            }
+        }
+    }
+}
