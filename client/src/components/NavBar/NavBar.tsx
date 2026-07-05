@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import ConfirmModal from "../Modals/ConfirmModal";
@@ -22,10 +22,14 @@ export default function NavBar() {
   const publicRoute = ["/home", "/login", "/register", "/"].includes(location.pathname);
   const publicVariant = !user && publicRoute;
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
   const handleLogout = async () => {
+    setMenuOpen(false);
     const isConfirmed = await ConfirmModal("Logout", "Are you sure you want to logout?");
     if (isConfirmed) {
-      setMenuOpen(false);
       await logout();
       navigate("/login");
     }

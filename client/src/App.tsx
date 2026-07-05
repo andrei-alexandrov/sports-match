@@ -35,7 +35,7 @@ export default function App() {
               <h2 style={{ color: "white", display: "flex", justifyContent: "center" }}>
                 Page not found. You've taken a wrong turn, but you found a hedgehog.
               </h2>
-              <div className="errorImage">
+              <div className="errorImage" style={{ display: "flex", justifyContent: "center" }}>
                 <img width={650} src={errorpic} alt="errorImage" />
               </div>
             </div>
