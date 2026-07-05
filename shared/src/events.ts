@@ -10,7 +10,7 @@ export const createEventInputSchema = z
     sport: activityKeySchema,
     type: eventTypeSchema,
     description: z.string().trim().max(500, "Description is too long").optional(),
-    placeId: z.string().optional(),
+    placeId: z.string().max(64).optional(),
     locationText: z.string().trim().min(3, "Location is too short").max(120, "Location is too long").optional(),
     startsAt: z.string().refine((value) => {
       const date = new Date(value);

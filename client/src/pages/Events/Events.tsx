@@ -57,6 +57,7 @@ export default function EventsPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [formError, setFormError] = useState("");
   const [error, setError] = useState("");
+  const [actionError, setActionError] = useState("");
   const [busyId, setBusyId] = useState("");
   const [creating, setCreating] = useState(false);
   // Safe: this route renders inside RequireAuth, which blocks until the auth check resolves.
@@ -134,6 +135,7 @@ export default function EventsPage() {
 
   const membership = async (id: string, action: "join" | "leave" | "cancel") => {
     setBusyId(id);
+    setActionError("");
     try {
       if (action === "join") {
         await eventsApi.joinEvent(id);
@@ -142,9 +144,8 @@ export default function EventsPage() {
       } else {
         await eventsApi.cancelEvent(id);
       }
-      setError("");
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.");
+      setActionError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.");
     } finally {
       await refreshRef.current();
       setBusyId("");
@@ -158,7 +159,15 @@ export default function EventsPage() {
           <h1 className="eventsPage__title">Events</h1>
           <p className="eventsPage__subtitle">Join a session or start your own</p>
         </div>
-        <button type="button" className="eventsPage__create" onClick={() => setShowForm((open) => !open)}>
+        <button
+          type="button"
+          className="eventsPage__create"
+          aria-expanded={showForm}
+          onClick={() => {
+            setFormError("");
+            setShowForm((open) => !open);
+          }}
+        >
           {showForm ? "Close" : "Create event"}
         </button>
       </header>
@@ -299,6 +308,7 @@ export default function EventsPage() {
       )}
 
       {error && <CustomAlert variant="danger" message={error} />}
+      {actionError && <CustomAlert variant="danger" message={actionError} />}
 
       {events.length > 0 ? (
         <div className="eventsPage__grid">
