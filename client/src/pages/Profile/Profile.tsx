@@ -43,7 +43,15 @@ export default function ProfilePage() {
       setDraft({ ...draft, city: value });
     } else if (name === "gender") {
       setDraft({ ...draft, gender: value as UpdateProfileInput["gender"] });
+    } else if (name === "trainerBio") {
+      setDraft({ ...draft, trainerBio: value });
     }
+  };
+
+  // Dedicated handler: the checkbox stores a boolean in draft, unlike the
+  // string-typed fields handleEdit manages above.
+  const handleTrainerToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDraft((d) => ({ ...d, trainer: event.target.checked }));
   };
 
   const handleSave = async () => {
@@ -133,8 +141,14 @@ export default function ProfilePage() {
             <input type="file" accept="image/*" onChange={handleImageChange} hidden ref={fileInputRef} />
           </label>
           <div className="profileCard__identity">
-            <h1 className="profileCard__name">{user.username}</h1>
+            <h1 className="profileCard__name">
+              {user.username}
+              {!isEditing && user.trainer && <span className="profileCard__trainerChip">TRAINER</span>}
+            </h1>
             <p className="profileCard__meta">{user.city || "Add your city"}</p>
+            {!isEditing && user.trainer && user.trainerBio && (
+              <p className="profileCard__trainerBio">{user.trainerBio}</p>
+            )}
           </div>
           {!isEditing && (
             <div className="profileCard__actions">
@@ -188,6 +202,37 @@ export default function ProfilePage() {
                 <option value="other">Other</option>
               </select>
             </div>
+
+            <div className="profileCard__row">
+              <label className="profileCard__checkboxLabel" htmlFor="trainer">
+                <input
+                  id="trainer"
+                  name="trainer"
+                  type="checkbox"
+                  className="profileCard__checkbox"
+                  checked={draft.trainer ?? user?.trainer ?? false}
+                  onChange={handleTrainerToggle}
+                />
+                I&apos;m a trainer
+              </label>
+            </div>
+
+            {(draft.trainer ?? user?.trainer ?? false) && (
+              <>
+                <label className="profileCard__label" htmlFor="trainerBio">Trainer bio</label>
+                <div className="profileCard__row">
+                  <input
+                    id="trainerBio"
+                    name="trainerBio"
+                    className="profileCard__input"
+                    value={draft.trainerBio ?? user?.trainerBio ?? ""}
+                    onChange={handleEdit}
+                    placeholder="Tell buddies what you coach"
+                    maxLength={120}
+                  />
+                </div>
+              </>
+            )}
 
             <div className="profileCard__actions">
               <button

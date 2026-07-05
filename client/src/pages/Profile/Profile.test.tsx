@@ -17,6 +17,8 @@ const mockUser = {
   gender: "male",
   image: "",
   activities: ["tennis"],
+  trainer: false,
+  trainerBio: "",
 };
 
 function stubFetch(onPatch?: (body: unknown) => void) {

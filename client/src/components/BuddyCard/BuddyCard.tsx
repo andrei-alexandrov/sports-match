@@ -20,6 +20,7 @@ export default function BuddyCard({ user, defaultImage, onStartChat }: BuddyCard
         alt={user.username}
       />
       <h3 className="buddyCard__name">{user.username}</h3>
+      {user.trainer && <span className="buddyCard__trainer">TRAINER</span>}
       <div className="buddyCard__tags">
         {visibleActivities.map((key) => (
           <span className="buddyCard__tag" key={key}>

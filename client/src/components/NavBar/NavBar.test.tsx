@@ -33,7 +33,12 @@ describe("NavBar", () => {
     vi.stubGlobal(
       "fetch",
       vi.fn(async () =>
-        new Response(JSON.stringify({ user: { username: "andrei", city: "", image: "", activities: [] } }), { status: 200 }),
+        new Response(
+          JSON.stringify({
+            user: { username: "andrei", city: "", image: "", activities: [], trainer: false, trainerBio: "" },
+          }),
+          { status: 200 },
+        ),
       ),
     );
     renderAt("/buddySearch");

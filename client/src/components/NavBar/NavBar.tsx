@@ -10,6 +10,7 @@ const APP_LINKS = [
   { to: "/activities", label: "Activities" },
   { to: "/buddySearch", label: "Buddies" },
   { to: "/messages", label: "Messages" },
+  { to: "/events", label: "Events" },
   { to: "/places", label: "Places" },
 ];
 

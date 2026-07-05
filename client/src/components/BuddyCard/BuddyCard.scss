@@ -25,6 +25,13 @@
         margin-top: 12px;
     }
 
+    &__trainer {
+        @include chip($amber-soft, $amber-deep);
+        font-size: 10px;
+        letter-spacing: .06em;
+        margin-top: 4px;
+    }
+
     &__tags {
         display: flex;
         flex-wrap: wrap;
