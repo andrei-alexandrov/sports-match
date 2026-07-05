@@ -43,24 +43,20 @@ export default function ActivitiesPage() {
   };
 
   return (
-    <div className="activitiesPageContainer">
-      <div className="titleWrapper">
-        <h2 className="siteNameTitle">
-          ADD favorite sports to your profile so that other people can find you
-        </h2>
-      </div>
-      {error && <CustomAlert variant="danger" message={error} />}
-      <div className="searchContainer">
-        <label htmlFor="activitySearch"></label>
+    <div className="activitiesPage">
+      <header className="activitiesPage__head">
+        <h1 className="activitiesPage__title">Activities</h1>
+        <p className="activitiesPage__subtitle">Pick the sports you play — they power your buddy matches</p>
         <input
-          id="activitySearch"
+          className="activitiesPage__search"
           type="text"
+          placeholder="Search sports"
           value={searchInput}
-          placeholder="Search for sport"
           onChange={(e) => setSearchInput(e.target.value)}
         />
-      </div>
-      <div className="activitiesContainer">
+      </header>
+      {error && <CustomAlert variant="danger" message={error} />}
+      <div className="activitiesPage__grid">
         {sortedActivities
           .filter((activity) => activity.label.toLowerCase().includes(debouncedSearchInput.toLowerCase()))
           .map((activity) => (

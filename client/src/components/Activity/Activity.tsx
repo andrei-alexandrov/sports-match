@@ -9,24 +9,22 @@ interface ActivityComponentProps {
   disabled?: boolean;
 }
 
-function ActivityComponent({ activity, onAdd, added, onRemove, disabled }: ActivityComponentProps) {
-  const addButtonText = added ? "Remove" : "Add";
-
+function ActivityComponent({ activity, onAdd, added, disabled }: ActivityComponentProps) {
   return (
-    <div className="activityContainerSquare">
-      <h2>{activity.label}</h2>
-      <img src={activity.image} alt={activity.label} />
-      {onAdd && (
-        <button className={added ? "addedButton" : "addButton"} onClick={() => onAdd(activity)} disabled={disabled}>
-          {addButtonText}
+    <article className="activityCard">
+      <img className="activityCard__img" src={activity.image} alt={activity.label} />
+      <div className="activityCard__body">
+        <h3 className="activityCard__label">{activity.label}</h3>
+        <button
+          type="button"
+          className={added ? "activityCard__btn activityCard__btn--remove" : "activityCard__btn"}
+          onClick={() => onAdd?.(activity)}
+          disabled={disabled}
+        >
+          {added ? "Remove" : "Add"}
         </button>
-      )}
-      {onRemove && (
-        <button className="removeButton" onClick={() => onRemove(activity)} disabled={disabled}>
-          X
-        </button>
-      )}
-    </div>
+      </div>
+    </article>
   );
 }
 

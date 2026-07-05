@@ -1,60 +1,33 @@
-@import "../../variables";
-@import "../../mixins";
+@import "../../styles/tokens";
+@import "../../styles/mixins";
 
-.activitiesPageContainer {
-    display: flex;
-    flex-direction: column;
+.activitiesPage {
+    @include page-container;
 
-    .activitiesContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+    &__head {
+        margin-bottom: 22px;
+    }
+
+    &__title {
+        font-size: 28px;
+    }
+
+    &__subtitle {
+        color: $muted;
+        font-size: 14px;
+        margin-top: 6px;
+    }
+
+    &__search {
+        @include input-pill;
+        margin-top: 16px;
         width: 100%;
-        margin: auto;
-        gap: 40px;
-        margin-top: 70px;
+        max-width: 340px;
     }
 
-    .siteNameTitle {
-        color: $almost-white-color;
-        margin-top: 1rem;
-        text-align: center;
-    }
-
-    .searchContainer {
-        height: 30px;
-        margin: auto;
-        margin-top: 50px;
-    }
-
-    #activitySearch {
-        @include search();
-        height: 40px;
-        color: $almost-white-color;
-
-        &::placeholder,
-        &:focus {
-            color: $almost-white-color;
-        }
-    }
-}
-
-.swal2-title {
-    font-size: 24px;
-    color: #333;
-}
-
-.swal2-popup {
-    background-color: $dark-main-color;
-    border-radius: 10px;
-}
-
-.swal2-confirm {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-
-    &:hover {
-        background-color: #66bb6a;
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
     }
 }
