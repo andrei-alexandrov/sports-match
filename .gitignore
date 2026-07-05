@@ -5,3 +5,6 @@ coverage/
 .env.*.local
 *.log
 .DS_Store
+
+# superpowers scratch (SDD ledger, brainstorm mockups, session state)
+.superpowers/
