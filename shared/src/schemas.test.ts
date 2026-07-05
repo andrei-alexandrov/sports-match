@@ -70,7 +70,9 @@ describe("updateProfileInputSchema", () => {
   it("accepts trainer flag and trainer bio", () => {
     const result = updateProfileInputSchema.safeParse({ trainer: true, trainerBio: "Tennis coach, 10y" });
     expect(result.success).toBe(true);
-    expect(result.data.trainer).toBe(true);
+    if (result.success) {
+      expect(result.data.trainer).toBe(true);
+    }
   });
 
   it("rejects an over-long trainer bio", () => {
