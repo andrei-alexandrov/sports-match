@@ -1,0 +1,99 @@
+@import "../../styles/tokens";
+
+.orbitRadar {
+    position: relative;
+    flex-shrink: 0;
+
+    &__ring {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+
+        &--outer {
+            inset: 0;
+            border: 1.5px solid $ring-1;
+        }
+
+        &--mid {
+            inset: 14%;
+            border: 1.5px solid $ring-2;
+        }
+
+        &--inner {
+            inset: 28%;
+            border: 1.5px solid $ring-3;
+        }
+    }
+
+    &__sweep {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, rgba(99, 102, 241, 0.18), transparent 65deg);
+        pointer-events: none;
+    }
+
+    &__center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// Floating "player" dot — pages position it absolutely inside a relative box.
+.orbit-dot {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: $surface;
+    box-shadow: 0 5px 14px rgba(28, 25, 23, 0.13);
+}
+
+// Avatar halo — the double ring around avatars.
+.orbit-halo {
+    box-shadow: 0 0 0 3px $surface, 0 0 0 5px rgba(99, 102, 241, 0.35);
+}
+
+.orbit-halo--amber {
+    box-shadow: 0 0 0 3px $surface, 0 0 0 5px rgba(245, 158, 11, 0.35);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .orbitRadar__sweep {
+        animation: orbit-sweep 7s linear infinite;
+    }
+
+    .orbit-dot {
+        animation: orbit-pulse 3.2s ease-in-out infinite;
+    }
+
+    @keyframes orbit-sweep {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes orbit-pulse {
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale(1.3);
+            opacity: 0.55;
+        }
+    }
+}

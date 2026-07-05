@@ -1,0 +1,48 @@
+// Orbit design tokens — the single source of visual truth (see
+// docs/superpowers/specs/2026-07-05-orbit-redesign-design.md).
+
+// Surfaces
+$bg: #faf9f7;
+$surface: #ffffff;
+$border: #e7e5e4;
+$border-soft: #edeae4;
+
+// Ink
+$ink: #1c1917;
+$ink-soft: #57534e;
+$muted: #78716c;
+$faint: #a8a29e;
+
+// Accent — indigo. $accent is decorative (rings, dots, sweep);
+// $accent-strong is the interactive color (buttons, links) for contrast.
+$accent: #6366f1;
+$accent-strong: #4f46e5;
+$accent-deep: #4338ca;
+$accent-soft: #eef2ff;
+
+// Secondary — amber
+$amber: #f59e0b;
+$amber-deep: #b45309;
+$amber-soft: #fef3c7;
+
+// Status
+$success: #059669;
+$danger: #dc2626;
+$danger-soft: #fee2e2;
+
+// Radar
+$ring-1: rgba(99, 102, 241, 0.16);
+$ring-2: rgba(99, 102, 241, 0.26);
+$ring-3: rgba(99, 102, 241, 0.36);
+
+// Shape & elevation
+$radius-card: 18px;
+$radius-bubble: 16px;
+$radius-pill: 999px;
+$shadow-card: 0 8px 24px rgba(28, 25, 23, 0.07);
+$shadow-pop: 0 12px 32px rgba(28, 25, 23, 0.12);
+
+// Type & layout
+$font: "Manrope Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+$bp-md: 768px;
+$bp-lg: 1080px;

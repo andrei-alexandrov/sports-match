@@ -1,0 +1,60 @@
+@import "./tokens";
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: $font;
+    font-size: 16px;
+    background: $bg;
+    color: $ink;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    color: $accent-strong;
+}
+
+// Focus is visible everywhere; the old global outline:none is gone.
+:focus-visible {
+    outline: 2px solid $accent-strong;
+    outline-offset: 2px;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $border;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: $faint;
+}

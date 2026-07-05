@@ -1,0 +1,83 @@
+@import "./tokens";
+
+@mixin focus-ring {
+    &:focus-visible {
+        outline: 2px solid $accent-strong;
+        outline-offset: 2px;
+    }
+}
+
+@mixin card {
+    background: $surface;
+    border-radius: $radius-card;
+    box-shadow: $shadow-card;
+}
+
+@mixin button-base {
+    font-family: $font;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: $radius-pill;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+    @include focus-ring;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+@mixin button-primary {
+    @include button-base;
+    background: $accent-strong;
+    color: #fff;
+    border: none;
+
+    &:hover:not(:disabled) {
+        background: $accent-deep;
+    }
+}
+
+@mixin button-ghost {
+    @include button-base;
+    background: $surface;
+    color: $ink;
+    border: 1.5px solid $border;
+
+    &:hover:not(:disabled) {
+        border-color: $ink;
+    }
+}
+
+@mixin input-pill {
+    font-family: $font;
+    font-size: 15px;
+    color: $ink;
+    background: $surface;
+    border: 1.5px solid $border;
+    border-radius: $radius-pill;
+    padding: 12px 20px;
+    @include focus-ring;
+
+    &::placeholder {
+        color: $faint;
+    }
+}
+
+@mixin chip($chip-bg, $chip-ink) {
+    display: inline-block;
+    background: $chip-bg;
+    color: $chip-ink;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: $radius-pill;
+    padding: 4px 12px;
+}
+
+@mixin page-container {
+    max-width: $bp-lg;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+}
