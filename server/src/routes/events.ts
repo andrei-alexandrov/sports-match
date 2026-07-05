@@ -86,3 +86,73 @@ eventsRouter.get("/", requireAuth, validateQuery(searchEventsQuerySchema), async
   const events = await Event.find(filter).sort({ startsAt: 1 }).limit(EVENTS_RESULT_CAP).lean<EventLean[]>();
   res.json({ events: events.map(toPublicEvent) });
 });
+
+async function loadEventOr404(id: string): Promise<EventLean> {
+  const event = mongoose.isValidObjectId(id) ? await Event.findById(id).lean<EventLean>() : null;
+  if (!event) {
+    throw new AppError(404, "NOT_FOUND", "Event not found");
+  }
+  return event;
+}
+
+eventsRouter.post<{ id: string }>("/:id/join", requireAuth, async (req, res) => {
+  const me = await requireUser(req.session.userId);
+  const id = req.params.id;
+  const now = new Date();
+
+  const result = mongoose.isValidObjectId(id)
+    ? await Event.updateOne(
+        {
+          _id: id,
+          status: "active",
+          startsAt: { $gt: now },
+          participants: { $ne: me.username },
+          // The capacity check lives INSIDE the update filter so two users
+          // can never take the same last slot.
+          $expr: { $lt: [{ $size: "$participants" }, "$capacity"] },
+        },
+        { $push: { participants: me.username } },
+      )
+    : { modifiedCount: 0 };
+
+  if (result.modifiedCount === 0) {
+    const event = await loadEventOr404(id);
+    if (event.status === "cancelled") {
+      throw new AppError(409, "EVENT_CANCELLED", "This event was cancelled");
+    }
+    if (event.startsAt <= now) {
+      throw new AppError(409, "EVENT_STARTED", "This event has already started");
+    }
+    if (event.participants.includes(me.username)) {
+      throw new AppError(409, "ALREADY_JOINED", "You already joined this event");
+    }
+    throw new AppError(409, "EVENT_FULL", "No spots left");
+  }
+  res.json({ event: toPublicEvent(await loadEventOr404(id)) });
+});
+
+eventsRouter.post<{ id: string }>("/:id/leave", requireAuth, async (req, res) => {
+  const me = await requireUser(req.session.userId);
+  const event = await loadEventOr404(req.params.id);
+  if (event.host === me.username && event.type === "social") {
+    throw new AppError(409, "HOST_CANNOT_LEAVE", "Hosts can't leave their own event — cancel it instead");
+  }
+  const result = await Event.updateOne({ _id: event._id }, { $pull: { participants: me.username } });
+  if (result.modifiedCount === 0) {
+    throw new AppError(409, "NOT_JOINED", "You haven't joined this event");
+  }
+  res.json({ event: toPublicEvent(await loadEventOr404(req.params.id)) });
+});
+
+eventsRouter.post<{ id: string }>("/:id/cancel", requireAuth, async (req, res) => {
+  const me = await requireUser(req.session.userId);
+  const event = await loadEventOr404(req.params.id);
+  if (event.host !== me.username) {
+    throw new AppError(403, "FORBIDDEN", "Only the host can cancel this event");
+  }
+  if (event.status === "cancelled") {
+    throw new AppError(409, "EVENT_CANCELLED", "This event was already cancelled");
+  }
+  await Event.updateOne({ _id: event._id }, { $set: { status: "cancelled" } });
+  res.json({ event: toPublicEvent(await loadEventOr404(req.params.id)) });
+});

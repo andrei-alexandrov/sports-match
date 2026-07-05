@@ -85,6 +85,14 @@ describe("POST /api/events", () => {
     expect(res.body.error.code).toBe("VALIDATION_ERROR");
   });
 
+  it("rejects a malformed placeId with 400", async () => {
+    const app = createApp();
+    const me = await registeredAgent(app, "mira");
+    const res = await me.post("/api/events").send({ ...socialInput(), placeId: "not-an-id", locationText: undefined });
+    expect(res.status).toBe(400);
+    expect(res.body.error.code).toBe("VALIDATION_ERROR");
+  });
+
   it("requires authentication", async () => {
     const res = await request(createApp()).post("/api/events").send(socialInput());
     expect(res.status).toBe(401);
@@ -126,8 +134,7 @@ describe("GET /api/events", () => {
     expect(res.body.events).toEqual([]);
   });
 
-  // enabled in the membership task
-  it.skip("shows cancelled events only to their host and participants", async () => {
+  it("shows cancelled events only to their host and participants", async () => {
     const app = createApp();
     const host = await registeredAgent(app, "mira");
     const joiner = await registeredAgent(app, "bob");
