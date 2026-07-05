@@ -1,50 +1,131 @@
-@import "../../variables";
-@import "../../mixins";
+@import "../../styles/tokens";
+@import "../../styles/mixins";
 
-.home-container {
-    
-    .navContainer {
-        margin-top: 11rem;
-        justify-content: center;
-        align-items: center;
-    }
+.homePage {
+    @include page-container;
 
-    .siteDescription {
-        text-align: center;
-    }
-
-    .siteNameTitle {
+    &__hero {
         display: flex;
+        align-items: center;
+        gap: 32px;
+        padding: 40px 0 48px;
+    }
+
+    &__intro {
+        flex: 1.2;
+    }
+
+    &__badge {
+        @include chip($amber-soft, $amber-deep);
+        letter-spacing: 0.1em;
+        font-size: 11px;
+        padding: 6px 14px;
+    }
+
+    &__title {
+        font-size: clamp(38px, 6vw, 56px);
+        line-height: 1.03;
+        margin-top: 18px;
+    }
+
+    &__subtitle {
+        color: $muted;
+        font-size: 17px;
+        line-height: 1.55;
+        margin-top: 14px;
+        max-width: 420px;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 26px;
+        flex-wrap: wrap;
+    }
+
+    &__primaryCta {
+        @include button-primary;
+        text-decoration: none;
+    }
+
+    &__ghostCta {
+        @include button-ghost;
+        text-decoration: none;
+    }
+
+    &__radarWrap {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
         justify-content: center;
-        font-size: 5em;
-        font-style: italic;
-        color: $almost-white-color;
-        text-shadow: $strong-text-shadow;
+        min-height: 300px;
     }
 
-    .siteSloganTitle {
-        font-size: 1.8em;
-        margin-top: 2rem;
-        font-style: italic;
-        letter-spacing: 0.05em;
-        color: $almost-white-color;
-        text-shadow: $strong-text-shadow;
+    &__you {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: $accent;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 16px;
+        box-shadow: 0 0 0 5px $bg, 0 0 0 7px rgba(99, 102, 241, 0.3);
     }
 
-    @media screen and (min-width: 992px) {
-        .col-lg-3 {
-            flex: 0 0 auto;
-            width: 18%;
+    &__dot {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
+    &__features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    &__feature {
+        @include card;
+        padding: 20px 22px;
+    }
+
+    &__featureIcon {
+        font-size: 24px;
+    }
+
+    &__featureTitle {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    &__featureText {
+        color: $muted;
+        font-size: 13.5px;
+        margin-top: 5px;
+    }
+
+    @media (max-width: #{$bp-md - 1px}) {
+        &__hero {
+            flex-direction: column-reverse;
+            padding-top: 12px;
+            text-align: center;
+        }
+
+        &__actions {
+            justify-content: center;
+        }
+
+        &__subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        &__features {
+            grid-template-columns: 1fr;
         }
     }
-}
-
-.background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-Index: -1;
 }
