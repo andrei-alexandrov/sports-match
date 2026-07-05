@@ -42,7 +42,12 @@ export default function HomePage() {
             <span className="homePage__you">A</span>
           </Radar>
           {HERO_DOTS.map((dot) => (
-            <span key={dot.emoji} className="orbit-dot homePage__dot" style={dot.style}>
+            <span
+              key={dot.emoji}
+              className="orbit-dot homePage__dot"
+              style={dot.style}
+              aria-hidden="true"
+            >
               {dot.emoji}
             </span>
           ))}

@@ -4,11 +4,19 @@
 .chatPage {
     @include page-container;
     display: flex;
+    flex-wrap: wrap;
     gap: 0;
     @include card;
     padding: 0;
     overflow: hidden;
     min-height: 520px;
+
+    // The alert is a direct child alongside the two flex panes below; giving it a
+    // full-width basis forces it onto its own line above both, instead of beside them.
+    > .orbitAlert {
+        flex: 1 0 100%;
+        margin: 12px 20px 0;
+    }
 
     &__list {
         width: 300px;

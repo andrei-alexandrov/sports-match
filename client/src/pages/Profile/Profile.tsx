@@ -126,14 +126,52 @@ export default function ProfilePage() {
               id="city"
               name="city"
               className="profileCard__input"
-              value={draft.city ?? ""}
+              value={draft.city ?? user?.city ?? ""}
               onChange={handleEdit}
               placeholder="Edit your location"
             />
-            <button type="button" className="profileCard__save" onClick={handleSave}>
-              Save
-            </button>
           </div>
+
+          <label className="profileCard__label" htmlFor="age">Age</label>
+          <div className="profileCard__row">
+            <input
+              id="age"
+              name="age"
+              type="number"
+              min={0}
+              max={100}
+              className="profileCard__input"
+              value={draft.age ?? user?.age ?? ""}
+              onChange={handleEdit}
+              placeholder="Edit your age"
+            />
+          </div>
+
+          <label className="profileCard__label" htmlFor="gender">Gender</label>
+          <div className="profileCard__row">
+            <select
+              id="gender"
+              name="gender"
+              className="profileCard__select"
+              value={draft.gender ?? user?.gender ?? ""}
+              onChange={handleEdit}
+            >
+              <option value="">Choose gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            className="profileCard__save"
+            onClick={handleSave}
+            disabled={Object.keys(draft).length === 0}
+          >
+            Save
+          </button>
+
           {error && <CustomAlert variant="danger" message={error} />}
         </div>
       </section>

@@ -147,6 +147,7 @@ export default function MessagesPage() {
 
   return (
     <div className={currentReceiver ? "chatPage chatPage--thread" : "chatPage"}>
+      {error && <CustomAlert variant="danger" message={error} />}
       <aside className="chatPage__list">
         <h2 className="chatPage__listTitle">Chats</h2>
         {conversations.length === 0
@@ -187,7 +188,6 @@ export default function MessagesPage() {
               </button>
               <h3 className="chatPage__receiver">{currentReceiver}</h3>
             </header>
-            {error && <CustomAlert variant="danger" message={error} />}
             <ul className="chatPage__messages" ref={messageListRef}>
               {messages.map((message) => (
                 <li
