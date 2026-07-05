@@ -1,0 +1,103 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<h2>Direction C, plus a signature — which one makes it yours?</h2>
+<p class="subtitle">Same warm base (ivory + indigo + rounded), three different "ownable motifs" that would repeat across every page: heroes, cards, empty states, dividers, avatars. Click a favorite — combining two is also fair game.</p>
+
+<style>
+  .sig { border-radius: 12px; overflow: hidden; border: 1px solid #ddd; background: #faf9f7; font-family: 'Manrope', sans-serif; color: #1c1917; position: relative; }
+  .sig * { box-sizing: border-box; margin: 0; }
+  .sig .hero { padding: 34px 28px 26px; position: relative; overflow: hidden; }
+  .sig .hero h4 { font-size: 26px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; position: relative; }
+  .sig .hero p { color: #78716c; font-size: 13px; margin-top: 8px; position: relative; }
+  .sig .strip { display: flex; gap: 10px; padding: 0 28px 26px; align-items: center; position: relative; }
+  .sig .chip { background: #fff; border-radius: 16px; padding: 10px 14px; display: flex; gap: 9px; align-items: center; box-shadow: 0 8px 24px rgba(28,25,23,.08); font-size: 12px; font-weight: 700; }
+  .sig .av { width: 30px; height: 30px; border-radius: 50%; background: #eef2ff; color: #4f46e5; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; }
+  .sig .pillbtn { background: #6366f1; color: #fff; border: none; border-radius: 999px; padding: 9px 18px; font-weight: 700; font-size: 12px; font-family: inherit; }
+</style>
+
+<div class="cards" style="display: grid; grid-template-columns: 1fr; gap: 26px;">
+
+  <!-- C1: COURT LINES -->
+  <div class="card" data-choice="c1-court-lines" onclick="toggleSelect(this)">
+    <div class="card-image sig">
+      <div class="hero">
+        <svg style="position:absolute; right:-40px; top:-30px; width:340px; height:260px; opacity:.35;" viewBox="0 0 340 260" fill="none">
+          <rect x="30" y="20" width="280" height="220" rx="4" stroke="#6366f1" stroke-width="2" opacity=".35"/>
+          <line x1="170" y1="20" x2="170" y2="240" stroke="#6366f1" stroke-width="2" opacity=".35"/>
+          <circle cx="170" cy="130" r="44" stroke="#6366f1" stroke-width="2" opacity=".5"/>
+          <circle cx="170" cy="130" r="3" fill="#6366f1" opacity=".5"/>
+          <path d="M30 20 A 26 26 0 0 1 56 46" stroke="#6366f1" stroke-width="2" opacity=".35" transform="rotate(90 43 33)"/>
+          <rect x="30" y="75" width="52" height="110" stroke="#6366f1" stroke-width="2" opacity=".3"/>
+          <rect x="258" y="75" width="52" height="110" stroke="#6366f1" stroke-width="2" opacity=".3"/>
+        </svg>
+        <h4>Play together,<br>not alone</h4>
+        <p>247 players near you in Sofia</p>
+      </div>
+      <div class="strip">
+        <div class="chip">
+          <span class="av" style="box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(99,102,241,.45);">M</span> Maria K.
+          <button class="pillbtn">Chat</button>
+        </div>
+        <div style="flex:1; height:2px; background:rgba(99,102,241,.25); position:relative;">
+          <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:14px; height:14px; border:2px solid rgba(99,102,241,.45); border-radius:50%; background:#faf9f7;"></span>
+        </div>
+        <div class="chip"><span class="av">D</span> Dimo P.</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C1 — Court Lines</h3>
+      <p>Faint court geometry (center circle, service boxes, corner arcs) drawn as a quiet background layer on heroes and empty states; section dividers become halfway-lines with a center circle; avatars get a "center spot" double ring. Whispers sport on every page without a single stock photo.</p>
+    </div>
+  </div>
+
+  <!-- C2: EDITORIAL TYPE -->
+  <div class="card" data-choice="c2-editorial-type" onclick="toggleSelect(this)">
+    <div class="card-image sig">
+      <div class="hero" style="padding-bottom:18px;">
+        <h4 style="font-size:34px; text-transform:uppercase; line-height:1.02;">Find your<br>
+          <span style="color:transparent; -webkit-text-stroke:2px #6366f1; letter-spacing:.01em;">partner</span>
+        </h4>
+        <p>Pick a sport. Pick a neighborhood. Play today.</p>
+      </div>
+      <div class="strip" style="gap:26px; padding-bottom:30px;">
+        <div><div style="font-size:24px; font-weight:800; color:#6366f1;">247</div><div style="font-size:10.5px; color:#78716c; font-weight:700; text-transform:uppercase; letter-spacing:.08em;">players</div></div>
+        <div><div style="font-size:24px; font-weight:800; color:#6366f1;">40</div><div style="font-size:10.5px; color:#78716c; font-weight:700; text-transform:uppercase; letter-spacing:.08em;">sports</div></div>
+        <div><div style="font-size:24px; font-weight:800; color:#6366f1;">54</div><div style="font-size:10.5px; color:#78716c; font-weight:700; text-transform:uppercase; letter-spacing:.08em;">venues</div></div>
+        <button class="pillbtn" style="margin-left:auto;">Start playing →</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C2 — Editorial Type</h3>
+      <p>Typography IS the brand: oversized headlines where exactly one word is outlined in indigo, big bold stat numbers, uppercase micro-labels, generous whitespace. Magazine-cover confidence; zero graphics needed — hardest to mistake for a template.</p>
+    </div>
+  </div>
+
+  <!-- C3: TRACK & LANES -->
+  <div class="card" data-choice="c3-track-lanes" onclick="toggleSelect(this)">
+    <div class="card-image sig">
+      <div class="hero">
+        <svg style="position:absolute; right:-70px; top:-70px; width:300px; height:300px; opacity:.5;" viewBox="0 0 300 300" fill="none">
+          <rect x="20" y="20" width="260" height="260" rx="130" stroke="#6366f1" stroke-width="2" opacity=".28"/>
+          <rect x="42" y="42" width="216" height="216" rx="108" stroke="#6366f1" stroke-width="2" opacity=".34" stroke-dasharray="1 9" stroke-linecap="round"/>
+          <rect x="64" y="64" width="172" height="172" rx="86" stroke="#6366f1" stroke-width="2" opacity=".4"/>
+          <rect x="86" y="86" width="128" height="128" rx="64" stroke="#f59e0b" stroke-width="2" opacity=".45" stroke-dasharray="1 9" stroke-linecap="round"/>
+        </svg>
+        <h4>Your lane is<br>waiting 🏃</h4>
+        <p>247 players near you in Sofia</p>
+      </div>
+      <div class="strip">
+        <div class="chip" style="border-radius:999px; box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(99,102,241,.4), 0 8px 24px rgba(28,25,23,.08);">
+          <span class="av">M</span> Maria K. <button class="pillbtn">Chat</button>
+        </div>
+        <span style="font-size:11px; font-weight:800; color:#6366f1; border:2px dashed rgba(99,102,241,.5); border-radius:999px; padding:7px 14px;">TENNIS</span>
+        <span style="font-size:11px; font-weight:800; color:#b45309; border:2px dashed rgba(245,158,11,.55); border-radius:999px; padding:7px 14px;">SOFIA</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C3 — Track &amp; Lanes</h3>
+      <p>The running-track oval as the brand shape: concentric lane rings (with dashed "lane tick" strokes and one amber lane for warmth) decorate heroes and corners; tags and buttons wear the pill/lane treatment; avatars get lane-ring halos. Playful, kinetic, geometric.</p>
+    </div>
+  </div>
+
+</div>

@@ -1,5 +1,5 @@
 import type { UpdateProfileInput } from "@sports-match/shared";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import CustomAlert from "../../components/CustomAlert/CustomAlert";
 import { useAuth } from "../../context/AuthContext";
 import userImage from "../../images/user.png";
@@ -14,6 +14,7 @@ export default function ProfilePage() {
   const [draft, setDraft] = useState<UpdateProfileInput>({});
   const [error, setError] = useState("");
   const [savingActivities, setSavingActivities] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   if (!user) {
     return null; // RequireAuth guarantees a user; this narrows the type.
@@ -92,15 +93,26 @@ export default function ProfilePage() {
           <label
             className="profileCard__avatarWrap"
             title="Change photo"
+            role="button"
+            tabIndex={0}
             onClick={() => {
               if (!isEditing) {
                 startEditing();
               }
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                if (!isEditing) {
+                  startEditing();
+                }
+                fileInputRef.current?.click();
+              }
+            }}
           >
             <img className="profileCard__avatar orbit-halo" src={displayedImage} alt="Profile" />
             <span className="profileCard__avatarHint">Change</span>
-            <input type="file" accept="image/*" onChange={handleImageChange} hidden />
+            <input type="file" accept="image/*" onChange={handleImageChange} hidden ref={fileInputRef} />
           </label>
           <div>
             <h1 className="profileCard__name">{user.username}</h1>
