@@ -6,10 +6,11 @@ import {
   type PublicMessage,
 } from "@sports-match/shared";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { io, type Socket } from "socket.io-client";
 import * as messagesApi from "../../api/messages";
 import CustomAlert from "../../components/CustomAlert/CustomAlert";
+import Radar from "../../components/Orbit/Radar";
 import { useAuth } from "../../context/AuthContext";
 import userImage from "../../images/user.png";
 import "../../sweetalert2-custom.scss";
@@ -136,81 +137,83 @@ export default function MessagesPage() {
     );
   };
 
-  const receiverImage = (username: string): string =>
-    conversations.find((c) => c.username === username)?.image || userImage;
-
-  return (
-    <div className="chatPage">
-      <div className="conversationList">
-        <h1>Chats</h1>
-        <ul>
-          {conversations.map((conversation) => (
-            <li key={conversation.username} onClick={() => setCurrentReceiver(conversation.username)}>
-              <img
-                src={conversation.image || userImage}
-                alt={conversation.username}
-                className="receiverImage"
-              />
-              {conversation.username}
-              {conversation.unreadCount > 0 && <span className="unreadIndicator"></span>}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="chatContainer">
-        <div className="receiverHeader">
-          <h1>{currentReceiver ? currentReceiver : "Go back and find a buddy"}</h1>
-          {currentReceiver && (
-            <img src={receiverImage(currentReceiver)} alt={currentReceiver} className="receiverImage" />
-          )}
-        </div>
-        {error && <CustomAlert variant="danger" message={error} />}
-        <div className="messagesWrapper">
-          <ul className="messagesList" ref={messageListRef}>
-            {messages.map((message) => (
-              <MessageBubble
-                key={message.id}
-                message={message}
-                me={me}
-                senderImage={receiverImage(message.sender)}
-              />
-            ))}
-          </ul>
-          <form className="messagesForm" onSubmit={handleSendMessage}>
-            <input
-              type="text"
-              name="message"
-              placeholder="Type a message..."
-              autoComplete="off"
-              disabled={!currentReceiver}
-            />
-            <button type="submit" disabled={!currentReceiver}>Send</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface MessageBubbleProps {
-  message: PublicMessage;
-  me: string;
-  senderImage: string;
-}
-
-function MessageBubble({ message, me, senderImage }: MessageBubbleProps) {
-  const isSentByMe = message.sender === me;
-  return (
+  const findBuddiesEmptyState = (
     <>
-      <span className="shortTimestamp">{formatDate(message.timestamp)}</span>
-      <li className={`message ${isSentByMe ? "sender" : "receiver"}`}>
-        {!isSentByMe && (
-          <div className="senderInfo">
-            <img src={senderImage} alt={message.sender} className="senderImage" />
-          </div>
-        )}
-        <span className="messageText">{message.text}</span>
-      </li>
+      <Radar size={90} />
+      <p>Find a buddy to start chatting</p>
+      <Link to="/buddySearch">Find buddies</Link>
     </>
+  );
+
+  return (
+    <div className={currentReceiver ? "chatPage chatPage--thread" : "chatPage"}>
+      <aside className="chatPage__list">
+        <h2 className="chatPage__listTitle">Chats</h2>
+        {conversations.length === 0
+          ? <div className="chatPage__listEmpty">{findBuddiesEmptyState}</div>
+          : conversations.map((conversation) => (
+              <button
+                type="button"
+                key={conversation.username}
+                className={
+                  conversation.username === currentReceiver ? "chatItem chatItem--active" : "chatItem"
+                }
+                onClick={() => setCurrentReceiver(conversation.username)}
+              >
+                <img className="chatItem__avatar" src={conversation.image || userImage} alt="" />
+                <span className="chatItem__body">
+                  <span className="chatItem__name">{conversation.username}</span>
+                </span>
+                {conversation.unreadCount > 0 && (
+                  <span className="chatItem__unread" aria-label="Unread messages" />
+                )}
+              </button>
+            ))}
+      </aside>
+
+      <section className="chatPage__thread">
+        {!currentReceiver ? (
+          <div className="chatPage__threadEmpty">{findBuddiesEmptyState}</div>
+        ) : (
+          <>
+            <header className="chatPage__header">
+              <button
+                type="button"
+                className="chatPage__back"
+                aria-label="Back to chats"
+                onClick={() => setCurrentReceiver("")}
+              >
+                ‹
+              </button>
+              <h3 className="chatPage__receiver">{currentReceiver}</h3>
+            </header>
+            {error && <CustomAlert variant="danger" message={error} />}
+            <ul className="chatPage__messages" ref={messageListRef}>
+              {messages.map((message) => (
+                <li
+                  key={message.id}
+                  className={message.sender === me ? "bubble bubble--sent" : "bubble bubble--received"}
+                >
+                  <p className="bubble__text">{message.text}</p>
+                  <span className="bubble__time">{formatDate(message.timestamp)}</span>
+                </li>
+              ))}
+            </ul>
+            <form className="chatPage__composer" onSubmit={handleSendMessage}>
+              <input
+                className="chatPage__input"
+                type="text"
+                name="message"
+                placeholder="Type a message..."
+                autoComplete="off"
+              />
+              <button type="submit" className="chatPage__send">
+                Send ↑
+              </button>
+            </form>
+          </>
+        )}
+      </section>
+    </div>
   );
 }
