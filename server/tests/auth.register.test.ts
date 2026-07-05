@@ -20,6 +20,8 @@ describe("POST /api/auth/register", () => {
       gender: "",
       image: "",
       activities: [],
+      trainer: false,
+      trainerBio: "",
     });
     expect(res.headers["set-cookie"]?.[0]).toContain("HttpOnly");
   });

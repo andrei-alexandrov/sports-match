@@ -9,6 +9,8 @@ export interface UserFields {
   gender: "male" | "female" | "other" | "";
   image: string;
   activities: string[];
+  trainer: boolean;
+  trainerBio: string;
 }
 
 const userSchema = new mongoose.Schema<UserFields>({
@@ -19,6 +21,8 @@ const userSchema = new mongoose.Schema<UserFields>({
   gender: { type: String, default: "" },
   image: { type: String, default: "" },
   activities: { type: [String], default: [] },
+  trainer: { type: Boolean, default: false },
+  trainerBio: { type: String, default: "" },
 });
 
 export const User = mongoose.model<UserFields>("User", userSchema);
@@ -33,5 +37,7 @@ export function toPublicUser(user: UserDoc): PublicUser {
     gender: user.gender,
     image: user.image,
     activities: user.activities,
+    trainer: user.trainer,
+    trainerBio: user.trainerBio,
   };
 }
