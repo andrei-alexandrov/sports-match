@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar/NavBar";
 import RequireAuth from "./components/RequireAuth";
 import ActivitiesPage from "./pages/Activities/Activities";
 import BuddySearchPage from "./pages/BuddySearch/BuddySearch";
+import EventsPage from "./pages/Events/Events";
 import HomePage from "./pages/Home/Home";
 import LoginForm from "./pages/LoginAndRegister/LoginForm";
 import RegistrationForm from "./pages/LoginAndRegister/RegistrationForm";
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/activities" element={<ActivitiesPage />} />
           <Route path="/buddySearch" element={<BuddySearchPage />} />
           <Route path="/messages" element={<MessagesPage />} />
+          <Route path="/events" element={<EventsPage />} />
           <Route path="/places" element={<PlacesPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />

@@ -1,0 +1,241 @@
+@import "../../styles/tokens";
+@import "../../styles/mixins";
+
+.eventsPage {
+    @include page-container;
+
+    &__head {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &__title {
+        font-size: 28px;
+    }
+
+    &__subtitle {
+        color: $muted;
+        font-size: 14px;
+        margin-top: 6px;
+    }
+
+    &__create {
+        @include button-primary;
+    }
+
+    &__filters {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin: 20px 0 22px;
+        flex-wrap: wrap;
+    }
+
+    &__segments {
+        display: flex;
+        background: $surface;
+        border: 1.5px solid $border;
+        border-radius: $radius-pill;
+        padding: 3px;
+        gap: 2px;
+    }
+
+    &__segment {
+        border: none;
+        background: none;
+        font-family: $font;
+        font-weight: 700;
+        font-size: 13px;
+        color: $muted;
+        padding: 7px 16px;
+        border-radius: $radius-pill;
+        cursor: pointer;
+        @include focus-ring;
+
+        &--active {
+            background: $accent-soft;
+            color: $accent-deep;
+        }
+    }
+
+    &__select {
+        @include input-pill;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+    }
+
+    &__empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding: 48px 0;
+        color: $muted;
+        font-weight: 700;
+    }
+}
+
+.eventForm {
+    @include card;
+    padding: 22px;
+    margin-bottom: 24px;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 14px;
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-weight: 700;
+        font-size: 13px;
+
+        &--wide {
+            grid-column: 1 / -1;
+        }
+    }
+
+    &__input {
+        @include input-pill;
+        font-weight: 400;
+    }
+
+    &__textarea {
+        border-radius: $radius-card;
+        min-height: 70px;
+        resize: vertical;
+    }
+
+    &__submit {
+        @include button-primary;
+        margin-top: 16px;
+    }
+}
+
+.eventCard {
+    @include card;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &--cancelled {
+        opacity: 0.65;
+    }
+
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__when {
+        font-weight: 800;
+        font-size: 13px;
+        color: $accent-deep;
+    }
+
+    &__badge {
+        @include chip($amber-soft, $amber-deep);
+        font-size: 10px;
+        letter-spacing: 0.06em;
+    }
+
+    &__title {
+        font-size: 17px;
+    }
+
+    &__chips {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    &__chip {
+        @include chip($accent-soft, $accent-deep);
+
+        &--price {
+            background: $amber-soft;
+            color: $amber-deep;
+        }
+    }
+
+    &__where {
+        color: $ink-soft;
+        font-size: 13px;
+    }
+
+    &__desc {
+        color: $muted;
+        font-size: 13px;
+    }
+
+    &__meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin-top: 2px;
+        font-size: 12.5px;
+        color: $muted;
+        font-weight: 700;
+    }
+
+    &__msg {
+        background: none;
+        border: none;
+        color: $accent-strong;
+        font-family: $font;
+        font-weight: 700;
+        font-size: 12.5px;
+        cursor: pointer;
+        padding: 2px 6px;
+        border-radius: $radius-pill;
+        @include focus-ring;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 6px;
+    }
+
+    &__join {
+        @include button-primary;
+        padding: 9px 20px;
+        font-size: 13.5px;
+    }
+
+    &__leave,
+    &__cancel {
+        @include button-ghost;
+        padding: 9px 20px;
+        font-size: 13.5px;
+    }
+
+    &__cancel:hover:not(:disabled) {
+        border-color: $danger;
+        color: $danger;
+    }
+
+    &__hosting {
+        @include chip($accent-soft, $accent-deep);
+    }
+
+    &__cancelledLabel {
+        @include chip($danger-soft, $danger);
+        letter-spacing: 0.06em;
+    }
+}
