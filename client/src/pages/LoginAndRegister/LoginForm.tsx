@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import CustomAlert from "../../components/CustomAlert/CustomAlert";
+import Radar from "../../components/Orbit/Radar";
 import { useAuth } from "../../context/AuthContext";
 import "./LoginAndRegister.scss";
 
@@ -22,8 +22,7 @@ function LoginForm() {
   const from = (location.state as { from?: string } | null)?.from ?? "/home";
   const formValid = username !== "" && password !== "";
 
-  // react-bootstrap's Form.Control types onChange against this element union.
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === "username") {
       setUsername(value.trim());
@@ -49,37 +48,48 @@ function LoginForm() {
   };
 
   return (
-    <div className="introPage">
-      <section className="pageHolder">
-        <form className="loginForm" onSubmit={handleSubmit}>
-          <h2 className="loginTitle">Login</h2>
-          {alert.show && <CustomAlert variant={alert.variant} message={alert.message} />}
-          <Form.Group controlId="username">
-            <div className="inputBox">
-              <span className="icon"><ion-icon name="person"></ion-icon></span>
-              <Form.Control type="text" name="username" value={username} onChange={handleChange} required />
-              <Form.Label>Username</Form.Label>
-            </div>
-          </Form.Group>
-
-          <Form.Group controlId="password">
-            <div className="inputBox">
-              <span className="icon"><ion-icon name="lock-closed"></ion-icon></span>
-              <Form.Control type="password" name="password" value={password} onChange={handleChange} required />
-              <Form.Label>Password</Form.Label>
-            </div>
-          </Form.Group>
-          <span className="btnHolder">
-            <Button type="submit" className={`submit-btn ${formValid ? "enabled" : ""}`}>
-              Login
-            </Button>
-            <div className="registerLink">
-              <p className="have-account">Don't have an account?
-                <Link to="/register"><span className="registerHover"> Sign up</span></Link></p>
-            </div>
-          </span>
-        </form>
-      </section>
+    <div className="authPage">
+      <div className="authPage__decor" aria-hidden="true">
+        <Radar size={220} sweep={false} />
+      </div>
+      <form className="authCard" onSubmit={handleSubmit}>
+        <span className="authCard__mark" aria-hidden="true" />
+        <h1 className="authCard__title">Welcome back</h1>
+        <p className="authCard__subtitle">Log in to find your next game</p>
+        {alert.show && <CustomAlert variant={alert.variant} message={alert.message} />}
+        <label className="authCard__label" htmlFor="username">
+          Username
+        </label>
+        <input
+          id="username"
+          className="authCard__input"
+          type="text"
+          name="username"
+          value={username}
+          onChange={handleChange}
+          autoComplete="username"
+          required
+        />
+        <label className="authCard__label" htmlFor="password">
+          Password
+        </label>
+        <input
+          id="password"
+          className="authCard__input"
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+          autoComplete="current-password"
+          required
+        />
+        <button type="submit" className="authCard__submit" disabled={!formValid}>
+          Log in
+        </button>
+        <p className="authCard__switch">
+          Don&apos;t have an account? <Link to="/register">Sign up</Link>
+        </p>
+      </form>
     </div>
   );
 }

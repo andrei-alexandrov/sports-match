@@ -10,7 +10,6 @@ import RegistrationForm from "./pages/LoginAndRegister/RegistrationForm";
 import MessagesPage from "./pages/Messages/Messages";
 import PlacesPage from "./pages/Places/Places";
 import ProfilePage from "./pages/Profile/Profile";
-import "./App.scss";
 
 export default function App() {
   return (
