@@ -215,8 +215,9 @@ export default function ProfilePage() {
             </div>
             <div className="profileCard__viewRow">
               <span className="profileCard__label">Age</span>
-              <span className={user.age ? "profileCard__value" : "profileCard__value profileCard__value--empty"}>
-                {user.age || "Not set"}
+              {/* null-aware: age 0 is a set value, unlike "" for the string fields */}
+              <span className={user.age != null ? "profileCard__value" : "profileCard__value profileCard__value--empty"}>
+                {user.age != null ? user.age : "Not set"}
               </span>
             </div>
             <div className="profileCard__viewRow">
