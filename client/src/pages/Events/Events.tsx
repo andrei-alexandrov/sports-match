@@ -1,6 +1,6 @@
 import type { ActivityKey, CreateEventInput, EventType, PublicEvent } from "@sports-match/shared";
 import { createEventInputSchema } from "@sports-match/shared";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CLIENT_ACTIVITIES } from "../../activities/catalogue";
 import * as eventsApi from "../../api/events";
@@ -58,6 +58,7 @@ export default function EventsPage() {
   const [formError, setFormError] = useState("");
   const [error, setError] = useState("");
   const [busyId, setBusyId] = useState("");
+  const [creating, setCreating] = useState(false);
   // Safe: this route renders inside RequireAuth, which blocks until the auth check resolves.
   const me = user?.username ?? "";
 
@@ -80,6 +81,11 @@ export default function EventsPage() {
     void refresh();
   }, [refresh]);
 
+  const refreshRef = useRef(refresh);
+  useEffect(() => {
+    refreshRef.current = refresh;
+  }, [refresh]);
+
   useEffect(() => {
     placesApi
       .searchPlaces({})
@@ -93,8 +99,10 @@ export default function EventsPage() {
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (creating) return;
     const candidate: CreateEventInput = {
       title: form.title,
+      // Select options come from the catalogue; zod's enum backstops an empty value.
       sport: form.sport as ActivityKey,
       type: form.type,
       description: form.description || undefined,
@@ -110,6 +118,7 @@ export default function EventsPage() {
       setFormError(parsed.error.issues[0]?.message ?? "Check the form");
       return;
     }
+    setCreating(true);
     try {
       await eventsApi.createEvent(parsed.data);
       setForm(EMPTY_FORM);
@@ -118,6 +127,8 @@ export default function EventsPage() {
       await refresh();
     } catch (err) {
       setFormError(err instanceof ApiError ? err.message : "Could not create the event.");
+    } finally {
+      setCreating(false);
     }
   };
 
@@ -135,8 +146,8 @@ export default function EventsPage() {
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.");
     } finally {
+      await refreshRef.current();
       setBusyId("");
-      await refresh();
     }
   };
 
@@ -159,6 +170,7 @@ export default function EventsPage() {
               key={option.label}
               type="button"
               className={typeFilter === option.value ? "eventsPage__segment eventsPage__segment--active" : "eventsPage__segment"}
+              aria-pressed={typeFilter === option.value}
               onClick={() => setTypeFilter(option.value)}
             >
               {option.label}
@@ -280,7 +292,7 @@ export default function EventsPage() {
             </label>
           </div>
           {formError && <CustomAlert variant="danger" message={formError} />}
-          <button type="submit" className="eventForm__submit">
+          <button type="submit" className="eventForm__submit" disabled={creating}>
             Publish event
           </button>
         </form>
