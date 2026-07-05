@@ -124,7 +124,7 @@ export default function EventsPage() {
       setForm(EMPTY_FORM);
       setShowForm(false);
       setFormError("");
-      await refresh();
+      await refreshRef.current();
     } catch (err) {
       setFormError(err instanceof ApiError ? err.message : "Could not create the event.");
     } finally {
