@@ -49,15 +49,34 @@ function renderProfile() {
 }
 
 async function waitForLoad() {
+  // "Sofia" renders twice in view mode (header meta + the City value row), so wait
+  // on the uniquely-rendered username instead.
+  await waitFor(() => expect(screen.getByText("andrei")).toBeTruthy());
+}
+
+async function enterEditMode() {
+  await waitForLoad();
+  fireEvent.click(screen.getByRole("button", { name: "Edit profile" }));
   await waitFor(() => expect((screen.getByLabelText("City") as HTMLInputElement).value).toBe("Sofia"));
 }
 
 describe("ProfilePage", () => {
-  it("prefills the user's current city, age, and gender after load", async () => {
+  it("renders view mode by default, with no editable inputs", async () => {
     stubFetch();
     renderProfile();
 
     await waitForLoad();
+    expect(screen.getAllByText("Sofia").length).toBeGreaterThan(0);
+    expect(screen.queryByLabelText("City")).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "City" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Edit profile" })).toBeTruthy();
+  });
+
+  it("prefills the user's current city, age, and gender after load", async () => {
+    stubFetch();
+    renderProfile();
+
+    await enterEditMode();
     expect((screen.getByLabelText("Age") as HTMLInputElement).value).toBe("30");
     expect((screen.getByLabelText("Gender") as HTMLSelectElement).value).toBe("male");
   });
@@ -66,7 +85,7 @@ describe("ProfilePage", () => {
     stubFetch();
     renderProfile();
 
-    await waitForLoad();
+    await enterEditMode();
     const saveButton = screen.getByRole("button", { name: "Save" }) as HTMLButtonElement;
     expect(saveButton.disabled).toBe(true);
 
@@ -81,13 +100,26 @@ describe("ProfilePage", () => {
     });
     renderProfile();
 
-    await waitForLoad();
+    await enterEditMode();
     fireEvent.change(screen.getByLabelText("City"), { target: { value: "Plovdiv" } });
     fireEvent.click(screen.getByRole("button", { name: "Save" }));
 
     await waitFor(() => expect(patchedBody).toEqual({ city: "Plovdiv" }));
     const patchCall = fetchMock.mock.calls.find(([url]) => url === "/api/users/me");
     expect(patchCall?.[1]).toMatchObject({ method: "PATCH" });
+  });
+
+  it("discards the typed change and returns to view mode when Cancel is clicked", async () => {
+    stubFetch();
+    renderProfile();
+
+    await enterEditMode();
+    fireEvent.change(screen.getByLabelText("City"), { target: { value: "Plovdiv" } });
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+
+    expect(screen.queryByLabelText("City")).toBeNull();
+    expect(screen.getAllByText("Sofia").length).toBeGreaterThan(0);
+    expect(screen.queryByText("Plovdiv")).toBeNull();
   });
 
   it("makes the avatar photo control keyboard-operable", async () => {

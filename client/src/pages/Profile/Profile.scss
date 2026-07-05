@@ -19,6 +19,18 @@
         gap: 20px;
     }
 
+    &__identity {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: auto;
+    }
+
     &__avatarWrap {
         position: relative;
         cursor: pointer;
@@ -97,6 +109,28 @@
         padding: 10px 22px;
     }
 
+    &__editBtn,
+    &__cancelBtn {
+        @include button-ghost;
+        padding: 10px 22px;
+    }
+
+    &__viewRow {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+    }
+
+    &__value {
+        font-size: 15px;
+        color: $ink;
+
+        &--empty {
+            color: $muted;
+            font-style: italic;
+        }
+    }
+
     &__sectionTitle {
         font-size: 18px;
         margin-bottom: 14px;
@@ -105,6 +139,17 @@
     &__empty {
         color: $muted;
         font-size: 14px;
+    }
+
+    @media (max-width: #{$bp-md - 1px}) {
+        &__header {
+            flex-wrap: wrap;
+        }
+
+        &__actions {
+            margin-left: 0;
+            flex-basis: 100%;
+        }
     }
 }
 

@@ -20,8 +20,17 @@ export default function ProfilePage() {
     return null; // RequireAuth guarantees a user; this narrows the type.
   }
 
+  // Used by the avatar click: seeds the whole draft so the photo preview flow keeps
+  // its existing behavior unchanged.
   const startEditing = () => {
     setDraft({ age: user.age, city: user.city, gender: user.gender, image: user.image });
+    setIsEditing(true);
+  };
+
+  // Used by the "Edit profile" button: enters edit mode without seeding draft, so
+  // Save stays disabled and the PATCH body stays scoped to fields the user actually
+  // touches (see handleSave / the `disabled` rule on the Save button below).
+  const openEdit = () => {
     setIsEditing(true);
   };
 
@@ -42,9 +51,15 @@ export default function ProfilePage() {
       await updateProfile(draft);
       setError("");
       setIsEditing(false);
+      setDraft({});
     } catch {
       setError("Could not save your profile. Please try again.");
     }
+  };
+
+  const cancelEditing = () => {
+    setIsEditing(false);
+    setDraft({});
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +99,10 @@ export default function ProfilePage() {
     }
   };
 
-  const displayedImage = (isEditing ? draft.image : user.image) || userImage;
+  // Not gated on isEditing: opening edit mode via "Edit profile" doesn't seed
+  // draft.image, so the avatar must keep showing the saved photo until the file
+  // picker (avatar click) actually produces a new draft.image value.
+  const displayedImage = (draft.image ?? user.image) || userImage;
 
   return (
     <div className="profilePage">
@@ -114,66 +132,103 @@ export default function ProfilePage() {
             <span className="profileCard__avatarHint">Change</span>
             <input type="file" accept="image/*" onChange={handleImageChange} hidden ref={fileInputRef} />
           </label>
-          <div>
+          <div className="profileCard__identity">
             <h1 className="profileCard__name">{user.username}</h1>
             <p className="profileCard__meta">{user.city || "Add your city"}</p>
           </div>
+          {!isEditing && (
+            <div className="profileCard__actions">
+              <button type="button" className="profileCard__editBtn" onClick={openEdit}>
+                Edit profile
+              </button>
+            </div>
+          )}
         </div>
-        <div className="profileCard__fields">
-          <label className="profileCard__label" htmlFor="city">City</label>
-          <div className="profileCard__row">
-            <input
-              id="city"
-              name="city"
-              className="profileCard__input"
-              value={draft.city ?? user?.city ?? ""}
-              onChange={handleEdit}
-              placeholder="Edit your location"
-            />
+        {isEditing ? (
+          <div className="profileCard__fields">
+            <label className="profileCard__label" htmlFor="city">City</label>
+            <div className="profileCard__row">
+              <input
+                id="city"
+                name="city"
+                className="profileCard__input"
+                value={draft.city ?? user?.city ?? ""}
+                onChange={handleEdit}
+                placeholder="Edit your location"
+              />
+            </div>
+
+            <label className="profileCard__label" htmlFor="age">Age</label>
+            <div className="profileCard__row">
+              <input
+                id="age"
+                name="age"
+                type="number"
+                min={0}
+                max={100}
+                className="profileCard__input"
+                value={draft.age === null ? "" : (draft.age ?? user?.age ?? "")}
+                onChange={handleEdit}
+                placeholder="Edit your age"
+              />
+            </div>
+
+            <label className="profileCard__label" htmlFor="gender">Gender</label>
+            <div className="profileCard__row">
+              <select
+                id="gender"
+                name="gender"
+                className="profileCard__select"
+                value={draft.gender ?? user?.gender ?? ""}
+                onChange={handleEdit}
+              >
+                <option value="">Choose gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div className="profileCard__actions">
+              <button
+                type="button"
+                className="profileCard__save"
+                onClick={handleSave}
+                disabled={Object.keys(draft).length === 0}
+              >
+                Save
+              </button>
+              <button type="button" className="profileCard__cancelBtn" onClick={cancelEditing}>
+                Cancel
+              </button>
+            </div>
+
+            {error && <CustomAlert variant="danger" message={error} />}
           </div>
+        ) : (
+          <div className="profileCard__fields">
+            <div className="profileCard__viewRow">
+              <span className="profileCard__label">City</span>
+              <span className={user.city ? "profileCard__value" : "profileCard__value profileCard__value--empty"}>
+                {user.city || "Not set"}
+              </span>
+            </div>
+            <div className="profileCard__viewRow">
+              <span className="profileCard__label">Age</span>
+              <span className={user.age ? "profileCard__value" : "profileCard__value profileCard__value--empty"}>
+                {user.age || "Not set"}
+              </span>
+            </div>
+            <div className="profileCard__viewRow">
+              <span className="profileCard__label">Gender</span>
+              <span className={user.gender ? "profileCard__value" : "profileCard__value profileCard__value--empty"}>
+                {user.gender || "Not set"}
+              </span>
+            </div>
 
-          <label className="profileCard__label" htmlFor="age">Age</label>
-          <div className="profileCard__row">
-            <input
-              id="age"
-              name="age"
-              type="number"
-              min={0}
-              max={100}
-              className="profileCard__input"
-              value={draft.age ?? user?.age ?? ""}
-              onChange={handleEdit}
-              placeholder="Edit your age"
-            />
+            {error && <CustomAlert variant="danger" message={error} />}
           </div>
-
-          <label className="profileCard__label" htmlFor="gender">Gender</label>
-          <div className="profileCard__row">
-            <select
-              id="gender"
-              name="gender"
-              className="profileCard__select"
-              value={draft.gender ?? user?.gender ?? ""}
-              onChange={handleEdit}
-            >
-              <option value="">Choose gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <button
-            type="button"
-            className="profileCard__save"
-            onClick={handleSave}
-            disabled={Object.keys(draft).length === 0}
-          >
-            Save
-          </button>
-
-          {error && <CustomAlert variant="danger" message={error} />}
-        </div>
+        )}
       </section>
 
       <section className="profileCard">
