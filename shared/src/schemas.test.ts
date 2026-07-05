@@ -66,6 +66,16 @@ describe("updateProfileInputSchema", () => {
     expect(updateProfileInputSchema.safeParse({ age: 0 }).success).toBe(true);
     expect(updateProfileInputSchema.safeParse({ age: 100 }).success).toBe(true);
   });
+
+  it("accepts trainer flag and trainer bio", () => {
+    const result = updateProfileInputSchema.safeParse({ trainer: true, trainerBio: "Tennis coach, 10y" });
+    expect(result.success).toBe(true);
+    expect(result.data.trainer).toBe(true);
+  });
+
+  it("rejects an over-long trainer bio", () => {
+    expect(updateProfileInputSchema.safeParse({ trainerBio: "x".repeat(121) }).success).toBe(false);
+  });
 });
 
 describe("publicUserSchema", () => {
@@ -78,6 +88,8 @@ describe("publicUserSchema", () => {
       gender: "" as const,
       image: "",
       activities: [],
+      trainer: false,
+      trainerBio: "",
     };
     expect(publicUserSchema.safeParse(user).success).toBe(true);
     const withHash = publicUserSchema.safeParse({ ...user, passwordHash: "x" });

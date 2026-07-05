@@ -35,6 +35,8 @@ export const updateProfileInputSchema = z.object({
     .array(activityKeySchema)
     .transform((keys) => [...new Set(keys)])
     .optional(),
+  trainer: z.boolean().optional(),
+  trainerBio: z.string().trim().max(120, "Trainer bio is too long").optional(),
 });
 export type UpdateProfileInput = z.infer<typeof updateProfileInputSchema>;
 
@@ -46,6 +48,8 @@ export const publicUserSchema = z.object({
   gender: genderSchema,
   image: z.string(),
   activities: z.array(z.string()),
+  trainer: z.boolean(),
+  trainerBio: z.string(),
 });
 export type PublicUser = z.infer<typeof publicUserSchema>;
 
