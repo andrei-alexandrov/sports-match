@@ -5,6 +5,7 @@ import { CLIENT_ACTIVITIES } from "../../activities/catalogue";
 import * as usersApi from "../../api/users";
 import BuddyCard from "../../components/BuddyCard/BuddyCard";
 import CustomAlert from "../../components/CustomAlert/CustomAlert";
+import Radar from "../../components/Orbit/Radar";
 import useDebounce from "../../components/Utils/Debounce";
 import { useAuth } from "../../context/AuthContext";
 import userImage from "../../images/user.png";
@@ -53,15 +54,18 @@ export default function BuddySearchPage() {
 
   return (
     <div className="buddyPage">
-      <h2 className="siteSloganTitle">Find someone that shares your sport passion</h2>
-      <div className="buddySearchWrapper">
+      <header className="buddyPage__head">
+        <h1 className="buddyPage__title">Find a buddy</h1>
+        <p className="buddyPage__subtitle">People who share your sport, in your city</p>
+      </header>
+      <div className="buddyPage__filters">
         <select
-          className="buddySearchSelect"
+          className="buddyPage__select"
           id="activity-select"
           value={selectedActivity}
           onChange={(e) => setSelectedActivity(e.target.value)}
         >
-          <option value="">Search buddy by activity</option>
+          <option value="">All sports</option>
           {sortedActivities.map((activity) => (
             <option key={activity.key} value={activity.key}>
               {activity.label}
@@ -69,22 +73,26 @@ export default function BuddySearchPage() {
           ))}
         </select>
         <input
-          className="buddySearchSelect"
+          className="buddyPage__input"
           type="text"
           value={city}
           placeholder="City"
           onChange={(e) => setCity(e.target.value)}
         />
+        <span className="buddyPage__count">{buddies.length} found</span>
       </div>
       {error && <CustomAlert variant="danger" message={error} />}
-      <div className="buddiesHolder">
+      <div className="buddyPage__grid">
         {buddies.length === 0 && !error ? (
-          <p style={{ color: "white", textAlign: "center" }}>No buddies found</p>
+          <div className="buddyPage__empty">
+            <Radar size={110}>
+              <span className="buddyPage__emptyDot" />
+            </Radar>
+            <p>No buddies found — try another sport or city</p>
+          </div>
         ) : (
           buddies.map((buddy) => (
-            <div className="buddyCardContainer" key={buddy.username}>
-              <BuddyCard user={buddy} defaultImage={userImage} onStartChat={handleStartChat} />
-            </div>
+            <BuddyCard key={buddy.username} user={buddy} defaultImage={userImage} onStartChat={handleStartChat} />
           ))
         )}
       </div>
