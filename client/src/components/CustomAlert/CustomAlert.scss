@@ -1,0 +1,25 @@
+@import "../../styles/tokens";
+
+.orbitAlert {
+    border-radius: $radius-card;
+    padding: 12px 18px;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 12px 0;
+
+    &--danger {
+        background: $danger-soft;
+        color: $danger;
+    }
+
+    &--success {
+        background: $accent-soft;
+        color: $accent-deep;
+    }
+
+    &--warning,
+    &--info {
+        background: $amber-soft;
+        color: $amber-deep;
+    }
+}

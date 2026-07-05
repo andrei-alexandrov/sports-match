@@ -1,4 +1,4 @@
-import { Alert } from "react-bootstrap";
+import "./CustomAlert.scss";
 
 interface CustomAlertProps {
   variant: "success" | "danger" | "warning" | "info";
@@ -6,5 +6,9 @@ interface CustomAlertProps {
 }
 
 export default function CustomAlert({ variant, message }: CustomAlertProps) {
-  return <Alert variant={variant}>{message}</Alert>;
+  return (
+    <div className={`orbitAlert orbitAlert--${variant}`} role="alert">
+      {message}
+    </div>
+  );
 }

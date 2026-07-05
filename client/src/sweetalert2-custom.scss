@@ -1,24 +1,36 @@
-@import "./variables";
-
-.swal2-title {
-    font-size: 24px;
-    color: $almost-white-color !important;
-}
+@import "./styles/tokens";
 
 .swal2-popup {
-    background-color: $dark-main-color !important;
-    border-radius: 10px; 
-    color: $almost-white-color;
+    font-family: $font !important;
+    background: $surface !important;
+    color: $ink !important;
+    border-radius: $radius-card !important;
+    box-shadow: $shadow-pop !important;
+}
+
+.swal2-title {
+    color: $ink !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+}
+
+.swal2-html-container {
+    color: $muted !important;
 }
 
 .swal2-confirm {
-    border: none !important;
-    background-color: $purple-color !important;
-    &:hover {
-        background-color: $medium-main-color !important;
-    }
+    background: $accent-strong !important;
+    border-radius: $radius-pill !important;
+    font-weight: 700 !important;
+    padding: 10px 24px !important;
+    box-shadow: none !important;
 }
 
 .swal2-cancel {
-    background-color: grey !important;
+    background: $surface !important;
+    color: $ink !important;
+    border: 1.5px solid $border !important;
+    border-radius: $radius-pill !important;
+    font-weight: 700 !important;
+    padding: 10px 24px !important;
 }
