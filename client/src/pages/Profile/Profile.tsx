@@ -6,7 +6,6 @@ import userImage from "../../images/user.png";
 import "../../sweetalert2-custom.scss";
 import "./Profile.scss";
 import { activityByKey } from "../../activities/catalogue";
-import { ActivityComponentCircle } from "../../components/Activity/Activity";
 import ConfirmModal from "../../components/Modals/ConfirmModal";
 
 export default function ProfilePage() {
@@ -87,84 +86,73 @@ export default function ProfilePage() {
   const displayedImage = (isEditing ? draft.image : user.image) || userImage;
 
   return (
-    <div className="profilePageContainer">
-      <div className="profileInfo">
-        {error && <CustomAlert variant="danger" message={error} />}
-        <div className="profileImage">
-          <img src={displayedImage} alt={user.username} />
-          {isEditing && (
-            <div className="file-input-container">
-              <input type="file" name="image" id="file-input" className="file-input" onChange={handleImageChange} accept="image/*" />
-              <label htmlFor="file-input" className="file-input-label">Choose File</label>
-            </div>
-          )}
+    <div className="profilePage">
+      <section className="profileCard">
+        <div className="profileCard__header">
+          <label
+            className="profileCard__avatarWrap"
+            title="Change photo"
+            onClick={() => {
+              if (!isEditing) {
+                startEditing();
+              }
+            }}
+          >
+            <img className="profileCard__avatar orbit-halo" src={displayedImage} alt="Profile" />
+            <span className="profileCard__avatarHint">Change</span>
+            <input type="file" accept="image/*" onChange={handleImageChange} hidden />
+          </label>
+          <div>
+            <h1 className="profileCard__name">{user.username}</h1>
+            <p className="profileCard__meta">{user.city || "Add your city"}</p>
+          </div>
         </div>
-        <div className="userInfo">
-          <h2>
-            <span className="icon">
-              <ion-icon name="accessibility-outline"></ion-icon>{" "}
-              {user.username}
-            </span>
-          </h2>
-          <p>
-            <span className="icon">
-              <ion-icon name="calendar-outline"></ion-icon>{" "}
-              {isEditing ? (
-                <input style={{ position: "relative" }} type="number" name="age" value={draft.age ?? ""} onChange={handleEdit} placeholder="Edit your age" />
-              ) : (
-                <>{typeof user.age === "number" ? user.age : ""}</>
-              )}
-            </span>
-          </p>
-          <p>
-            <span className="icon">
-              <ion-icon name="location-outline"></ion-icon>{" "}
-            </span>
-            {isEditing ? (
-              <input type="text" name="city" value={draft.city ?? ""} onChange={handleEdit} placeholder="Edit your location" />
-            ) : (
-              user.city
-            )}
-          </p>
-          <p>
-            <span className="icon">
-              <ion-icon name="transgender-outline"></ion-icon>{" "}
-            </span>
-            {isEditing ? (
-              <select style={{ cursor: "pointer" }} name="gender" value={draft.gender ?? ""} onChange={handleEdit}>
-                <option value="">Choose gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            ) : (
-              user.gender
-            )}
-          </p>
+        <div className="profileCard__fields">
+          <label className="profileCard__label" htmlFor="city">City</label>
+          <div className="profileCard__row">
+            <input
+              id="city"
+              name="city"
+              className="profileCard__input"
+              value={draft.city ?? ""}
+              onChange={handleEdit}
+              placeholder="Edit your location"
+            />
+            <button type="button" className="profileCard__save" onClick={handleSave}>
+              Save
+            </button>
+          </div>
+          {error && <CustomAlert variant="danger" message={error} />}
         </div>
-        {isEditing ? (
-          <button onClick={handleSave}>Save</button>
-        ) : (
-          <button onClick={startEditing}>Edit</button>
-        )}
-      </div>
-      <div>
-        <h3>{user.username}'s activities:</h3>
+      </section>
+
+      <section className="profileCard">
+        <h2 className="profileCard__sectionTitle">My sports</h2>
         {user.activities.length > 0 ? (
-          <div className="activitiesList">
+          <div className="profileChips">
             {user.activities.map((key) => {
               const activity = activityByKey(key);
               return activity ? (
-                <div key={key}>
-                  <ActivityComponentCircle activity={activity} onRemove={() => handleRemoveActivity(key)} disabled={savingActivities} />
-                </div>
+                <span className="profileChip" key={key}>
+                  <img className="profileChip__img" src={activity.image} alt="" />
+                  {activity.label}
+                  <button
+                    type="button"
+                    className="profileChip__remove"
+                    aria-label={`Remove ${activity.label}`}
+                    onClick={() => handleRemoveActivity(key)}
+                    disabled={savingActivities}
+                  >
+                    ✕
+                  </button>
+                </span>
               ) : null;
             })}
           </div>
         ) : (
-          <p>No activities added yet</p>
+          <p className="profileCard__empty">No sports yet — add some from the Activities page.</p>
         )}
-      </div>
+      </section>
     </div>
   );
 }

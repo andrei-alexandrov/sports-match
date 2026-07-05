@@ -1,125 +1,145 @@
-@import "../../variables";
-@import "../../mixins";
+@import "../../styles/tokens";
+@import "../../styles/mixins";
 
-.profilePageContainer {
-    margin-top: 30px;
-    text-align: center;
+.profilePage {
+    @include page-container;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
-    .profileInfo {
-        width: 700px;
-        margin: auto;
+.profileCard {
+    @include card;
+    padding: 26px 28px;
+
+    &__header {
         display: flex;
-        color: $almost-white-color;
-        background-color: rgba(255, 255, 255, 0.2);
-
-        box-shadow: 10px 20px 20px 10px rgba(0, 0, 0, 0.5);
-        @include profileBorder();
-
-
-        .userInfo {
-            width: 500px;
-            margin-top: 1rem;
-
-            h2 {
-                font-size: 1.5rem;
-                margin-bottom: 3rem;
-            }
-
-            button {
-                @include button();
-                background-color: $contrast-transperant;
-            }
-        }
+        align-items: center;
+        gap: 20px;
     }
 
-    .profileImage img {
-        box-sizing: border-box;
-        width: 250px;
-        height: 270px;
+    &__avatarWrap {
+        position: relative;
+        cursor: pointer;
+        border-radius: 50%;
+        @include focus-ring;
+    }
+
+    &__avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__avatarHint {
+        position: absolute;
+        inset: auto 0 0 0;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        color: #fff;
+        background: rgba(28, 25, 23, 0.55);
+        border-radius: 0 0 48px 48px;
+        padding: 4px 0 8px;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+    }
+
+    &__avatarWrap:hover &__avatarHint {
+        opacity: 1;
+    }
+
+    &__name {
+        font-size: 24px;
+    }
+
+    &__meta {
+        color: $muted;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    &__fields {
+        margin-top: 20px;
+    }
+
+    &__label {
+        font-weight: 700;
+        font-size: 13px;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    &__row {
+        display: flex;
+        gap: 10px;
+    }
+
+    &__input {
+        @include input-pill;
+        flex: 1;
+    }
+
+    &__save {
+        @include button-primary;
+        padding: 10px 22px;
+    }
+
+    &__sectionTitle {
+        font-size: 18px;
+        margin-bottom: 14px;
+    }
+
+    &__empty {
+        color: $muted;
+        font-size: 14px;
+    }
+}
+
+.profileChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.profileChip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: $accent-soft;
+    color: $accent-deep;
+    font-weight: 700;
+    font-size: 13px;
+    border-radius: $radius-pill;
+    padding: 6px 10px 6px 6px;
+
+    &__img {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
         object-fit: cover;
     }
 
-    input[type=file] {
+    &__remove {
+        background: none;
         border: none;
-    }
-
-    button {
-        @include button();
-        width: 97px;
-        color: $almost-white-color;
-        background-color: $contrast-transperant !important;
-        margin-right: 1rem;
-        margin-top: 1rem;
-        font-size: 17px;
-
-        &:hover {
-            background-color: $purple-color !important;
-        }
-    }
-
-    p {
-        font-size: 18px;
-        color: $almost-white-color;
-    }
-
-    .activitiesList {
-        margin: 50px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 40px;
-        justify-content: center;
-    }
-
-    h3 {
-        margin: 40px 0 0 0;
-        font-size: 32px;
-        color: white;
-    }
-
-    input,
-    select {
-        background-color: $contrast-transperant;
-        color: $almost-white-color;
-        box-sizing: border-box;
-        border-radius: 40px;
-        width: 200px;
-        height: 30px;
-        border: none;
-        align-items: center;
-        text-align: center;
-        margin: 0 10px;
-        font-size: 16px;
-        font-family: inherit;
-
-        &::placeholder {
-            color: $almost-white-color;
-        }
-    }
-
-    input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    .file-input {
-        display: none;
-    }
-
-    .file-input-label {
-        @include button();
-        padding: 10px;
-        background-color: $contrast-transperant;
-        color: $almost-white-color;
-        font-weight: bold;
+        color: $accent-deep;
+        font-weight: 800;
         cursor: pointer;
-        font-size: 15px;
-        height: 43px;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
+        padding: 2px 6px;
+        border-radius: $radius-pill;
+        @include focus-ring;
 
-    .file-input-label:hover {
-        background-color: $purple-color;
+        &:hover:not(:disabled) {
+            color: $danger;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     }
 }

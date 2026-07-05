@@ -30,23 +30,4 @@ function ActivityComponent({ activity, onAdd, added, onRemove, disabled }: Activ
   );
 }
 
-interface ActivityComponentCircleProps {
-  activity: ClientActivity;
-  onRemove?: (activity: ClientActivity) => void;
-  disabled?: boolean;
-}
-
-function ActivityComponentCircle({ activity, onRemove, disabled }: ActivityComponentCircleProps) {
-  return (
-    <div className="activityContainerCircle">
-      {onRemove && (
-        <button className="smallBtn" onClick={() => onRemove(activity)} disabled={disabled}>
-          X
-        </button>
-      )}
-      <img src={activity.image} alt={activity.label} />
-    </div>
-  );
-}
-
-export { ActivityComponent, ActivityComponentCircle };
+export { ActivityComponent };
