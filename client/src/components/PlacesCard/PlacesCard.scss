@@ -1,33 +1,54 @@
-@import "../../variables";
-@import "../../mixins";
+@import "../../styles/tokens";
+@import "../../styles/mixins";
 
-.sportPlaceCard {
-    box-shadow: -1rem 0 3rem #000;
-    transition: 0.4s ease-out;
-    border-width: 6px;
-    border-style: solid;
-    border-image: linear-gradient(to right, $contrast-transperant, $almost-white-color) 1;
-    border-radius: 10px;
+.placeCard {
+    @include card;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
-    &:hover {
-        transform: translateY(-10px);
-        transition: 0.4s ease-out;
+    &__img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        display: block;
+        background: $accent-soft;
     }
 
-    img {
-        height: 200px;
-        width: 300px;
+    &__body {
+        padding: 14px 16px 16px;
     }
 
-    .inner {
-        color: white;
+    &__topRow {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
     }
 
-    a {
-        color: whitesmoke;
+    &__name {
+        font-size: 15px;
+    }
+
+    &__distance {
+        @include chip($amber-soft, $amber-deep);
+        flex-shrink: 0;
+    }
+
+    &__line {
+        color: $ink-soft;
+        font-size: 13px;
+        margin-top: 6px;
+
+        &--muted {
+            color: $muted;
+        }
+    }
+
+    &__site {
+        display: inline-block;
+        font-weight: 700;
+        font-size: 13px;
+        margin-top: 10px;
     }
 }

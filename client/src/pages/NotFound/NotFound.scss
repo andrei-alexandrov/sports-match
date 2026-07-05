@@ -1,0 +1,28 @@
+@import "../../styles/tokens";
+@import "../../styles/mixins";
+
+.notFound {
+    @include page-container;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 72px;
+
+    &__title {
+        font-size: 30px;
+        margin-top: 26px;
+    }
+
+    &__text {
+        color: $muted;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+
+    &__cta {
+        @include button-primary;
+        text-decoration: none;
+        margin-top: 22px;
+    }
+}
