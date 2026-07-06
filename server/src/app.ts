@@ -42,7 +42,9 @@ export function createApp(
       // they cannot be spoofed there. Elsewhere (local, tests) they are
       // absent and the socket address is used.
       keyGenerator: (req) => {
-        const edgeHeader = req.headers["true-client-ip"] ?? req.headers["cf-connecting-ip"];
+        // cf-connecting-ip first: Cloudflare overwrites it on every proxied
+        // request, so it can never carry a client-forged value.
+        const edgeHeader = req.headers["cf-connecting-ip"] ?? req.headers["true-client-ip"];
         const edgeIp = Array.isArray(edgeHeader) ? edgeHeader[0] : edgeHeader;
         return ipKeyGenerator(edgeIp && edgeIp.length > 0 ? edgeIp : (req.ip ?? ""));
       },
