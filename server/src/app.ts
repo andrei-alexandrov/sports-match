@@ -1,6 +1,6 @@
 import compression from "compression";
 import express from "express";
-import { rateLimit } from "express-rate-limit";
+import { ipKeyGenerator, rateLimit } from "express-rate-limit";
 import { errorHandler, notFoundHandler } from "./errors";
 import { authRouter } from "./routes/auth";
 import { eventsRouter } from "./routes/events";
@@ -36,6 +36,16 @@ export function createApp(
       limit: options.apiRateLimitMax ?? RATE_LIMIT_DEFAULT_MAX,
       standardHeaders: true,
       legacyHeaders: false,
+      // Render fronts services with Cloudflare, so req.ip resolves to an
+      // internal router shared by all clients. The edge sets these headers
+      // with the real client IP; instances are not directly reachable, so
+      // they cannot be spoofed there. Elsewhere (local, tests) they are
+      // absent and the socket address is used.
+      keyGenerator: (req) => {
+        const edgeHeader = req.headers["true-client-ip"] ?? req.headers["cf-connecting-ip"];
+        const edgeIp = Array.isArray(edgeHeader) ? edgeHeader[0] : edgeHeader;
+        return ipKeyGenerator(edgeIp && edgeIp.length > 0 ? edgeIp : (req.ip ?? ""));
+      },
       handler: (_req, res) => {
         res
           .status(429)

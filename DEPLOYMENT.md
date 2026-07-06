@@ -11,7 +11,9 @@ Total cost: $0. Total time: ~15 minutes.
 
 1. Sign up / log in at <https://www.mongodb.com/cloud/atlas>.
 2. Create a project, then **Build a Database** → choose the **M0 (Free)**
-   tier. Pick a region close to your Render region (e.g. Frankfurt).
+   tier. Pick **Frankfurt** — the Render blueprint pins the web service
+   there, and keeping the database next to it avoids transatlantic latency
+   on every query.
 3. **Database Access** → *Add New Database User* → password
    authentication, a username and a strong password, role
    **Read and write to any database**.

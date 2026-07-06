@@ -3,7 +3,8 @@ services:
     name: sports-match
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
+    region: frankfurt
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm run start
     healthCheckPath: /api/health
     envVars:

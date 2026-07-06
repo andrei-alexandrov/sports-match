@@ -31,6 +31,16 @@ describe("/api rate limiting", () => {
     expect(page.status).toBe(200);
     expect(page.text).toContain("sports-match-fixture");
   });
+
+  it("keys budgets by the edge-provided client IP when present", async () => {
+    const app = createApp(noSession, { apiRateLimitMax: 1 });
+    const first = await request(app).get("/api/health").set("cf-connecting-ip", "203.0.113.10");
+    expect(first.status).toBe(200);
+    const blocked = await request(app).get("/api/health").set("cf-connecting-ip", "203.0.113.10");
+    expect(blocked.status).toBe(429);
+    const otherClient = await request(app).get("/api/health").set("cf-connecting-ip", "203.0.113.99");
+    expect(otherClient.status).toBe(200);
+  });
 });
 
 describe("compression", () => {
