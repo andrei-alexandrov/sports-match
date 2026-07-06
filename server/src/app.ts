@@ -1,5 +1,6 @@
 import compression from "compression";
 import express from "express";
+import { rateLimit } from "express-rate-limit";
 import { errorHandler, notFoundHandler } from "./errors";
 import { authRouter } from "./routes/auth";
 import { eventsRouter } from "./routes/events";
@@ -13,7 +14,13 @@ export interface CreateAppOptions {
   /** Absolute path to the built SPA. When set (production boot), static
    *  files + an SPA fallback are served next to the API. */
   clientDist?: string;
+  /** Requests allowed per IP per minute on /api routes. Tests lower it
+   *  to assert 429s; production uses the default. */
+  apiRateLimitMax?: number;
 }
+
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_DEFAULT_MAX = 300;
 
 export function createApp(
   sessionMiddleware: express.RequestHandler = createSessionMiddleware(),
@@ -22,6 +29,20 @@ export function createApp(
   const app = express();
   app.set("trust proxy", 1);
   app.use(compression());
+  app.use(
+    "/api",
+    rateLimit({
+      windowMs: RATE_LIMIT_WINDOW_MS,
+      limit: options.apiRateLimitMax ?? RATE_LIMIT_DEFAULT_MAX,
+      standardHeaders: true,
+      legacyHeaders: false,
+      handler: (_req, res) => {
+        res
+          .status(429)
+          .json({ error: { code: "RATE_LIMITED", message: "Too many requests — please slow down" } });
+      },
+    }),
+  );
   // 5mb: profile images travel as data URLs for now (see spec).
   app.use(express.json({ limit: "5mb" }));
   app.use(sessionMiddleware);
