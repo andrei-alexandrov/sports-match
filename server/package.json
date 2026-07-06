@@ -7,7 +7,7 @@
     "dev": "tsx watch src/index.ts",
     "dev:memory": "tsx src/dev-memory.ts",
     "test": "vitest run",
-    "build": "tsc --noEmit"
+    "build": "tsc --noEmit && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js --packages=external --alias:@sports-match/shared=../shared/src/index.ts"
   },
   "dependencies": {
     "@sports-match/shared": "*",
@@ -27,6 +27,7 @@
     "@types/express-session": "^1.18.0",
     "@types/node": "^24.0.0",
     "@types/supertest": "^6.0.0",
+    "esbuild": "^0.28.1",
     "mongodb-memory-server": "^10.1.0",
     "socket.io-client": "^4.8.0",
     "supertest": "^7.1.0",

@@ -1,4 +1,6 @@
 import http from "node:http";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { createApp } from "./app";
 import { config } from "./config";
 import { connectDb } from "./db";
@@ -16,7 +18,16 @@ async function main(): Promise<void> {
   await connectDb(config.mongoUrl);
   await seedPlaces();
   const sessionMiddleware = createSessionMiddleware();
-  const app = createApp(sessionMiddleware);
+  // In production this process also serves the built SPA (single origin:
+  // session cookies and websockets need no cross-origin setup). The server
+  // bundle lives at server/dist/index.js, so the SPA build sits two levels
+  // up at client/dist — same depth as src/ in dev, but only production
+  // passes clientDist at all.
+  const here = path.dirname(fileURLToPath(import.meta.url));
+  const clientDist = config.isProduction
+    ? path.resolve(here, process.env.CLIENT_DIST ?? "../../client/dist")
+    : undefined;
+  const app = createApp(sessionMiddleware, { clientDist });
   const server = http.createServer(app);
   attachSocket(server, sessionMiddleware);
   server.listen(config.port, () => {

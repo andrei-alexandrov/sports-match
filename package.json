@@ -8,7 +8,9 @@
     "dev": "concurrently -n server,client -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
     "dev:memory": "concurrently -n server,client -c blue,green \"npm run dev:memory -w server\" \"npm run dev -w client\"",
     "test": "npm test -w shared -w server -w client --if-present",
-    "build": "npm run build -w shared -w server -w client --if-present"
+    "build": "npm run build -w shared -w server -w client --if-present",
+    "start": "node server/dist/index.js",
+    "smoke": "node scripts/smoke-prod.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"
