@@ -31,11 +31,14 @@ with accounts can do (Atlas cluster, host signup).
 - New `server/src/serveClient.ts`: `serveClient(app: express.Express,
   distPath: string): void` — `express.static(distPath)` plus a GET
   fallback middleware (skips `/api` and `/socket.io` paths) sending
-  `index.html`. Called from `index.ts` ONLY when `config.isProduction`,
-  with the dist path resolved relative to the bundle location
-  (`../../client/dist` from `server/dist/`), overridable via
-  `CLIENT_DIST` env.
-- `createApp(sessionMiddleware?, options?: { apiRateLimitMax?: number })`:
+  `index.html`. Because `createApp` registers the 404/error handlers
+  internally, `serveClient` is called INSIDE `createApp` (just before the
+  404 handler) when `options.clientDist` is set; `index.ts` passes
+  `clientDist` ONLY when `config.isProduction`, resolved relative to the
+  bundle location (`../../client/dist` from `server/dist/`), overridable
+  via `CLIENT_DIST` env.
+- `createApp(sessionMiddleware?, options?: { clientDist?: string;
+  apiRateLimitMax?: number })`:
   adds `compression()` early and `express-rate-limit` mounted on `/api`
   (default max 300 per 60s window, `standardHeaders: true`,
   envelope-shaped 429 `{ error: { code: "RATE_LIMITED", message: … } }`).
