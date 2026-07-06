@@ -5,9 +5,10 @@ profile around the sports you love, find nearby players who share them,
 chat to arrange a game, and discover venues in your city.
 
 **Status:** rebuilt from scratch as a full-stack TypeScript app — auth +
-profiles, activities + buddy search, real-time chat, and the places
-catalogue are all live. The original 2023 prototype lives on the
-[`prototype`](../../tree/prototype) branch.
+profiles, activities + buddy search, real-time chat, the places
+catalogue, and events are all live, and the app is deployable to Render
+(see [DEPLOYMENT.md](DEPLOYMENT.md)). The original 2023 prototype lives
+on the [`prototype`](../../tree/prototype) branch.
 
 ## Structure
 
@@ -38,7 +39,15 @@ To keep data, create a free MongoDB Atlas cluster, copy
 - `npm run dev` — client (:3000) + server (:4000), real database
 - `npm run dev:memory` — same, with in-memory MongoDB
 - `npm test` — all workspace test suites
-- `npm run build` — typecheck everything + production client build
+- `npm run build` — typecheck everything + production bundles (server + client)
+- `npm run start` — run the production build (needs `NODE_ENV=production`, `MONGO_URL`, `SESSION_SECRET`)
+- `npm run smoke` — boot the production build against an in-memory MongoDB and probe it
+
+## Deploying
+
+One free Render web service + one free MongoDB Atlas cluster.
+[DEPLOYMENT.md](DEPLOYMENT.md) walks through it click by click
+(~15 minutes, $0).
 
 ## Roadmap
 
@@ -47,4 +56,4 @@ To keep data, create a free MongoDB Atlas cluster, copy
 3. ✅ Real-time chat (Socket.io)
 4. ✅ Places catalogue with geo search
 5. ✅ Events — trainer sessions with open slots + social games
-6. Deployment
+6. ✅ Deployment
